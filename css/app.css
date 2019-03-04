@@ -1,0 +1,121 @@
+/* 公共部分--开始 */
+
+html, body {
+	/*  margin: 1px!important;  */
+	height: 100%;
+	font-family: "Helvetica Neue", Helvetica, "Lucida Grande", "Luxi Sans", Arial, "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Micro Hei Mono", "WenQuanYi Zen Hei", "WenQuanYi Zen Hei Mono", LiGothicMed;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	margin: 0;
+	overflow-x: hidden;
+}
+
+.index-body {
+	background-color: #F7F7F7;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+
+.hide {
+	display: none;
+}
+
+p {
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+	-webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+}
+
+a:active {
+	background: none;
+}
+
+input {
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+	outline: none;
+}
+
+ul {
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+	padding: 0;
+	margin: 0;
+    font-size: 0;
+}
+
+li {
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+	list-style: none;
+}
+
+div {
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+
+.tips {
+	font-size: 1.2rem;
+	text-align: center;
+	padding-top: 10px;
+}
+
+@font-face {
+	font-family: 'PingFangSC-Regular';
+	src: url('../fonts/PingFangSC-Regular.ttf');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* 兼容mui样式--开始 */
+
+.mui-content ul {
+    background-color: #fff!important;
+    margin-top: 0px!important;
+    border-left: 0px solid #eee!important;
+    -webkit-border-radius: 0px 0px 5px 5px;
+    -moz-border-radius: 0px 0px 5px 5px;
+    border-radius: 0px 0px 5px 5px;
+}
+
+.mui-content ul li {
+    margin-bottom: -3px!important;
+}
+
+.mui-table-view-cell span {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: -11px -15px;
+    padding: inherit;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: inherit;
+    font-size: 18px;
+    /*color: #030303;*/
+}
+
+.mui-grid-view.mui-grid-9 .mui-table-view-cell {
+    padding: 11px 5px!important;
+}
+
+.mui-segmented-control.mui-scroll-wrapper {
+    height: 40px!important;
+}
+
+.mui-grid-view.mui-grid-9 .mui-table-view-cell>a:not(.mui-btn) {
+    padding: 10px 0 0 0!important;
+}
+
+.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body {
+    height: 20px!important;
+    color: #030303!important;
+}
+
+/* 兼容mui样式--结束 */

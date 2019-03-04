@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="">
+	<head>
+		<title>首页</title>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="renderer" content="webkit" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" href="js/lib/mui/css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="js/lib/mui/css/icons-extra.css" />
+		<link rel="stylesheet" href="css/app.css" />
+		<link rel="stylesheet" href="js/lib/macy/assets/css/macy.css">
+		<style>
+			.home-page {
+				width: 100%;
+				height: 100%;
+				overflow-y: auto;
+				overflow-x: hidden;
+				background: #f7f7f7;
+			}
+
+			.home-page .banner-pack {
+				width: 100%;
+				height: 170px;
+				margin-bottom: 10px;
+			}
+			.home-page .banner-pack img {
+				width: 100%;
+				height: 170px;
+			}
+
+			.home-page .stop-time-pack {
+				display: -webkit-flex;
+				display: flex;
+				align-items: center;
+				background: #fff;
+				color: #ff554e;
+				height: 40px;
+				line-height: 40px;
+				width: 100%;
+				border-top: 1px solid #e6e6e6;
+				border-bottom: 1px solid #e6e6e6;
+				padding: 0 10px;
+				margin-bottom: 10px;
+			}
+
+			.home-page .stop-time-pack img {
+				width: 16px;
+				height: 16px;
+				margin-right: 10px;
+			}
+
+			.home-page .stop-time-pack span {
+				font-size: 14px;
+				margin-right: 5px;
+			}
+
+			.home-page .stop-time-pack .time {
+				font-weight: bold;
+				margin-right: 3px;
+				font-family: PingFangSC-Regular;
+			}
+
+			.home-page .entrant-pack {
+				display: -webkit-flex;
+				display: flex;
+				background: #fff;
+				height: 70px;
+				line-height: 70px;
+				width: 100%;
+				border-top: 1px solid #e6e6e6;
+				border-bottom: 1px solid #e6e6e6;
+			}
+
+			.home-page .entrant-pack .entrant-item-pack {
+				width: 33.333%;
+			}
+
+			.home-page .entrant-pack .entrant-item-pack .value {
+				height: 40px;
+				font-size: 20px;
+				line-height: 50px;
+				text-align: center;
+				font-family: PingFangSC-Regular;
+			}
+			.home-page .entrant-pack .entrant-item-pack .label {
+				height: 30px;
+				font-size: 14px;
+				line-height: 20px;
+				text-align: center;
+			}
+
+			.home-page .entrant-pack .right-line {
+				width: 1px;
+				border-right: 1px solid #f7f7f7;
+				height: 30px;
+				z-index: 9;
+				position: relative;
+				top: 20px;
+			}
+
+			.home-page .detail-pack {
+				padding: 0 35px;
+				height: 30px;
+				line-height: 30px;
+				width: 100%;
+				display: -webkit-flex; /* Safari */
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				font-size: 14px;
+				background: #fff;
+				border-bottom: 1px solid #e6e6e6;
+				margin-bottom: 10px;
+			}
+
+			.home-page .production-pack {
+				width: 100%;
+				height: auto;
+				background: #fff;
+				border-top: 1px solid #e6e6e6;
+				border-bottom: 1px solid #e6e6e6;
+				padding: 10px;
+			}
+
+			.home-page .production-pack .top-pack {
+				position: relative;
+				height: 60px;
+				line-height: 60px;
+				width: 100%;
+				text-align: center;
+				display: -webkit-flex; /* Safari */
+				display: flex;
+				justify-content: center;
+			}
+
+			.home-page .production-pack .top-pack .bg-line {
+				height: 1px;
+				width: 100%;
+				border-bottom: 1px solid #c1c0c0;
+				position: relative;
+				top: 29px;
+				z-index: 9;
+			}
+
+			.home-page .production-pack .top-pack .title-big-pack {
+				width: 200px;
+				height: 60px;
+				z-index: 99;
+				position: absolute;
+				display: -webkit-flex; /* Safari */
+				display: flex;
+				background: #fff;
+				justify-content: center;
+			}
+
+			.home-page .production-pack .top-pack .title-big-pack .title-pack {
+				width: 158px;
+				height: 48px;
+				border: 1px solid #c1c0c0;
+				position: relative;
+				border-radius: 2px;
+			}
+
+			.home-page .production-pack .top-pack .title {
+				font-size: 18px;
+				line-height: 35px;
+			}
+
+			.home-page .production-pack .top-pack .tip-pack {
+				height: 20px;
+				line-height: 20px;
+				z-index: 999;
+				position: absolute;
+				background: #fff;
+				font-size: 12px;
+				left: 10px;
+				right: 10px;
+				display: -webkit-flex; /* Safari */
+				display: flex;
+			}
+
+			.home-page .production-pack .top-pack .tip-pack .tip-tag{
+				background: #79d4bd;
+				color: #fff;
+				width: 160px;
+			}
+
+			.home-page .production-pack .list-pack {
+				margin-top: 10px;
+			}
+
+			.home-page .production-pack .list-pack .production {
+				border: 1px dashed #dadada;
+				border-radius: 0;
+				padding: 5px;
+				/*background: #eaeaea;*/
+			}
+
+			.home-page .production-pack .list-pack .production img {
+				margin-bottom: 7px;
+			}
+
+			.home-page .production-pack .list-pack .production .info-pack {
+				text-align: center;
+				font-size: 14px;
+				margin-bottom: 7px;
+			}
+
+			.home-page .production-pack .list-pack .production .info-pack span {
+				margin-right: 10px;
+			}
+
+			.home-page .production-pack .list-pack .production .vote-pack {
+				width: 100%;
+				height: 30px;
+				line-height: 30px;
+				border-radius: 3px;
+				border: 1px solid #79d4bd;
+				display: -webkit-flex; /* Safari */
+				display: flex;
+			}
+
+
+			.home-page .production-pack .list-pack .production .vote-pack .left-pack {
+				width: 35%;
+				height: 100%;
+				line-height: 1;
+				border-right: 1px solid #79d4bd;
+				display: -webkit-flex; /* Safari */
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.home-page .production-pack .list-pack .production .vote-pack .left-pack .mui-icon-extra {
+				font-size: 16px;
+				color: #4eb99e;
+			}
+			.home-page .production-pack .list-pack .production .vote-pack .left-pack .have-vote {
+				font-size: 14px;
+				color: #4eb99e;
+			}
+
+			.home-page .production-pack .list-pack .production .vote-pack .right-pack {
+				width: 64%;
+				height: 30px;
+				line-height: 30px;
+				font-size: 14px;
+				text-align: center;
+				color: #4eb99e;
+			}
+
+
+			.home-page .production-pack .load-more .mui-btn-block {
+				font-size: 14px;
+				line-height: 1;
+				margin-top: 20px;
+				border: 0px;
+				background: #f7f7f7;
+			}
+
+			.mui-spinner {
+				display: inline-block;
+				width: 24px;
+				height: 24px;
+				-webkit-transform-origin: 50%;
+				transform-origin: 50%;
+				-webkit-animation: spinner-spin 1s step-end infinite;
+				animation: spinner-spin 1s step-end infinite;
+			}
+
+			.mui-spinner:after {
+				display: block;
+				content: "";
+				width: 100%;
+				height: 100%;
+				background-position: 50%;
+				background-size: 100%;
+				background-repeat: no-repeat;
+			}
+
+			.mui-spinner-custom:after {
+				background-image: url("data:image/svg+xml;charset=utf-8,<svg viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><defs><line id='l' x1='60' x2='60' y1='7' y2='27' stroke='red' stroke-width='11' stroke-linecap='round'/></defs><g><use xlink:href='%23l' opacity='.27'/><use xlink:href='%23l' opacity='.27' transform='rotate(30 60,60)'/><use xlink:href='%23l' opacity='.27' transform='rotate(60 60,60)'/><use xlink:href='%23l' opacity='.27' transform='rotate(90 60,60)'/><use xlink:href='%23l' opacity='.27' transform='rotate(120 60,60)'/><use xlink:href='%23l' opacity='.27' transform='rotate(150 60,60)'/><use xlink:href='%23l' opacity='.37' transform='rotate(180 60,60)'/><use xlink:href='%23l' opacity='.46' transform='rotate(210 60,60)'/><use xlink:href='%23l' opacity='.56' transform='rotate(240 60,60)'/><use xlink:href='%23l' opacity='.66' transform='rotate(270 60,60)'/><use xlink:href='%23l' opacity='.75' transform='rotate(300 60,60)'/><use xlink:href='%23l' opacity='.85' transform='rotate(330 60,60)'/></g></svg>");
+			}
+
+
+		</style>
+
+	</head>
+	<body>
+
+		<!-- 首页面 -->
+		<div id="home_page" class="home-page">
+
+			<!-- 大赛封面 -->
+			<div class="banner-pack">
+				<img src="i/banner.png" />
+			</div>
+
+			<!-- 结束时间 -->
+			<div class="stop-time-pack">
+				<img src="i/time.png" />
+				<span>活动结束还有：</span>
+				<span>
+					<span class="time">1</span>天
+					<span class="time">12</span>小时
+					<span class="time">30</span>分钟
+					<span class="time">13</span>秒
+				</span>
+			</div>
+
+			<!-- 参赛信息 -->
+			<div class="entrant-pack">
+				<div class="entrant-item-pack">
+					<div class="value">1000</div>
+					<div class="label">参赛人数</div>
+				</div>
+				<div class="right-line"></div>
+				<div class="entrant-item-pack">
+					<div class="value">4420800</div>
+					<div class="label">累积投票</div>
+				</div>
+				<div class="right-line"></div>
+				<div class="entrant-item-pack">
+					<div class="value">200155</div>
+					<div class="label">参与人数</div>
+				</div>
+			</div>
+
+			<!-- 参赛详情 -->
+			<div class="detail-pack">
+				<div>参赛详情</div>
+				<div>我要报名</div>
+			</div>
+
+			<!-- 参赛作品列表 -->
+			<div class="production-pack">
+				<div class="top-pack">
+					<div class="bg-line"></div>
+					<div class="title-big-pack">
+						<div class="title-pack">
+							<div class="title">参赛作品</div>
+							<div class="tip-pack">
+								<div class="tip-tag">书画院重点推荐</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="list-pack">
+					<div id="macyContainer">
+						<div class="production">
+							<img src="http://unsplash.it/557/387/" alt="" class="demo-image">
+							<div class="info-pack"><span>4526号</span><span>张三</span></div>
+							<div class="vote-pack">
+								<div class="left-pack">
+									<span class="mui-icon-extra mui-icon-extra-heart-filled"></span>
+								</div>
+								<div class="right-pack">
+									12345845
+								</div>
+							</div>
+						</div>
+						<div class="production">
+							<img src="http://assets.jq22.com/plugin/2017-06-09-12-21-18.png" alt="" class="demo-image">
+							<div class="info-pack"><span>4526号</span><span>张三</span></div>
+							<div class="vote-pack">
+								<div class="left-pack">
+									<span class="have-vote">已投</span>
+								</div>
+								<div class="right-pack">
+									12345845
+								</div>
+							</div>
+						</div>
+						<div class="production"><img src="http://placerabbit.com/660/646/" alt="" class="demo-image"></div>
+						<div class="production"><img src="http://placerabbit.com/741/375/" alt="" class="demo-image"></div>
+					</div>
+					<div class="load-more">
+						<button id="loadMore" type="button" data-loading-text = "加载中"  class="mui-btn mui-btn-block">点击加载更多</button>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+
+		<!-- 通用类库 -->
+		<script src="js/lib/zepto.js"></script>
+		<script src="js/lib/zepto.touch.js"></script>
+		<script src="js/lib/fastclick.js"></script>
+		<script src="js/lib/Client.js"></script>
+		<script src="js/lib/Server.js"></script>
+		<script src="js/lib/mui/js/mui.min.js"></script>
+		<script src="js/lib/macy/macy.js"></script>
+
+		<script>
+			var page = 1;
+
+			// 初始化加载更多
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			mui(document.body).on('tap', '#loadMore', function(e) {
+				mui(this).button('loading');
+				page++;
+				getData();
+				setTimeout(function() {
+					mui(this).button('reset');
+				}.bind(this), 2000);
+			});
+
+
+			// 初始化瀑布流
+			var masonry = new Macy({
+				container: '#macyContainer',
+				trueOrder: false,
+				waitForImages: false,
+				useOwnImageLoader: false,
+				debug: true,
+				mobileFirst: true,
+				columns: 2,
+				margin: 10,
+				breakAt: {
+					1200: 2,
+					940: 2,
+					520: 2,
+					400: 2
+				}
+			});
+
+
+			// getData();
+
+			function getData () {
+				setTimeout (function () {
+					var html = '';
+					for (var i = 0; i < 15; i++) {
+						if (i%2 ==0) {
+							html += '<div class="demo">'+page+'--'+i+'<img src="http://placerabbit.com/439/856/" alt="" class="demo-image"></div>';
+						} else {
+							html += '<div class="demo">'+page+'--'+i+'<img src="http://placerabbit.com/813/455/" alt="" class="demo-image"></div>';
+						}
+					}
+					$('#macyContainer').append(html);
+					masonry.runOnImageLoad(function () {
+						masonry.recalculate(true);
+					}, true);
+				}, 2000)
+			}
+		</script>
+	</body>
+</html>
