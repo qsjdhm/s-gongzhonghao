@@ -13,7 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="js/lib/mui/css/icons-extra.css" />
 	<link rel="stylesheet" href="css/app.css" />
 	<style>
-		.home-page {
+		.ranking-page {
 			width: 100%;
 			height: 100%;
 			overflow-y: auto;
@@ -21,7 +21,7 @@
 			background: #f7f7f7;
 		}
 
-		.home-page .stop-time-pack {
+		.ranking-page .stop-time-pack {
 			display: -webkit-flex;
 			display: flex;
 			align-items: center;
@@ -37,24 +37,24 @@
 			margin-bottom: 10px;
 		}
 
-		.home-page .stop-time-pack img {
+		.ranking-page .stop-time-pack img {
 			width: 16px;
 			height: 16px;
 			margin-right: 10px;
 		}
 
-		.home-page .stop-time-pack span {
+		.ranking-page .stop-time-pack span {
 			font-size: 14px;
 			margin-right: 5px;
 		}
 
-		.home-page .stop-time-pack .time {
+		.ranking-page .stop-time-pack .time {
 			font-weight: bold;
 			margin-right: 3px;
 			font-family: PingFangSC-Regular;
 		}
 
-		.home-page .entrant-pack {
+		.ranking-page .entrant-pack {
 			display: -webkit-flex;
 			display: flex;
 			background: #fff;
@@ -65,25 +65,25 @@
 			border-bottom: 1px solid #e6e6e6;
 		}
 
-		.home-page .entrant-pack .entrant-item-pack {
+		.ranking-page .entrant-pack .entrant-item-pack {
 			width: 33.333%;
 		}
 
-		.home-page .entrant-pack .entrant-item-pack .value {
+		.ranking-page .entrant-pack .entrant-item-pack .value {
 			height: 40px;
 			font-size: 20px;
 			line-height: 50px;
 			text-align: center;
 			font-family: PingFangSC-Regular;
 		}
-		.home-page .entrant-pack .entrant-item-pack .label {
+		.ranking-page .entrant-pack .entrant-item-pack .label {
 			height: 30px;
 			font-size: 14px;
 			line-height: 20px;
 			text-align: center;
 		}
 
-		.home-page .entrant-pack .right-line {
+		.ranking-page .entrant-pack .right-line {
 			width: 1px;
 			border-right: 1px solid #f7f7f7;
 			height: 30px;
@@ -92,7 +92,7 @@
 			top: 20px;
 		}
 
-		.home-page .detail-pack {
+		.ranking-page .detail-pack {
 			padding: 0 35px;
 			height: 30px;
 			line-height: 30px;
@@ -107,7 +107,7 @@
 			margin-bottom: 10px;
 		}
 
-		.home-page .production-pack {
+		.ranking-page .production-pack {
 			width: 100%;
 			height: auto;
 			background: #fff;
@@ -116,7 +116,7 @@
 			padding: 10px;
 		}
 
-		.home-page .production-pack .top-pack {
+		.ranking-page .production-pack .top-pack {
 			position: relative;
 			height: 60px;
 			line-height: 60px;
@@ -127,7 +127,7 @@
 			justify-content: center;
 		}
 
-		.home-page .production-pack .top-pack .bg-line {
+		.ranking-page .production-pack .top-pack .bg-line {
 			height: 1px;
 			width: 100%;
 			border-bottom: 1px solid #c1c0c0;
@@ -136,7 +136,7 @@
 			z-index: 9;
 		}
 
-		.home-page .production-pack .top-pack .title-big-pack {
+		.ranking-page .production-pack .top-pack .title-big-pack {
 			width: 200px;
 			height: 60px;
 			z-index: 99;
@@ -147,7 +147,7 @@
 			justify-content: center;
 		}
 
-		.home-page .production-pack .top-pack .title-big-pack .title-pack {
+		.ranking-page .production-pack .top-pack .title-big-pack .title-pack {
 			width: 158px;
 			height: 48px;
 			border: 1px solid #c1c0c0;
@@ -155,12 +155,12 @@
 			border-radius: 2px;
 		}
 
-		.home-page .production-pack .top-pack .title {
+		.ranking-page .production-pack .top-pack .title {
 			font-size: 18px;
 			line-height: 35px;
 		}
 
-		.home-page .production-pack .top-pack .tip-pack {
+		.ranking-page .production-pack .top-pack .tip-pack {
 			height: 20px;
 			line-height: 20px;
 			z-index: 999;
@@ -173,21 +173,21 @@
 			display: flex;
 		}
 
-		.home-page .production-pack .top-pack .tip-pack .tip-tag{
+		.ranking-page .production-pack .top-pack .tip-pack .tip-tag{
 			background: #79d4bd;
 			color: #fff;
 			width: 160px;
 		}
 
-		.home-page .production-pack .list-pack-pack {
+		.ranking-page .production-pack .list-pack-pack {
 			margin-top: 10px;
 		}
 
-		.home-page .production-pack .list-pack-pack .list-pack {
+		.ranking-page .production-pack .list-pack-pack .list-pack {
 			margin-top: 10px;
 		}
 
-		.home-page .production-pack .list-pack .item-pack {
+		.ranking-page .production-pack .list-pack .item-pack {
 			width: 100%;
 			height: 99px;
 			border-bottom: 1px solid #e2e2e2;
@@ -197,7 +197,7 @@
 			margin-bottom: 10px;
 		}
 
-		.home-page .production-pack .list-pack .item-pack .left-pack{
+		.ranking-page .production-pack .list-pack .item-pack .left-pack{
 			width: 78px;
 			height: 99px;
 			position: relative;
@@ -206,14 +206,14 @@
 			justify-content: center;
 		}
 
-		.home-page .production-pack .list-pack .item-pack .portrait {
+		.ranking-page .production-pack .list-pack .item-pack .portrait {
 			width: 48px;
 			height: 48px;
 			position: absolute;
 			top: 25px;
 		}
 
-		.home-page .production-pack .list-pack .item-pack .crown {
+		.ranking-page .production-pack .list-pack .item-pack .crown {
 			width: 36px;
 			height: 36px;
 			position: absolute;
@@ -221,45 +221,45 @@
 		}
 
 
-		.home-page .production-pack .list-pack .item-pack .center-pack {
+		.ranking-page .production-pack .list-pack .item-pack .center-pack {
 			position: absolute;
 			left: 78px;
 			right: 30px;
 			height: 100%;
 		}
 
-		.home-page .production-pack .list-pack .item-pack .center-pack .name-pack {
+		.ranking-page .production-pack .list-pack .item-pack .center-pack .name-pack {
 			height: 35px;
 			line-height: 35px;
 			font-size: 18px;
 			font-weight: 500;
 		}
 
-		.home-page .production-pack .list-pack .item-pack .center-pack .name-pack span {
+		.ranking-page .production-pack .list-pack .item-pack .center-pack .name-pack span {
 			margin-right: 10px;
 		}
 
-		.home-page .production-pack .list-pack .item-pack .center-pack .poll-pack {
+		.ranking-page .production-pack .list-pack .item-pack .center-pack .poll-pack {
 			height: 25px;
 			line-height: 25px;
 			font-size: 14px;
 		}
 
-		.home-page .production-pack .list-pack .item-pack .center-pack .poll-pack span {
+		.ranking-page .production-pack .list-pack .item-pack .center-pack .poll-pack span {
 			margin-right: 10px;
 		}
 
-		.home-page .production-pack .list-pack .item-pack .center-pack .aphorism-pack {
+		.ranking-page .production-pack .list-pack .item-pack .center-pack .aphorism-pack {
 			height: 25px;
 			line-height: 25px;
 			font-size: 14px;
 		}
 
-		.home-page .production-pack .list-pack .item-pack .center-pack .aphorism-pack span {
+		.ranking-page .production-pack .list-pack .item-pack .center-pack .aphorism-pack span {
 			margin-right: 10px;
 		}
 
-		.home-page .production-pack .list-pack .item-pack .right-pack {
+		.ranking-page .production-pack .list-pack .item-pack .right-pack {
 			height: 89px;
 			line-height: 89px;
 			position: absolute;
@@ -268,15 +268,15 @@
 			font-size: 26px;
 		}
 
-		.home-page .production-pack .list-pack .item-pack .right-pack .top {
+		.ranking-page .production-pack .list-pack .item-pack .right-pack .top {
 			color: #f84b49;
 		}
 
-		.home-page .production-pack .list-pack .item-pack .right-pack .conventional {
+		.ranking-page .production-pack .list-pack .item-pack .right-pack .conventional {
 			color: #666;
 		}
 
-		.home-page .production-pack .load-more .mui-btn-block {
+		.ranking-page .production-pack .load-more .mui-btn-block {
 			font-size: 14px;
 			line-height: 1;
 			margin-top: 20px;
@@ -315,7 +315,7 @@
 <body>
 
 <!-- 首页面 -->
-<div id="home_page" class="home-page">
+<div id="ranking_page" class="ranking-page">
 
 	<!-- 结束时间 -->
 	<div class="stop-time-pack">
@@ -353,7 +353,7 @@
 		<div>我要报名</div>
 	</div>
 
-	<!-- 参赛作品列表 -->
+	<!-- 排名列表 -->
 	<div class="production-pack">
 		<div class="top-pack">
 			<div class="bg-line"></div>
