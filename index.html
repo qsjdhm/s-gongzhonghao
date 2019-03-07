@@ -60,23 +60,23 @@
 			<iframe id="iframePage" src="home.html"></iframe>
 		</div>
 		<nav class="mui-bar mui-bar-tab">
-			<a class="mui-tab-item mui-active" onclick="go('home')">
+			<a class="mui-tab-item mui-active" id="home">
 				<span class="mui-icon mui-icon-home"></span>
 				<span class="mui-tab-label">首页</span>
 			</a>
-			<a class="mui-tab-item" onclick="go('ranking')">
+			<a class="mui-tab-item" id="ranking">
 				<span class="mui-icon-extra mui-icon-extra-rank"></span>
 				<span class="mui-tab-label">排行榜</span>
 			</a>
-			<a class="mui-tab-item" onclick="go('search')">
+			<a class="mui-tab-item" id="search">
 				<span class="mui-icon mui-icon-search"></span>
 				<span class="mui-tab-label">搜索</span>
 			</a>
-			<a class="mui-tab-item" onclick="go('apply')">
+			<a class="mui-tab-item" id="apply">
 				<span class="mui-icon-extra mui-icon-extra-custom"></span>
 				<span class="mui-tab-label">报名</span>
 			</a>
-			<a class="mui-tab-item" onclick="go('personal')">
+			<a class="mui-tab-item" id="personal">
 				<span class="mui-icon mui-icon-contact"></span>
 				<span class="mui-tab-label">个人中心</span>
 			</a>
@@ -92,9 +92,21 @@
 				FastClick.attach(document.body);
 			});
 
-			var go = function (pageName) {
-				$('#iframePage').attr('src', pageName + '.html')
-			}
+			$('#home').tap(function(){
+				$("#iframePage").attr('src', 'home.html')
+			})
+			$('#ranking').tap(function(){
+				$("#iframePage").attr('src', 'ranking.html')
+			})
+			$('#search').tap(function(){
+				$("#iframePage").attr('src', 'search.html')
+			})
+			$('#apply').tap(function(){
+				$("#iframePage").attr('src', 'apply.html')
+			})
+			$('#personal').tap(function(){
+				$("#iframePage").attr('src', 'personal.html')
+			})
 		</script>
 	</body>
 </html>
