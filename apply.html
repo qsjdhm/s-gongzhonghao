@@ -1,408 +1,469 @@
 <!doctype html>
 <html lang="">
-<head>
-	<title>报名页</title>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="description" content="" />
-	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-	<meta name="renderer" content="webkit" />
-	<meta http-equiv="Cache-Control" content="no-siteapp" />
-	<meta name="format-detection" content="telephone=no" />
-	<link rel="stylesheet" href="js/lib/mui/css/mui.min.css" />
-	<link rel="stylesheet" type="text/css" href="js/lib/mui/css/icons-extra.css" />
-	<link rel="stylesheet" href="css/app.css" />
-	<style>
-		.apply-page {
-			width: 100%;
-			height: 100%;
-			overflow-y: auto;
-			overflow-x: hidden;
-			background: #f7f7f7;
-		}
-
-		.apply-page .stop-time-pack {
-			display: -webkit-flex;
-			display: flex;
-			align-items: center;
-			background: #fff;
-			color: #ff554e;
-			height: 40px;
-			line-height: 40px;
-			width: 100%;
-			border-top: 1px solid #e6e6e6;
-			border-bottom: 1px solid #e6e6e6;
-			padding: 0 10px;
-			margin-top: 10px;
-		}
-
-		.apply-page .stop-time-pack img {
-			width: 16px;
-			height: 16px;
-			margin-right: 10px;
-		}
-
-		.apply-page .stop-time-pack span {
-			font-size: 14px;
-			margin-right: 5px;
-		}
-
-		.apply-page .stop-time-pack .time {
-			font-weight: bold;
-			margin-right: 3px;
-			font-family: PingFangSC-Regular;
-		}
-
-		.apply-page .detail-pack {
-			padding: 0 35px;
-			height: 30px;
-			line-height: 30px;
-			width: 100%;
-			display: -webkit-flex; /* Safari */
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			font-size: 14px;
-			background: #fff;
-			border-bottom: 1px solid #e6e6e6;
-			margin-bottom: 10px;
-		}
-
-		.apply-page .apply-pack {
-			background: #fff;
-			border-top: 1px solid #e6e6e6;
-			padding: 10px;
-		}
+	<head>
+		<title>react-native</title>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="renderer" content="webkit" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" href="js/lib/mui/css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="js/lib/mui/css/icons-extra.css" />
+		<link rel="stylesheet" href="css/app.css" />
+		<style>
+			.mui-bar-tab .mui-tab-item.mui-active {
+				color: #4cb89e;
+			}
+			.mui-bar-tab .mui-tab-item .mui-icon-extra {
+				top: 3px;
+				width: 24px;
+				height: 24px;
+				padding-top: 0;
+				padding-bottom: 0;
+				font-size: 24px;
+				position: relative;
+				z-index: 20;
+			}
+			.mui-bar-tab .mui-tab-item .mui-tab-label {
+				font-size: 11px;
+				display: block;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			.mui-bar {
+				border-top: 1px solid #e6e6e6;
+				-webkit-box-shadow: 0 0 1px rgba(216,215,215,0);
+				box-shadow: 0 0 1px rgba(216,215,215,0);
+			}
+			.mui-btn-block {
+				font-size: 16px;
+				display: block;
+				width: 100%;
+				margin-bottom: 10px;
+				padding: 5px 0;
+				border: 0px solid #79d4bd;
+				background-color: #79d4bd;
+				margin-top: 40px;
+			}
 
 
-		.apply-page .apply-pack .top-pack {
-			position: relative;
-			height: 60px;
-			line-height: 60px;
-			width: 100%;
-			text-align: center;
-			display: -webkit-flex; /* Safari */
-			display: flex;
-			justify-content: center;
-		}
+			.apply-page {
+				position: absolute;
+				top: 0;
+				bottom: 50px;
+				left: 0;
+				right: 0;
+				overflow-y: auto;
+				overflow-x: hidden;
+				background: #f7f7f7;
+			}
 
-		.apply-page .apply-pack .top-pack .bg-line {
-			height: 1px;
-			width: 100%;
-			border-bottom: 1px solid #c1c0c0;
-			position: relative;
-			top: 29px;
-			z-index: 9;
-		}
+			.apply-page .stop-time-pack {
+				display: -webkit-flex;
+				display: flex;
+				align-items: center;
+				background: #fff;
+				color: #ff554e;
+				height: 40px;
+				line-height: 40px;
+				width: 100%;
+				border-top: 1px solid #e6e6e6;
+				border-bottom: 1px solid #e6e6e6;
+				padding: 0 10px;
+				margin-top: 10px;
+			}
 
-		.apply-page .apply-pack .top-pack .title-big-pack {
-			width: 200px;
-			height: 60px;
-			z-index: 99;
-			position: absolute;
-			display: -webkit-flex; /* Safari */
-			display: flex;
-			background: #fff;
-			justify-content: center;
-		}
+			.apply-page .stop-time-pack img {
+				width: 16px;
+				height: 16px;
+				margin-right: 10px;
+			}
 
-		.apply-page .apply-pack .top-pack .title-big-pack .title-pack {
-			width: 158px;
-			height: 48px;
-			border: 1px solid #c1c0c0;
-			position: relative;
-			border-radius: 2px;
-		}
+			.apply-page .stop-time-pack span {
+				font-size: 14px;
+				margin-right: 5px;
+			}
 
-		.apply-page .apply-pack .top-pack .title {
-			font-size: 18px;
-			line-height: 35px;
-		}
+			.apply-page .stop-time-pack .time {
+				font-weight: bold;
+				margin-right: 3px;
+				font-family: PingFangSC-Regular;
+			}
 
-		.apply-page .apply-pack .top-pack .tip-pack {
-			height: 20px;
-			line-height: 20px;
-			z-index: 999;
-			position: absolute;
-			background: #fff;
-			font-size: 12px;
-			left: 10px;
-			right: 10px;
-			display: -webkit-flex; /* Safari */
-			display: flex;
-		}
+			.apply-page .detail-pack {
+				padding: 0 35px;
+				height: 30px;
+				line-height: 30px;
+				width: 100%;
+				display: -webkit-flex; /* Safari */
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				font-size: 14px;
+				background: #fff;
+				border-bottom: 1px solid #e6e6e6;
+				margin-bottom: 10px;
+			}
 
-		.apply-page .apply-pack .top-pack .tip-pack .tip-tag{
-			background: #79d4bd;
-			color: #fff;
-			width: 160px;
-		}
-
-		.apply-page .apply-pack label {
-			width: 27%;
-			height: 50px;
-			line-height: 1;
-			float: none;
-		}
-
-		.apply-page .mui-input-row {
-			border-bottom: 1px solid #eee;
-			font-size: 16px;
-		}
-
-		.apply-page .mui-input-row label~input,
-		.apply-page .mui-input-row label~textarea {
-			width: 73%;
-			font-size: 16px;
-			height: 50px;
-			line-height: 50px;
-		}
+			.apply-page .apply-pack {
+				background: #fff;
+				border-top: 1px solid #e6e6e6;
+				padding: 10px;
+				margin-bottom: 80px;
+			}
 
 
-		.apply-page .image-list {
-			width: 100%;
-			height: 85px;
-			background-size: cover;
-			padding: 10px 10px;
-			overflow: hidden;
-		}
-		.apply-page .image-item {
-			width: 65px;
-			height: 65px;
-			background-image: url(i/iconfont-tianjia.png);
-			background-size: 100% 100%;
-			display: inline-block;
-			position: relative;
-			border-radius: 5px;
-			margin-right: 10px;
-			margin-bottom: 10px;
-			border: solid 1px #e8e8e8;
-		}
-		.apply-page .image-item input[type="file"] {
-			position: absolute;
-			left: 0px;
-			top: 0px;
-			width: 100%;
-			height: 100%;
-			opacity: 0;
-			cursor: pointer;
-			z-index: 0;
-		}
-		.apply-page .image-item.space {
-			border: none;
-		}
-		.apply-page .image-item .image-close {
-			position: absolute;
-			display: inline-block;
-			right: -6px;
-			top: -6px;
-			width: 20px;
-			height: 20px;
-			text-align: center;
-			line-height: 20px;
-			border-radius: 12px;
-			background-color: #FF5053;
-			color: #f3f3f3;
-			border: solid 1px #FF5053;
-			font-size: 9px;
-			font-weight: 200;
-			z-index: 1;
-		}
-		.apply-page .image-item.space .image-close {
-			display: none;
-		}
+			.apply-page .apply-pack .top-pack {
+				position: relative;
+				height: 60px;
+				line-height: 60px;
+				width: 100%;
+				text-align: center;
+				display: -webkit-flex; /* Safari */
+				display: flex;
+				justify-content: center;
+			}
 
-		.mui-btn-block {
-			font-size: 16px;
-			display: block;
-			width: 100%;
-			margin-bottom: 10px;
-			padding: 5px 0;
-			border: 0px solid #79d4bd;
-			background-color: #79d4bd;
-			margin-top: 40px;
-		}
+			.apply-page .apply-pack .top-pack .bg-line {
+				height: 1px;
+				width: 100%;
+				border-bottom: 1px solid #c1c0c0;
+				position: relative;
+				top: 29px;
+				z-index: 9;
+			}
+
+			.apply-page .apply-pack .top-pack .title-big-pack {
+				width: 200px;
+				height: 60px;
+				z-index: 99;
+				position: absolute;
+				display: -webkit-flex; /* Safari */
+				display: flex;
+				background: #fff;
+				justify-content: center;
+			}
+
+			.apply-page .apply-pack .top-pack .title-big-pack .title-pack {
+				width: 158px;
+				height: 48px;
+				border: 1px solid #c1c0c0;
+				position: relative;
+				border-radius: 2px;
+			}
+
+			.apply-page .apply-pack .top-pack .title {
+				font-size: 18px;
+				line-height: 35px;
+			}
+
+			.apply-page .apply-pack .top-pack .tip-pack {
+				height: 20px;
+				line-height: 20px;
+				z-index: 999;
+				position: absolute;
+				background: #fff;
+				font-size: 12px;
+				left: 10px;
+				right: 10px;
+				display: -webkit-flex; /* Safari */
+				display: flex;
+			}
+
+			.apply-page .apply-pack .top-pack .tip-pack .tip-tag{
+				background: #79d4bd;
+				color: #fff;
+				width: 160px;
+			}
+
+			.apply-page .apply-pack label {
+				width: 27%;
+				height: 50px;
+				line-height: 1;
+				float: none;
+			}
+
+			.apply-page .mui-input-row {
+				border-bottom: 1px solid #eee;
+				font-size: 16px;
+			}
+
+			.apply-page .mui-input-row label~input,
+			.apply-page .mui-input-row label~textarea {
+				width: 73%;
+				font-size: 16px;
+				height: 50px;
+				line-height: 50px;
+			}
 
 
+			.apply-page .image-list {
+				width: 100%;
+				height: 85px;
+				background-size: cover;
+				padding: 10px 10px;
+				overflow: hidden;
+			}
+			.apply-page .image-item {
+				width: 65px;
+				height: 65px;
+				background-image: url(i/iconfont-tianjia.png);
+				background-size: 100% 100%;
+				display: inline-block;
+				position: relative;
+				border-radius: 5px;
+				margin-right: 10px;
+				margin-bottom: 10px;
+				border: solid 1px #e8e8e8;
+			}
+			.apply-page .image-item input[type="file"] {
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				opacity: 0;
+				cursor: pointer;
+				z-index: 0;
+			}
+			.apply-page .image-item.space {
+				border: none;
+			}
+			.apply-page .image-item .image-close {
+				position: absolute;
+				display: inline-block;
+				right: -6px;
+				top: -6px;
+				width: 20px;
+				height: 20px;
+				text-align: center;
+				line-height: 20px;
+				border-radius: 12px;
+				background-color: #FF5053;
+				color: #f3f3f3;
+				border: solid 1px #FF5053;
+				font-size: 9px;
+				font-weight: 200;
+				z-index: 1;
+			}
+			.apply-page .image-item.space .image-close {
+				display: none;
+			}
 
+		</style>
 
+	</head>
+	<body>
+		<!-- 首页面 -->
+		<div id="apply_page" class="apply-page">
 
-	</style>
+			<!-- 结束时间 -->
+			<div class="stop-time-pack">
+				<img src="i/time.png" />
+				<span>活动结束还有：</span>
+				<span>
+					<span class="time">1</span>天
+					<span class="time">12</span>小时
+					<span class="time">30</span>分钟
+					<span class="time">13</span>秒
+				</span>
+			</div>
 
-</head>
-<body>
+			<!-- 参赛详情 -->
+			<div class="detail-pack">
+				<div>感谢您的参与</div>
+				<div>参赛详情</div>
+			</div>
 
-<!-- 首页面 -->
-<div id="apply_page" class="apply-page">
-
-	<!-- 结束时间 -->
-	<div class="stop-time-pack">
-		<img src="i/time.png" />
-		<span>活动结束还有：</span>
-		<span>
-			<span class="time">1</span>天
-			<span class="time">12</span>小时
-			<span class="time">30</span>分钟
-			<span class="time">13</span>秒
-		</span>
-	</div>
-
-	<!-- 参赛详情 -->
-	<div class="detail-pack">
-		<div>感谢您的参与</div>
-		<div>参赛详情</div>
-	</div>
-
-	<!-- 报名表单 -->
-	<div class="apply-pack">
-		<div class="top-pack">
-			<div class="bg-line"></div>
-			<div class="title-big-pack">
-				<div class="title-pack">
-					<div class="title">报名信息</div>
-					<div class="tip-pack">
-						<div class="tip-tag">认真填写确保信息准确</div>
+			<!-- 报名表单 -->
+			<div class="apply-pack">
+				<div class="top-pack">
+					<div class="bg-line"></div>
+					<div class="title-big-pack">
+						<div class="title-pack">
+							<div class="title">报名信息</div>
+							<div class="tip-pack">
+								<div class="tip-tag">认真填写确保信息准确</div>
+							</div>
+						</div>
 					</div>
 				</div>
+				<div class="mui-input-row" style="margin-top: 10px;height: 50px; line-height: 50px;">
+					<label>选手姓名</label>
+					<input id='name' type="text" class="mui-input-clear mui-input" placeholder="请输入姓名或昵称">
+				</div>
+				<div class="mui-input-row" style="height: 50px; line-height: 50px;">
+					<label>作品介绍</label>
+					<input id='manifesto' type="text" class="mui-input-clear mui-input" placeholder="简短描述自己的参赛作品">
+				</div>
+				<div class="mui-input-row" style="height: 50px; line-height: 50px;">
+					<label>手机</label>
+					<input id='phone' type="text" class="mui-input-clear mui-input" placeholder="手机号我司不会对外公布">
+				</div>
+				<div class="mui-input-row" style="padding-top: 15px;color: #777;">
+					<span style="padding: 15px;">选择上传1-3张照片，第一张为封面图。</span>
+					<div id='image-list' class="row image-list"></div>
+				</div>
+				<button id='submit' type="button" class="mui-btn mui-btn-block mui-btn-primary">提交</button>
 			</div>
 		</div>
-		<div class="mui-input-row" style="margin-top: 10px;height: 50px; line-height: 50px;">
-			<label>选手姓名</label>
-			<input id='name' type="text" class="mui-input-clear mui-input" placeholder="请输入姓名或昵称">
-		</div>
-		<div class="mui-input-row" style="height: 50px; line-height: 50px;">
-			<label>作品介绍</label>
-			<input id='manifesto' type="text" class="mui-input-clear mui-input" placeholder="简短描述自己的参赛作品">
-		</div>
-		<div class="mui-input-row" style="height: 50px; line-height: 50px;">
-			<label>手机</label>
-			<input id='phone' type="text" class="mui-input-clear mui-input" placeholder="手机号我司不会对外公布">
-		</div>
-		<div class="mui-input-row" style="padding-top: 15px;color: #777;">
-			<span style="padding: 15px;">选择上传1-3张照片，第一张为封面图。</span>
-			<div id='image-list' class="row image-list"></div>
-		</div>
-		<button id='submit' type="button" class="mui-btn mui-btn-block mui-btn-primary">提交</button>
-	</div>
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item" id="home">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item" id="ranking">
+				<span class="mui-icon-extra mui-icon-extra-rank"></span>
+				<span class="mui-tab-label">排行榜</span>
+			</a>
+			<a class="mui-tab-item" id="search">
+				<span class="mui-icon mui-icon-search"></span>
+				<span class="mui-tab-label">搜索</span>
+			</a>
+			<a class="mui-tab-item mui-active" id="apply">
+				<span class="mui-icon-extra mui-icon-extra-custom"></span>
+				<span class="mui-tab-label">报名</span>
+			</a>
+			<a class="mui-tab-item" id="personal">
+				<span class="mui-icon mui-icon-contact"></span>
+				<span class="mui-tab-label">个人中心</span>
+			</a>
+		</nav>
 
-</div>
 
+		<!-- 通用类库 -->
+		<script src="js/lib/zepto.js"></script>
+		<script src="js/lib/zepto.touch.js"></script>
+		<script src="js/lib/fastclick.js"></script>
+		<script src="js/lib/mui/js/mui.min.js"></script>
 
-<!-- 通用类库 -->
-<script src="js/lib/zepto.js"></script>
-<script src="js/lib/zepto.touch.js"></script>
-<script src="js/lib/fastclick.js"></script>
-<script src="js/lib/mui/js/mui.min.js"></script>
+		<script>
+			(function(mui, window, document, undefined) {
+				mui.init();
 
-<script>
-	(function(mui, window, document, undefined) {
-		mui.init();
-		var get = function(id) {
-			return document.getElementById(id);
-		};
-		var qsa = function(sel) {
-			return [].slice.call(document.querySelectorAll(sel));
-		};
-		var ui = {
-			question: get('name'),
-			contact: get('manifesto'),
-			phone: get('phone'),
-			imageList: get('image-list'),
-			submit: get('submit')
-		};
-		ui.clearForm = function() {
-			ui.question.value = '';
-			ui.contact.value = '';
-			ui.phone.value = '';
-			ui.imageList.innerHTML = '';
-			ui.newPlaceholder();
-		};
-		ui.getFileInputArray = function() {
-			return [].slice.call(ui.imageList.querySelectorAll('input[type="file"]'));
-		};
-		ui.getFileInputIdArray = function() {
-			var fileInputArray = ui.getFileInputArray();
-			var idArray = [];
-			fileInputArray.forEach(function(fileInput) {
-				if (fileInput.value != '') {
-					idArray.push(fileInput.getAttribute('id'));
-				}
-			});
-			return idArray;
-		};
-		var imageIndexIdNum = 0;
-		ui.newPlaceholder = function() {
-			var fileInputArray = ui.getFileInputArray();
-			if (fileInputArray &&
-				fileInputArray.length > 0 &&
-				fileInputArray[fileInputArray.length - 1].parentNode.classList.contains('space')) {
-				return;
-			}
-			imageIndexIdNum++;
-			var placeholder = document.createElement('div');
-			placeholder.setAttribute('class', 'image-item space');
-			var closeButton = document.createElement('div');
-			closeButton.setAttribute('class', 'image-close');
-			closeButton.innerHTML = 'X';
-			closeButton.addEventListener('click', function(event) {
-				event.stopPropagation();
-				event.cancelBubble = true;
-				setTimeout(function() {
-					ui.imageList.removeChild(placeholder);
-				}, 0);
-				return false;
-			}, false);
-			var fileInput = document.createElement('input');
-			fileInput.setAttribute('type', 'file');
-			fileInput.setAttribute('accept', 'image/*');
-			fileInput.setAttribute('id', 'image-' + imageIndexIdNum);
-			fileInput.addEventListener('change', function(event) {
-				var file = fileInput.files[0];
-				if (file) {
-					var reader = new FileReader();
-					reader.onload = function() {
-						//处理 android 4.1 兼容问题
-						var base64 = reader.result.split(',')[1];
-						var dataUrl = 'data:image/png;base64,' + base64;
-						//
-						placeholder.style.backgroundImage = 'url(' + dataUrl + ')';
-					}
-					reader.readAsDataURL(file);
-					placeholder.classList.remove('space');
+				// 首先取消js在客户端的点击事件300毫秒延迟
+				FastClick.attach(document.body);
+				$('#home').tap(function(){
+					window.location.href = 'home.html';
+				})
+				$('#ranking').tap(function(){
+					window.location.href = 'ranking.html';
+				})
+				$('#search').tap(function(){
+					window.location.href = 'search.html';
+				})
+				$('#personal').tap(function(){
+					window.location.href = 'personal.html';
+				})
+
+				var get = function(id) {
+					return document.getElementById(id);
+				};
+				var qsa = function(sel) {
+					return [].slice.call(document.querySelectorAll(sel));
+				};
+				var ui = {
+					question: get('name'),
+					contact: get('manifesto'),
+					phone: get('phone'),
+					imageList: get('image-list'),
+					submit: get('submit')
+				};
+				ui.clearForm = function() {
+					ui.question.value = '';
+					ui.contact.value = '';
+					ui.phone.value = '';
+					ui.imageList.innerHTML = '';
 					ui.newPlaceholder();
-				}
-			}, false);
-			placeholder.appendChild(closeButton);
-			placeholder.appendChild(fileInput);
-			ui.imageList.appendChild(placeholder);
-		};
-		ui.newPlaceholder();
-		// ui.submit.addEventListener('tap', function(event) {
-		// 	if (ui.question.value == '' ||
-		// 		(ui.contact.value != '' &&
-		// 			ui.contact.value.search(/^(\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+)|([1-9]\d{4,9})$/) != 0)) {
-		// 		return mui.toast('信息填写不符合规范');
-		// 	}
-		// 	plus.nativeUI.showWaiting();
-		// 	feedback.send({
-		// 		question: ui.question.value,
-		// 		contact: ui.contact.value,
-		// 		images: ui.getFileInputIdArray()
-		// 	}, function() {
-		// 		plus.nativeUI.closeWaiting();
-		// 		mui.toast('感谢您的建议~');
-		// 		ui.clearForm();
-		// 		mui.back();
-		// 	});
-		// }, false);
+				};
+				ui.getFileInputArray = function() {
+					return [].slice.call(ui.imageList.querySelectorAll('input[type="file"]'));
+				};
+				ui.getFileInputIdArray = function() {
+					var fileInputArray = ui.getFileInputArray();
+					var idArray = [];
+					fileInputArray.forEach(function(fileInput) {
+						if (fileInput.value != '') {
+							idArray.push(fileInput.getAttribute('id'));
+						}
+					});
+					return idArray;
+				};
+				var imageIndexIdNum = 0;
+				ui.newPlaceholder = function() {
+					var fileInputArray = ui.getFileInputArray();
+					if (fileInputArray &&
+						fileInputArray.length > 0 &&
+						fileInputArray[fileInputArray.length - 1].parentNode.classList.contains('space')) {
+						return;
+					}
+					imageIndexIdNum++;
+					var placeholder = document.createElement('div');
+					placeholder.setAttribute('class', 'image-item space');
+					var closeButton = document.createElement('div');
+					closeButton.setAttribute('class', 'image-close');
+					closeButton.innerHTML = 'X';
+					closeButton.addEventListener('click', function(event) {
+						event.stopPropagation();
+						event.cancelBubble = true;
+						setTimeout(function() {
+							ui.imageList.removeChild(placeholder);
+						}, 0);
+						return false;
+					}, false);
+					var fileInput = document.createElement('input');
+					fileInput.setAttribute('type', 'file');
+					fileInput.setAttribute('accept', 'image/*');
+					fileInput.setAttribute('id', 'image-' + imageIndexIdNum);
+					fileInput.addEventListener('change', function(event) {
+						var file = fileInput.files[0];
+						if (file) {
+							var reader = new FileReader();
+							reader.onload = function() {
+								//处理 android 4.1 兼容问题
+								var base64 = reader.result.split(',')[1];
+								var dataUrl = 'data:image/png;base64,' + base64;
+								//
+								placeholder.style.backgroundImage = 'url(' + dataUrl + ')';
+							}
+							reader.readAsDataURL(file);
+							placeholder.classList.remove('space');
+							ui.newPlaceholder();
+						}
+					}, false);
+					placeholder.appendChild(closeButton);
+					placeholder.appendChild(fileInput);
+					ui.imageList.appendChild(placeholder);
+				};
+				ui.newPlaceholder();
+				// ui.submit.addEventListener('tap', function(event) {
+				// 	if (ui.question.value == '' ||
+				// 		(ui.contact.value != '' &&
+				// 			ui.contact.value.search(/^(\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+)|([1-9]\d{4,9})$/) != 0)) {
+				// 		return mui.toast('信息填写不符合规范');
+				// 	}
+				// 	plus.nativeUI.showWaiting();
+				// 	feedback.send({
+				// 		question: ui.question.value,
+				// 		contact: ui.contact.value,
+				// 		images: ui.getFileInputIdArray()
+				// 	}, function() {
+				// 		plus.nativeUI.closeWaiting();
+				// 		mui.toast('感谢您的建议~');
+				// 		ui.clearForm();
+				// 		mui.back();
+				// 	});
+				// }, false);
 
-		mui(document.body).on('tap', '#submit', function(e) {
-			mui(this).button('loading');
-			setTimeout(function() {
-				mui(this).button('reset');
-			}.bind(this), 2000);
-		});
-	})(mui, window, document, undefined);
-</script>
-</body>
+				mui(document.body).on('tap', '#submit', function(e) {
+					mui(this).button('loading');
+					setTimeout(function() {
+						mui(this).button('reset');
+					}.bind(this), 2000);
+				});
+			})(mui, window, document, undefined);
+		</script>
+	</body>
 </html>

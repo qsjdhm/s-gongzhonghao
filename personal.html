@@ -13,6 +13,40 @@
 		<link rel="stylesheet" type="text/css" href="js/lib/mui/css/icons-extra.css" />
 		<link rel="stylesheet" href="css/app.css" />
 		<style>
+			.mui-bar-tab .mui-tab-item.mui-active {
+				color: #4cb89e;
+			}
+			.mui-bar-tab .mui-tab-item .mui-icon-extra {
+				top: 3px;
+				width: 24px;
+				height: 24px;
+				padding-top: 0;
+				padding-bottom: 0;
+				font-size: 24px;
+				position: relative;
+				z-index: 20;
+			}
+			.mui-bar-tab .mui-tab-item .mui-tab-label {
+				font-size: 11px;
+				display: block;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			.mui-bar {
+				border-top: 1px solid #e6e6e6;
+				-webkit-box-shadow: 0 0 1px rgba(216,215,215,0);
+				box-shadow: 0 0 1px rgba(216,215,215,0);
+			}
+			.personal-page {
+				position: absolute;
+				top: 0;
+				bottom: 50px;
+				left: 0;
+				right: 0;
+				overflow-y: auto;
+				overflow-x: hidden;
+				background: #f7f7f7;
+			}
 			.personal-page .top-pack {
 				width: 100%;
 				height: 280px;
@@ -140,6 +174,7 @@
 
 			.personal-page .list-pack {
 				margin-top: 10px;
+				margin-bottom: 80px;
 			}
 
 			.personal-page .list-pack .mui-table-view-cell {
@@ -159,12 +194,6 @@
 				margin-right: 1px;
 				color: #666;
 			}
-
-
-
-
-
-
 		</style>
 	</head>
 	<body>
@@ -248,9 +277,28 @@
 				</ul>
 			</div>
 		</div>
-
-
-
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item" id="home">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item" id="ranking">
+				<span class="mui-icon-extra mui-icon-extra-rank"></span>
+				<span class="mui-tab-label">排行榜</span>
+			</a>
+			<a class="mui-tab-item" id="search">
+				<span class="mui-icon mui-icon-search"></span>
+				<span class="mui-tab-label">搜索</span>
+			</a>
+			<a class="mui-tab-item" id="apply">
+				<span class="mui-icon-extra mui-icon-extra-custom"></span>
+				<span class="mui-tab-label">报名</span>
+			</a>
+			<a class="mui-tab-item mui-active" id="personal">
+				<span class="mui-icon mui-icon-contact"></span>
+				<span class="mui-tab-label">个人中心</span>
+			</a>
+		</nav>
 
 		<!-- 通用类库 -->
 		<script src="js/lib/zepto.js"></script>
@@ -258,8 +306,27 @@
 		<script src="js/lib/fastclick.js"></script>
 		<script src="js/lib/mui/js/mui.min.js"></script>
 		<script>
-			mui.init({
-				swipeBack:true //启用右滑关闭功能
+			$(function () {
+				// 首先取消js在客户端的点击事件300毫秒延迟
+				FastClick.attach(document.body);
+
+				// 初始化加载更多
+				mui.init({
+					swipeBack: true //启用右滑关闭功能
+				});
+
+				$('#home').tap(function(){
+					window.location.href = 'home.html';
+				})
+				$('#ranking').tap(function(){
+					window.location.href = 'ranking.html';
+				})
+				$('#search').tap(function(){
+					window.location.href = 'search.html';
+				})
+				$('#apply').tap(function(){
+					window.location.href = 'apply.html';
+				})
 			});
 		</script>
 	</body>
