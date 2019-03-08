@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="">
 	<head>
-		<title>搜索页</title>
+		<title>react-native</title>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="description" content="" />
@@ -9,38 +9,412 @@
 		<meta name="renderer" content="webkit" />
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
 		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" href="js/lib/mui/css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="js/lib/mui/css/icons-extra.css" />
 		<link rel="stylesheet" href="css/app.css" />
+		<link rel="stylesheet" href="js/lib/macy/assets/css/macy.css">
+		<style>
+			.mui-bar-tab .mui-tab-item.mui-active {
+				color: #4cb89e;
+			}
+			.mui-bar-tab .mui-tab-item .mui-icon-extra {
+				top: 3px;
+				width: 24px;
+				height: 24px;
+				padding-top: 0;
+				padding-bottom: 0;
+				font-size: 24px;
+				position: relative;
+				z-index: 20;
+			}
+			.mui-bar-tab .mui-tab-item .mui-tab-label {
+				font-size: 11px;
+				display: block;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			.mui-bar {
+				border-top: 1px solid #e6e6e6;
+				-webkit-box-shadow: 0 0 1px rgba(216,215,215,0);
+				box-shadow: 0 0 1px rgba(216,215,215,0);
+			}
+			.mui-spinner {
+				display: inline-block;
+				width: 24px;
+				height: 24px;
+				-webkit-transform-origin: 50%;
+				transform-origin: 50%;
+				-webkit-animation: spinner-spin 1s step-end infinite;
+				animation: spinner-spin 1s step-end infinite;
+			}
+			.mui-spinner:after {
+				display: block;
+				content: "";
+				width: 100%;
+				height: 100%;
+				background-position: 50%;
+				background-size: 100%;
+				background-repeat: no-repeat;
+			}
+			.mui-spinner-custom:after {
+				background-image: url("data:image/svg+xml;charset=utf-8,<svg viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><defs><line id='l' x1='60' x2='60' y1='7' y2='27' stroke='red' stroke-width='11' stroke-linecap='round'/></defs><g><use xlink:href='%23l' opacity='.27'/><use xlink:href='%23l' opacity='.27' transform='rotate(30 60,60)'/><use xlink:href='%23l' opacity='.27' transform='rotate(60 60,60)'/><use xlink:href='%23l' opacity='.27' transform='rotate(90 60,60)'/><use xlink:href='%23l' opacity='.27' transform='rotate(120 60,60)'/><use xlink:href='%23l' opacity='.27' transform='rotate(150 60,60)'/><use xlink:href='%23l' opacity='.37' transform='rotate(180 60,60)'/><use xlink:href='%23l' opacity='.46' transform='rotate(210 60,60)'/><use xlink:href='%23l' opacity='.56' transform='rotate(240 60,60)'/><use xlink:href='%23l' opacity='.66' transform='rotate(270 60,60)'/><use xlink:href='%23l' opacity='.75' transform='rotate(300 60,60)'/><use xlink:href='%23l' opacity='.85' transform='rotate(330 60,60)'/></g></svg>");
+			}
+
+
+			.search-page {
+				position: absolute;
+				top: 10px;
+				bottom: 50px;
+				left: 0;
+				right: 0;
+				overflow-y: auto;
+				overflow-x: hidden;
+				background: #f7f7f7;
+			}
+
+			.search-page .search-pack {
+				width: 100%;
+				height: 34px;
+				display: -webkit-flex; /* Safari */
+				display: flex;
+				border-bottom: 1px solid #e6e6e6;
+				margin-bottom: 10px;
+				align-items: center;
+			}
+
+			.search-page .search-pack input {
+				width: 100%;
+				padding-top: 0;
+				padding-bottom: 0;
+				border-radius: 0;
+				background-color: #fff;
+				border-bottom: 1px solid #e6e6e6;
+			}
+
+			.search-page .search-pack .mui-search {
+				position: absolute;
+				height: 35px;
+				left: 0;
+				right: 50px;
+			}
+
+			.search-page .search-pack .mui-search::before {
+				margin-top: -12px;
+			}
+
+			.search-page .search-pack .mui-placeholder {
+				font-size: 14px;
+			}
+
+			.search-page .search-pack .btn-pack {
+				position: absolute;
+				height: 35px;
+				line-height: 35px;
+				width: 49px;
+				right: 0;
+				font-size: 14px;
+				text-align: center;
+				background: #fff;
+				border-bottom: 1px solid #e6e6e6;
+			}
+
+			.search-page .production-pack {
+				width: 100%;
+				height: auto;
+				background: #fff;
+				border-top: 3px solid #92e4cf;
+				border-bottom: 1px solid #e6e6e6;
+				padding: 10px;
+				margin-bottom: 80px;
+			}
+
+
+			.search-page .production-pack .list-pack {
+				margin-top: 10px;
+			}
+
+			.search-page .production-pack .list-pack .production {
+				border: 1px dashed #dadada;
+				border-radius: 0;
+				padding: 5px;
+				/*background: #eaeaea;*/
+			}
+
+			.search-page .production-pack .list-pack .production img {
+				margin-bottom: 7px;
+			}
+
+			.search-page .production-pack .list-pack .production .info-pack {
+				text-align: center;
+				font-size: 14px;
+				margin-bottom: 7px;
+			}
+
+			.search-page .production-pack .list-pack .production .info-pack span {
+				margin-right: 10px;
+			}
+
+			.search-page .production-pack .list-pack .production .vote-pack {
+				width: 100%;
+				height: 30px;
+				line-height: 30px;
+				border-radius: 3px;
+				border: 1px solid #79d4bd;
+				display: -webkit-flex; /* Safari */
+				display: flex;
+			}
+
+
+			.search-page .production-pack .list-pack .production .vote-pack .left-pack {
+				width: 35%;
+				height: 100%;
+				line-height: 1;
+				border-right: 1px solid #79d4bd;
+				display: -webkit-flex; /* Safari */
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.search-page .production-pack .list-pack .production .vote-pack .left-pack .mui-icon-extra {
+				font-size: 16px;
+				color: #4eb99e;
+			}
+			.search-page .production-pack .list-pack .production .vote-pack .left-pack .have-vote {
+				font-size: 14px;
+				color: #4eb99e;
+			}
+
+			.search-page .production-pack .list-pack .production .vote-pack .right-pack {
+				width: 64%;
+				height: 30px;
+				line-height: 30px;
+				font-size: 14px;
+				text-align: center;
+				color: #4eb99e;
+			}
+
+			.search-page .production-pack .list-pack .empty-pack {
+				margin-top: 80px;
+				margin-bottom: 80px;
+				display: -webkit-flex; /* Safari */
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 14px;
+			}
+
+			.search-page .production-pack .list-pack .empty-pack span {
+				margin-right: 10px;
+			}
+
+			.search-page .production-pack .list-pack .empty-pack .mui-icon-extra {
+				font-size: 20px;
+			}
+
+			.search-page .production-pack .load-more .mui-btn-block {
+				font-size: 14px;
+				line-height: 1;
+				margin-top: 20px;
+				border: 0px;
+				background: #f7f7f7;
+			}
+
+		</style>
+
 	</head>
 	<body>
-
 		<!-- 搜索页面 -->
-		<div class="search-page" id="search_page">
-			<div class="search">
-				<div class="search-bar-pack">
-					<img src="i/search_earth.png"/>
+		<div class="search-page">
+
+			<!-- 搜索框 -->
+			<div class="search-pack">
+				<div class="mui-input-row mui-search">
+					<input type="search" class="mui-input-clear" placeholder="可输入 编号ID 或者 昵称、姓名">
 				</div>
-				<div class="search-bar">
-					<input id="search_input" type="text" placeholder="搜索应用或输入网址" />
-					<a id="cancel_search" class="cancel-search">取消</a>
-				</div>
-				<div class="search-result">
-					<div class="search-result-block">
-						<div class="title">本地应用</div>
-						<div id="searched_apps" class="no-result">请搜索本地应用</div>
+				<div class="btn-pack">搜索</div>
+			</div>
+
+			<!-- 参赛作品列表 -->
+			<div class="production-pack">
+				<div class="list-pack">
+					<div style="display: none" class="empty-pack">
+						<span class="mui-icon-extra mui-icon-extra-lamp"></span>
+						<span>暂无匹配作品</span>
+					</div>
+					<div id="macyContainer">
+						<div class="production">
+							<img src="i/personal-banner.png" alt="" class="demo-image">
+							<div class="info-pack"><span>4526号</span><span>张三</span></div>
+							<div class="vote-pack">
+								<div class="left-pack">
+									<span class="mui-icon-extra mui-icon-extra-heart-filled"></span>
+								</div>
+								<div class="right-pack">
+									12345845
+								</div>
+							</div>
+						</div>
+						<div class="production">
+							<img src="i/personal-banner.png" alt="" class="demo-image">
+							<div class="info-pack"><span>4526号</span><span>张三</span></div>
+							<div class="vote-pack">
+								<div class="left-pack">
+									<span class="have-vote">已投</span>
+								</div>
+								<div class="right-pack">
+									12345845
+								</div>
+							</div>
+						</div>
+						<div class="production"><img src="i/personal-banner.png" alt="" class="demo-image"></div>
+						<div class="production"><img src="i/personal-banner.png" alt="" class="demo-image"></div>
+					</div>
+					<div class="load-more">
+						<button id="loadMore" type="button" data-loading-text = "加载中"  class="mui-btn mui-btn-block">点击加载更多</button>
 					</div>
 				</div>
 			</div>
 		</div>
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item" id="home">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item" id="ranking">
+				<span class="mui-icon-extra mui-icon-extra-rank"></span>
+				<span class="mui-tab-label">排行榜</span>
+			</a>
+			<a class="mui-tab-item mui-active" id="search">
+				<span class="mui-icon mui-icon-search"></span>
+				<span class="mui-tab-label">搜索</span>
+			</a>
+			<a class="mui-tab-item" id="apply">
+				<span class="mui-icon-extra mui-icon-extra-custom"></span>
+				<span class="mui-tab-label">报名</span>
+			</a>
+			<a class="mui-tab-item" id="personal">
+				<span class="mui-icon mui-icon-contact"></span>
+				<span class="mui-tab-label">个人中心</span>
+			</a>
+		</nav>
 
 
 		<!-- 通用类库 -->
 		<script src="js/lib/zepto.js"></script>
 		<script src="js/lib/zepto.touch.js"></script>
 		<script src="js/lib/fastclick.js"></script>
-		<script src="js/lib/Client.js"></script>
+		<script src="js/lib/mui/js/mui.min.js"></script>
+		<script src="js/lib/macy/macy.js"></script>
+		<script>
+			$(function () {
+				var page = 1;
 
-		<!-- 功能类 -->
-		<script src="js/components/Search.js"></script>
-		<script src="js/searchIndex.js"></script>
+				// 首先取消js在客户端的点击事件300毫秒延迟
+				FastClick.attach(document.body);
+
+				// 初始化加载更多
+				mui.init({
+					swipeBack: true //启用右滑关闭功能
+				});
+
+				mui(document.body).on('tap', '#loadMore', function(e) {
+					mui(this).button('loading');
+					page++;
+					getData();
+					setTimeout(function() {
+						mui(this).button('reset');
+					}.bind(this), 2000);
+				});
+
+				$('#home').tap(function(){
+					window.location.href = 'home.html';
+				})
+				$('#ranking').tap(function(){
+					window.location.href = 'ranking.html';
+				})
+				$('#apply').tap(function(){
+					window.location.href = 'apply.html';
+				})
+				$('#personal').tap(function(){
+					window.location.href = 'personal.html';
+				})
+
+
+				//语音识别完成事件
+				document.getElementById("search").addEventListener('recognized', function(e) {
+					console.log(e.detail.value);
+				});
+
+				var nativeWebview, imm, InputMethodManager;
+				var initNativeObjects = function() {
+					if (mui.os.android) {
+						var main = plus.android.runtimeMainActivity();
+						var Context = plus.android.importClass("android.content.Context");
+						InputMethodManager = plus.android.importClass("android.view.inputmethod.InputMethodManager");
+						imm = main.getSystemService(Context.INPUT_METHOD_SERVICE);
+					} else {
+						nativeWebview = plus.webview.currentWebview().nativeInstanceObject();
+					}
+				};
+				var showSoftInput = function() {
+					if (mui.os.android) {
+						imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
+					} else {
+						nativeWebview.plusCallMethod({
+							"setKeyboardDisplayRequiresUserAction": false
+						});
+					}
+					setTimeout(function() {
+						var inputElem = document.querySelector('input');
+						inputElem.focus();
+						inputElem.parentNode.classList.add('mui-active'); //第一个是search，加上激活样式
+					}, 200);
+				};
+				mui.plusReady(function() {
+					initNativeObjects();
+					showSoftInput();
+				});
+
+
+
+				// 初始化瀑布流
+				var masonry = new Macy({
+					container: '#macyContainer',
+					trueOrder: false,
+					waitForImages: false,
+					useOwnImageLoader: false,
+					debug: true,
+					mobileFirst: true,
+					columns: 2,
+					margin: 10,
+					breakAt: {
+						1200: 2,
+						940: 2,
+						520: 2,
+						400: 2
+					}
+				});
+
+				// getData();
+
+				function getData () {
+					setTimeout (function () {
+						var html = '';
+						for (var i = 0; i < 15; i++) {
+							if (i%2 ==0) {
+								html += '<div class="demo">'+page+'--'+i+'<img src="i/personal-banner.png" alt="" class="demo-image"></div>';
+							} else {
+								html += '<div class="demo">'+page+'--'+i+'<img src="i/personal-banner.png" alt="" class="demo-image"></div>';
+							}
+						}
+						$('#macyContainer').append(html);
+						masonry.runOnImageLoad(function () {
+							masonry.recalculate(true);
+						}, true);
+					}, 1000)
+				}
+			});
+		</script>
 	</body>
 </html>
