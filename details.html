@@ -23,7 +23,7 @@
 				overflow-y: auto;
 				overflow-x: hidden;
 				height: 100%;
-				background: url(i/shouye_nvsheng_bg.png);
+				background: url(i/details-bg.jpg);
 				background-size: 100% 100%;
 			}
 
@@ -81,49 +81,33 @@
 			}
 
 			.details-page .production-pack {
-				position: absolute;
-				top: 55px;
+				position: relative;
+				top: 0;
 				width: 100%;
 			}
 
 
-			.swiper-container{
+			.swiper-container {
 				width:100%;
 				-webkit-perspective: 1200px;
 				-moz-perspective: 1200px;
 				-ms-perspective: 1200px;
 				perspective: 1200px;
 			}
-			.swiper-wrapper{
+			.swiper-wrapper {
 				margin-top:10px;
 			}
-			.swiper-slide{
+			.swiper-slide {
 				width:80%;
 				-webkit-transform-style: preserve-3d;
 				-moz-transform-style: preserve-3d;
 				-ms-transform-style: preserve-3d;
 				transform-style: preserve-3d;
 			}
-			.swiper-slide-active {
-
-			}
 			.swiper-slide .main-img{
 				width:80%;
 				margin:0 auto;
 				display:block;
-			}
-			#pagination{
-				position:absolute;
-				bottom:100px;
-				width:100%;
-			}
-
-			#pagination .swiper-pagination-bullet{
-				width:9.5%;
-				float:left;
-				margin:0 0 0 6.15%;
-				background:none;
-				opacity: 1;
 			}
 			.swiper-pagination-bullet i{
 				background:#41203f;
@@ -135,25 +119,17 @@
 				display:block;
 				font-style:normal;
 				text-align:center;
-
 				margin:0 auto;
 				color:#f5b55c;
-
 			}
 			@media screen and (min-height: 481px) {
 				.swiper-wrapper{
 					margin-top:20px;
 				}
-				#pagination{
-					bottom:110px;
-				}
 			}
 			@media screen and (min-height: 569px) {
 				.swiper-wrapper{
 					margin-top:40px;
-				}
-				#pagination{
-					bottom:120px;
 				}
 				.swiper-pagination-bullet i{
 					width:30px;
@@ -163,13 +139,152 @@
 				}
 			}
 
+			.details-page .record-pack {
+				background: #f9f9f9;
+			}
+
+			.details-page .record-pack .title-pack {
+				padding: 5px 10px;
+				border-bottom: 1px dashed #ddd;
+				font-size: 14px;
+			}
+
+			.details-page .record-pack .title-pack span {
+				margin-right: 10px;
+			}
+
+			.details-page .list-pack {
+				height: auto;
+				margin-bottom: 50px;
+				padding-bottom: 10px;
+			 }
+
+			.details-page .list-pack {
+				height: auto;
+			}
+
+			.details-page .list-pack .item-pack {
+				position: relative;
+				height: 70px;
+				width: 100%;
+				padding: 10px;
+				display: -webkit-flex; /* Safari */
+				display: flex;
+				align-items: center;
+			}
+
+			.details-page .list-pack .item-pack .left-pack {
+				height: 36px;
+				width: 36px;
+			}
+
+			.details-page .list-pack .item-pack .right-pack {
+				position: absolute;
+				left: 70px;
+				right: 10px;
+				height: 60px;
+				top: 10px;
+				bottom: 10px;
+			}
+
+			.details-page .list-pack .item-pack .right-pack .desc-pack {
+				height: 40px;
+				line-height: 45px;
+				font-size: 14px;
+			}
+
+			.details-page .list-pack .item-pack .right-pack .time-pack {
+				height: 20px;
+				line-height: 10px;
+				font-size: 12px;
+				color: #999;
+			}
 
 
 
 
+
+
+			.details-page .operation-pack {
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+				height: 50px;
+				border-top: 1px solid #929292;
+				background: linear-gradient(#fbfbfb, #dadada);
+				padding: 0 20px;
+				display: -webkit-flex; /* Safari */
+				display: flex;
+				justify-content: space-between;
+				z-index: 99;
+			}
+
+			.details-page .operation-pack .back-pack {
+				text-align: center;
+			}
+
+			.details-page .operation-pack .gift-pack {
+				text-align: center;
+			}
+
+			.details-page .operation-pack .icon-pack {
+				font-size: 14px;
+				color: #fd3fa6;
+			}
+
+			.details-page .operation-pack .icon-pack .mui-icon-extra {
+				font-size: 18px;
+				margin-top: 3px;
+			}
+
+			.details-page .operation-pack .label-pack {
+				font-size: 14px;
+				color: #fd3fa6;
+			}
+
+			.vote-pack {
+				position: relative;
+				top: -20px;
+				height: 60px;
+				line-height: 60px;
+				width: 60px;
+				background: #f9c5df;
+				border-radius: 50%;
+				border: 4px solid #fd3fa6;
+				text-align: center;
+				animation: jello 1s;
+				animation-iteration-count: infinite;
+			}
+
+			.vote-pack .icon-pack {
+				height: 25px;
+				line-height: 35px;
+			}
+
+			.vote-pack .label-pack {
+				height: 30px;
+				line-height: 23px;
+			}
+
+			@keyframes jello {
+				0% {
+					border: 4px solid #fd3fa6;
+				}
+				20% {
+					border: 6px solid #fd3fa6;
+				}
+				35% {
+					border: 4px solid #fd3fa6;
+				}
+				60% {
+					border: 6px solid #fd3fa6;
+				}
+				100% {
+					border: 4px solid #fd3fa6;
+				}
+			}
 
 		</style>
-
 	</head>
 	<body>
 		<!-- 作品页面 -->
@@ -190,14 +305,77 @@
 			<div class="production-pack">
 				<div class="swiper-container" >
 					<div class="swiper-wrapper">
-						<div class="swiper-slide"><img src="i/production1.jpg" class="main-img"></div>
-						<div class="swiper-slide"><img src="i/shouye_nvsheng_hairdye_four.png" class="main-img"></div>
-						<div class="swiper-slide"><img src="i/shouye_nvsheng_haircare_five.png" class="main-img"></div>
+						<div class="swiper-slide"><img src="i/product1.jpg" class="main-img"></div>
+						<div class="swiper-slide"><img src="i/product2.jpg" class="main-img"></div>
+						<div class="swiper-slide"><img src="i/product3.jpg" class="main-img"></div>
 					</div>
 				</div>
 			</div>
 
-			<!-- 投票 -->
+			<!-- 投票记录 -->
+			<div class="record-pack">
+				<div class="title-pack">
+					<span class="mui-icon mui-icon-settings"></span>
+					<span>送礼物列表</span>
+				</div>
+				<div class="list-pack">
+					<div class="item-pack">
+						<div class="left-pack">
+							<img src="i/portrait.png" class="portrait" />
+						</div>
+						<div class="right-pack">
+							<div class="desc-pack">
+								张三用户，送给TA了1份证书！
+							</div>
+							<div class="time-pack">
+								2019-03-03 02:22:22
+							</div>
+						</div>
+					</div>
+					<div class="item-pack">
+						<div class="left-pack">
+							<img src="i/portrait.png" class="portrait" />
+						</div>
+						<div class="right-pack">
+							<div class="desc-pack">
+								张三用户，送给TA了1份证书！
+							</div>
+							<div class="time-pack">
+								2019-03-03 02:22:22
+							</div>
+						</div>
+					</div>
+					<div class="item-pack">
+						<div class="left-pack">
+							<img src="i/portrait.png" class="portrait" />
+						</div>
+						<div class="right-pack">
+							<div class="desc-pack">
+								张三用户，送给TA了1份证书！
+							</div>
+							<div class="time-pack">
+								2019-03-03 02:22:22
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 投票、送礼物等 -->
+			<div class="operation-pack">
+				<div class="back-pack">
+					<div class="icon-pack"><span class="mui-icon-extra mui-icon-extra-arrowleftcricle"></span></div>
+					<div class="label-pack">回首页</div>
+				</div>
+				<div class="vote-pack">
+					<div class="icon-pack"><span class="mui-icon-extra mui-icon-extra-heart-filled"></span></div>
+					<div class="label-pack">投票</div>
+				</div>
+				<div class="gift-pack">
+					<div class="icon-pack"><span class="mui-icon-extra mui-icon-extra-gift"></span></div>
+					<div class="label-pack">送礼物</div>
+				</div>
+			</div>
 
 		</div>
 
@@ -215,40 +393,22 @@
 					slidesPerView : 'auto',
 					centeredSlides : true,
 					watchSlidesProgress: true,
-					// pagination : '.swiper-pagination',
 					paginationClickable: true,
-					// paginationBulletRender: function (index, className) {
-					// 	switch (index) {
-					// 		case 0: name='洗';break;
-					// 		case 1: name='剪';break;
-					// 		case 2: name='烫';break;
-					// 		case 3: name='染';break;
-					// 		case 4: name='护';break;
-					// 		case 5: name='套';break;
-					// 		default: name='';
-					// 	}
-					//
-					// 	return '<span class="' + className + '"><i>' + name + '</i></span>';
-					// },
 					onProgress: function(swiper){
 						for (var i = 0; i < swiper.slides.length; i++){
 							var slide = swiper.slides[i];
 							var progress = slide.progress;
 							scale = 1 - Math.min(Math.abs(progress * 0.2), 1);
-
 							es = slide.style;
 							es.opacity = 1 - Math.min(Math.abs(progress/2),1);
 							es.webkitTransform = es.MsTransform = es.msTransform = es.MozTransform = es.OTransform = es.transform = 'translate3d(0px,0,'+(-Math.abs(progress*150))+'px)';
-
 						}
 					},
-
 					onSetTransition: function(swiper, speed) {
 						for (var i = 0; i < swiper.slides.length; i++) {
 							es = swiper.slides[i].style;
 							es.webkitTransitionDuration = es.MsTransitionDuration = es.msTransitionDuration = es.MozTransitionDuration = es.OTransitionDuration = es.transitionDuration = speed + 'ms';
 						}
-
 					}
 				});
 			});
