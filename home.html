@@ -14,6 +14,9 @@
 		<link rel="stylesheet" href="css/app.css" />
 		<link rel="stylesheet" href="js/lib/macy/assets/css/macy.css">
 		<style>
+			.mui-popup-button {
+				color: #4eb99e;
+			}
 			.mui-bar-tab .mui-tab-item.mui-active {
 				color: #4cb89e;
 			}
@@ -272,6 +275,8 @@
 				border: 1px solid #79d4bd;
 				display: -webkit-flex; /* Safari */
 				display: flex;
+				position: relative;
+				z-index: 9;
 			}
 
 
@@ -471,9 +476,17 @@
 				$('#personal').tap(function(){
 					window.location.href = 'personal.html';
 				})
-				$('.production').tap(function(){
+				$('.production img').tap(function(){
 					window.location.href = 'details.html';
 				})
+
+				$('.vote-pack').on('touchstart', function(){
+					mui.alert('恭喜您，投票成功！', '启后书法院', function() {
+						console.info('你刚关闭了警告框');
+					});
+				})
+
+
 
 
 				// 初始化瀑布流
