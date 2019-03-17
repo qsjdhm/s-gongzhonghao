@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="">
+	<head>
+		<title>react-native</title>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="renderer" content="webkit" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" href="js/lib/mui/css/mui.min.css" />
+		<link rel="stylesheet" href="js/lib/swiper/swiper.min.css">
+		<link rel="stylesheet" type="text/css" href="js/lib/mui/css/icons-extra.css" />
+		<link rel="stylesheet" href="css/app.css" />
+		<style>
+			.mui-bar {
+				background: #fff;
+			}
+			.mui-bar .mui-pull-left .mui-icon {
+				padding-right: 5px;
+				font-size: 28px;
+			}
+			.mui-bar .mui-btn {
+				font-weight: normal;
+				font-size: 17px;
+			}
+			.mui-bar .mui-btn-link {
+				top: 1px;
+			}
+
+			.page-pack {
+				position: absolute;
+				top: 43px;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				overflow-y: auto;
+				overflow-x: hidden;
+				background: #f7f7f7;
+			}
+
+			.message-page .details-pack {
+				margin-top: 10px;
+			}
+			.message-page .details-pack .title-pack {
+				height: 39px;
+				line-height: 39px;
+				padding: 0 15px;
+				display: -webkit-flex; /* Safari */
+				display: flex;
+				align-items: center;
+				border-bottom: 1px solid #eae9ea;
+			}
+			.message-page .details-pack .title-pack .icon-pack {
+				color: #c59c51;
+				font-size: 16px;
+				margin-right: 10px;
+			}
+
+			.message-page .details-pack .item-pack {
+				height: 39px;
+				line-height: 39px;
+				padding: 0 15px;
+				display: -webkit-flex; /* Safari */
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				border-bottom: 1px solid #eae9ea;
+				font-size: 14px;
+				background: #fff;
+			}
+
+			.message-page .details-pack .item-pack .time-pack {
+				color: #999;
+			}
+
+		</style>
+	</head>
+	<body>
+		<!-- 积分页面 -->
+		<div id="message_page" class="message-page">
+			<header id="header" class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<h1 class="mui-title">我的消息</h1>
+			</header>
+			<div class="page-pack">
+				<div class="details-pack">
+					<div class="title-pack">
+						<div class="icon-pack"><span class="mui-icon-extra mui-icon-extra-order"></span></div>
+						<div class="name">消息列表</div>
+					</div>
+					<div class="list-pack">
+						<div class="item-pack">
+							<div class="time-pack">2019-03-25</div>
+							<div class="desc-pack">您充值了130元</div>
+						</div>
+						<div class="item-pack">
+							<div class="time-pack">2019-03-25</div>
+							<div class="desc-pack">您兑换了毛笔*10</div>
+						</div>
+						<div class="item-pack">
+							<div class="time-pack">2019-03-25</div>
+							<div class="desc-pack">您支持张三证书*10</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- 通用类库 -->
+		<script src="js/lib/zepto.js"></script>
+		<script src="js/lib/zepto.touch.js"></script>
+		<script src="js/lib/fastclick.js"></script>
+		<script src="js/lib/mui/js/mui.min.js"></script>
+
+		<script>
+			$(function () {
+			});
+		</script>
+	</body>
+</html>

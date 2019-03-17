@@ -8,7 +8,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
 		<meta name="renderer" content="webkit" />
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
-		<meta name="format-detection" content="telephone=no" />
+		<meta name="format-detection" content="telephone=yes"/>
 		<link rel="stylesheet" href="js/lib/mui/css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="js/lib/mui/css/icons-extra.css" />
 		<link rel="stylesheet" href="css/app.css" />
@@ -211,7 +211,7 @@
 						</div>
 					</div>
 					<div class="right-pack">
-						<div class="personage-pack">
+						<div id="info" class="personage-pack">
 							<span>个人主页</span>
 							<span class="mui-icon mui-icon-arrowright"></span>
 						</div>
@@ -220,25 +220,25 @@
 				<div class="card-big-pack">
 					<div class="card-pack">
 						<div class="row-pack">
-							<div class="item-pack">
+							<div id="integral" class="item-pack">
 								<div class="item-top-pack">1234</div>
 								<div class="item-bottom-pack">我的积分</div>
 							</div>
-							<div class="item-pack">
+							<div id="consumption" class="item-pack">
 								<div class="item-top-pack">50.5</div>
 								<div class="item-bottom-pack">我的消费</div>
 							</div>
-							<div class="item-pack">
+							<div id="vote" class="item-pack">
 								<div class="item-top-pack">103</div>
 								<div class="item-bottom-pack">我的投票</div>
 							</div>
 						</div>
 						<div class="row-pack">
-							<div class="item-pack">
+							<div id="gift" class="item-pack">
 								<div class="item-top-pack">23</div>
 								<div class="item-bottom-pack">我的礼物</div>
 							</div>
-							<div class="item-pack">
+							<div id="details" class="item-pack">
 								<div class="item-top-pack">3</div>
 								<div class="item-bottom-pack">我的作品</div>
 							</div>
@@ -259,18 +259,18 @@
 							<span class="mui-icon-extra mui-icon-extra-gift"></span><span>礼物商城</span>
 						</a>
 					</li>
-					<li class="mui-table-view-cell">
+					<li id="message" class="mui-table-view-cell">
 						<a class="mui-navigate-right">
 							<span class="mui-icon-extra mui-icon-extra-notice"></span><span>消息中心</span>
 						</a>
 					</li>
-					<li class="mui-table-view-cell">
+					<li id="applyBtn" class="mui-table-view-cell">
 						<a class="mui-navigate-right">
 							<span class="mui-icon-extra mui-icon-extra-university"></span><span>我要报名</span>
 						</a>
 					</li>
-					<li class="mui-table-view-cell">
-						<a class="mui-navigate-right">
+					<li id="service" class="mui-table-view-cell">
+						<a href="tel:400-0000-688" class="mui-navigate-right">
 							<span class="mui-icon-extra mui-icon-extra-custom"></span><span>联系客服</span>
 						</a>
 					</li>
@@ -327,6 +327,36 @@
 				$('#apply').tap(function(){
 					window.location.href = 'apply.html';
 				})
+
+
+				$('#info').tap(function(){
+					window.location.href = 'info.html';
+				})
+				$('#integral').tap(function(){
+					window.location.href = 'integral.html';
+				})
+				$('#consumption').tap(function(){
+					window.location.href = 'consumption.html';
+				})
+				$('#vote').tap(function(){
+					window.location.href = 'vote.html';
+				})
+				$('#gift').tap(function(){
+					window.location.href = 'gift.html';
+				})
+				$('#details').tap(function(){
+					window.location.href = 'details.html?from=personal&id=123';
+				})
+				$('#message').tap(function(){
+					window.location.href = 'message.html';
+				})
+				$('#applyBtn').tap(function(){
+					window.location.href = 'apply.html';
+				})
+
+
+
+
 			});
 		</script>
 	</body>
