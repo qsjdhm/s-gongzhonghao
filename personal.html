@@ -254,7 +254,7 @@
 			</div>
 			<div class="list-pack mui-content">
 				<ul class="mui-table-view">
-					<li class="mui-table-view-cell">
+					<li id="mall" class="mui-table-view-cell">
 						<a class="mui-navigate-right">
 							<span class="mui-icon-extra mui-icon-extra-gift"></span><span>礼物商城</span>
 						</a>
@@ -346,6 +346,9 @@
 				})
 				$('#details').tap(function(){
 					window.location.href = 'details.html?from=personal&id=123';
+				})
+				$('#mall').tap(function(){
+					window.location.href = 'mall.html';
 				})
 				$('#message').tap(function(){
 					window.location.href = 'message.html';
