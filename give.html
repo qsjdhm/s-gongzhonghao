@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="">
+	<head>
+		<title>react-native</title>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="renderer" content="webkit" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" href="js/lib/mui/css/mui.min.css" />
+		<link rel="stylesheet" href="js/lib/swiper/swiper.min.css">
+		<link rel="stylesheet" type="text/css" href="js/lib/mui/css/icons-extra.css" />
+		<link rel="stylesheet" href="css/app.css" />
+		<style>
+			.mui-bar {
+				background: #fff;
+			}
+			.mui-bar .mui-pull-left .mui-icon {
+				padding-right: 5px;
+				font-size: 28px;
+			}
+			.mui-bar .mui-btn {
+				font-weight: normal;
+				font-size: 17px;
+			}
+			.mui-bar .mui-btn-link {
+				top: 1px;
+			}
+
+			.page-pack {
+				position: absolute;
+				top: 43px;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				overflow-y: auto;
+				overflow-x: hidden;
+				background: #f7f7f7;
+			}
+
+			.give-page .all-pack {
+				margin-bottom: 10px;
+			}
+
+
+
+			.give-page .all-pack .info-pack {
+				width: 100%;
+				height: auto;
+				position: relative;
+				top: 5px;
+				margin-bottom: 10px;
+				display: -webkit-flex;
+				display: flex;
+			}
+
+			.give-page .all-pack .left-pack {
+				height: auto;
+				width: 90%;
+				display: -webkit-flex;
+				display: flex;
+			}
+
+			.give-page .all-pack .left-pack .portrait-pack {
+				height: auto;
+				width: 60px;
+			}
+
+			.give-page .all-pack .left-pack .portrait-pack img {
+				height: 48px;
+				width: 48px;
+				margin-top: 6px;
+				margin-left: 15px;
+			}
+
+			.give-page .all-pack .left-pack .p-info-pack {
+				margin-left: 10px;
+			}
+
+			.give-page .all-pack .left-pack .p-info-pack .name-pack {
+				font-size: 16px;
+				height: 35px;
+				line-height: 45px;
+				color: #333;
+			}
+
+			.give-page .all-pack .left-pack .p-info-pack .phone-pack {
+				font-size: 14px;
+				height: auto;
+				line-height: 23px;
+				color: #999;
+			}
+
+			.give-page .all-pack .right-pack {
+				font-size: 14px;
+				width: 10%;
+				padding-right: 10px;
+				display: -webkit-flex;
+				display: flex;
+				align-items: center;
+				justify-content: flex-end;
+			}
+
+			.give-page .all-pack .right-pack span {
+				font-size: 14px;
+			}
+
+			.give-page .all-pack .poll-pack {
+				background: #fff;
+				padding: 10px;
+				margin-bottom: 10px;
+			}
+
+			.give-page .all-pack .poll-pack .desc-pack {
+				color: #c59c51;
+				font-size: 14px;
+				border-bottom: 1px solid #eae9ea;
+				padding-bottom: 10px;
+			}
+
+			.give-page .all-pack .poll-pack .mui-table-view {
+				background: #fff;
+				border: 0px solid #fff!important;
+			}
+			.give-page .all-pack .poll-pack .mui-table-view-cell {
+				border: 0px solid #fff!important;
+			}
+
+			.give-page .all-pack .poll-pack .mui-table-view-cell span {
+				font-size: 14px;
+				margin-bottom: 5px;
+			}
+
+
+
+
+			.give-page .all-pack .content-pack {
+				background: #fff;
+				padding: 10px;
+			}
+
+			.give-page .all-pack .content-pack .desc-pack {
+				color: #c59c51;
+				font-size: 14px;
+				border-bottom: 1px solid #eae9ea;
+				padding-bottom: 10px;
+			}
+
+			.give-page .all-pack .content-pack .mui-table-view {
+				background: #fff;
+				border: 0px solid #fff!important;
+			}
+			.give-page .all-pack .content-pack .mui-table-view-cell {
+				border: 0px solid #fff!important;
+			}
+
+			.give-page .all-pack .content-pack .mui-table-view-cell img {
+				width: 42px;
+				height: 42px;
+			}
+
+			.give-page .all-pack .number-pack {
+				background: #fff;
+				font-size: 14px;
+				margin-top: 10px;
+				padding: 5px 10px;
+				display: -webkit-flex; /* Safari */
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+			}
+
+			.give-page .all-pack .number-pack div {
+				width: 50%;
+			}
+
+			.give-page .all-pack .number-pack .label-pack {
+				color: #c59c51;
+			}
+
+			.give-page .all-pack .number-pack div select {
+				padding: 10px;
+				background: #ddf4ee;
+				margin-bottom: 0px;
+				font-size: 14px;
+				color: #000;
+			}
+
+			.give-page .all-pack .submit-pack {
+				margin-top: 10px;
+				padding: 0 10px;
+			}
+
+			.give-page .all-pack .mui-btn-block {
+				font-size: 14px;
+				display: block;
+				width: 100%;
+				margin-bottom: 10px;
+				padding: 10px 0;
+				border: 0px solid #fff;
+				background: #1ec622;
+				color: #fff;
+			}
+
+		</style>
+	</head>
+	<body>
+		<!-- 赠送礼物页面 -->
+		<div id="give_page" class="give-page">
+			<header id="header" class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<h1 class="mui-title">赠送礼物</h1>
+			</header>
+			<div class="page-pack">
+				<div class="all-pack">
+					<!-- 个人信息 -->
+					<div class="info-pack">
+						<div class="left-pack">
+							<div class="portrait-pack">
+								<img src="i/portrait.png">
+							</div>
+							<div class="p-info-pack">
+								<div class="name-pack">张三李四</div>
+								<div class="phone-pack">我的作品天下第一，独特的中国风</div>
+							</div>
+						</div>
+						<div class="right-pack">
+							<span class="mui-icon mui-icon-arrowright"></span>
+						</div>
+					</div>
+
+					<!-- 所得票数信息 -->
+					<div class="poll-pack">
+						<div class="desc-pack">
+							他的战绩
+						</div>
+						<ul class="mui-table-view mui-grid-view mui-grid-9">
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+								<span>编号</span>
+								<div class="mui-media-body">9527</div></a></li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+								<span>投票数</span>
+								<div class="mui-media-body">19527票</div></a></li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+								<span>收到礼物</span>
+								<div class="mui-media-body">527个</div></a></li>
+						</ul>
+					</div>
+
+					<div class="content-pack">
+						<div class="desc-pack">
+							1.选中心仪的礼物
+						</div>
+						<ul class="mui-table-view mui-grid-view mui-grid-9">
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+								<img src="i/diamond.png" />
+								<div class="mui-media-body">钻石（1元）</div></a></li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+								<img src="i/pen.png" />
+								<div class="mui-media-body">毛笔（5元）</div></a></li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+								<img src="i/certificate.png" />
+								<div class="mui-media-body">证书（10元）</div></a></li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+								<img src="i/cup.png" />
+								<div class="mui-media-body">奖杯（30元）</div></a></li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+								<img src="i/crown.png" />
+								<div class="mui-media-body">皇冠（50元）</div></a></li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+								<img src="i/medal.png" />
+								<div class="mui-media-body">金牌（100元）</div></a></li>
+						</ul>
+					</div>
+					<div class="number-pack">
+						<div class="label-pack">2.选择礼物个数</div>
+						<div>
+							<select class="mui-btn mui-btn-block">
+								<option value="item-1">1个</option>
+								<option value="item-2">2个</option>
+								<option value="item-3">3个</option>
+								<option value="item-4">4个</option>
+								<option value="item-5">5个</option>
+								<option value="item-6">6个</option>
+								<option value="item-7">7个</option>
+								<option value="item-8">8个</option>
+								<option value="item-9">9个</option>
+								<option value="item-10">10个</option>
+								<option value="item-20">20个</option>
+								<option value="item-50">50个</option>
+								<option value="item-100">100个</option>
+								<option value="item-200">200个</option>
+								<option value="item-500">500个</option>
+								<option value="item-1000">1000个</option>
+							</select>
+						</div>
+					</div>
+					<div class="submit-pack">
+						<button id="submit" type="button" data-loading-text = "加载中"  class="mui-btn mui-btn-block">微信支付</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+		<!-- 通用类库 -->
+		<script src="js/lib/zepto.js"></script>
+		<script src="js/lib/zepto.touch.js"></script>
+		<script src="js/lib/fastclick.js"></script>
+		<script src="js/lib/mui/js/mui.min.js"></script>
+
+		<script>
+			$(function () {
+				// 首先取消js在客户端的点击事件300毫秒延迟
+				FastClick.attach(document.body);
+
+				// 初始化加载更多
+				mui.init({
+					swipeBack: true //启用右滑关闭功能
+				});
+				mui(document.body).on('tap', '#loadMore', function(e) {
+					mui(this).button('loading');
+					setTimeout(function() {
+						mui(this).button('reset');
+					}.bind(this), 2000);
+				});
+
+				$('.mui-table-view-cell').on('touchstart', function(){
+					$('.mui-table-view-cell').css('border', '0px solid #f45d4a!important')
+					$(this).css('border', '1px solid #ffc900!important')
+				})
+
+				$('.info-pack').tap(function(){
+					window.location.href = 'details.html';
+				})
+
+
+
+			});
+		</script>
+	</body>
+</html>

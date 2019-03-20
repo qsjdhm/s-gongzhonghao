@@ -619,6 +619,16 @@
 					window.location.href = 'home.html';
 				})
 
+				$('.vote-pack').on('touchstart', function(){
+					mui.alert('恭喜您，投票成功！', '启后书法院', function() {
+						console.info('你刚关闭了警告框');
+					});
+				})
+
+				$('.gift-pack').tap(function(){
+					window.location.href = 'give.html';
+				})
+
 				mui.previewImage();
 			});
 		</script>
