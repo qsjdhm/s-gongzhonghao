@@ -332,7 +332,7 @@
 			<!-- 结束时间 -->
 			<div class="stop-time-pack">
 				<img src="i/time.png" />
-				<span>活动结束还有：</span>
+				<span>活动结束：</span>
 				<span>
 				<span class="time">1</span>天
 				<span class="time">12</span>小时
@@ -361,8 +361,8 @@
 
 			<!-- 参赛详情 -->
 			<div class="detail-pack">
-				<div>参赛详情</div>
-				<div>我要报名</div>
+				<div id="introduceBtn">参赛详情</div>
+				<div id="applyBtn">我要报名</div>
 			</div>
 
 			<!-- 参赛作品列表 -->
@@ -454,6 +454,15 @@
 				mui.init({
 					swipeBack: true //启用右滑关闭功能
 				});
+
+				$('#introduceBtn').tap(function(){
+					window.location.href = 'introduce.html';
+				})
+
+				$('#applyBtn').tap(function(){
+					window.location.href = 'apply.html';
+				})
+
 
 				mui(document.body).on('tap', '#loadMore', function(e) {
 					mui(this).button('loading');
