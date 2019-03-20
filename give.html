@@ -180,6 +180,10 @@
 				color: #c59c51;
 			}
 
+			.give-page .all-pack .number-pack .value-pack {
+				padding-left: 5px;
+			}
+
 			.give-page .all-pack .number-pack div select {
 				padding: 10px;
 				background: #ddf4ee;
@@ -188,9 +192,31 @@
 				color: #000;
 			}
 
-			.give-page .all-pack .submit-pack {
+			.give-page .all-pack .btn-pack {
 				margin-top: 10px;
 				padding: 0 10px;
+				display: -webkit-flex;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+			}
+
+			.give-page .all-pack .btn-pack .mall-pack {
+				 width: 50%;
+				 padding-right: 5px;
+			}
+
+			.give-page .all-pack .btn-pack .mall-pack .mui-btn-block {
+				background: #FEAE1B;
+			}
+
+			.give-page .all-pack .btn-pack .submit-pack {
+				width: 50%;
+				padding-left: 5px;
+			}
+
+			.give-page .all-pack .btn-pack .submit-pack .mui-btn-block {
+				background: #FF4351;
 			}
 
 			.give-page .all-pack .mui-btn-block {
@@ -251,32 +277,29 @@
 
 					<div class="content-pack">
 						<div class="desc-pack">
-							1.选中心仪的礼物
+							1.选择支持他的礼物
 						</div>
 						<ul class="mui-table-view mui-grid-view mui-grid-9">
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 								<img src="i/diamond.png" />
-								<div class="mui-media-body">钻石（1元）</div></a></li>
+								<div class="mui-media-body">钻石*30</div></a></li>
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 								<img src="i/pen.png" />
-								<div class="mui-media-body">毛笔（5元）</div></a></li>
-							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-								<img src="i/certificate.png" />
-								<div class="mui-media-body">证书（10元）</div></a></li>
+								<div class="mui-media-body">毛笔*5</div></a></li>
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 								<img src="i/cup.png" />
-								<div class="mui-media-body">奖杯（30元）</div></a></li>
+								<div class="mui-media-body">奖杯*1</div></a></li>
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 								<img src="i/crown.png" />
-								<div class="mui-media-body">皇冠（50元）</div></a></li>
+								<div class="mui-media-body">皇冠*10</div></a></li>
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 								<img src="i/medal.png" />
-								<div class="mui-media-body">金牌（100元）</div></a></li>
+								<div class="mui-media-body">金牌*2</div></a></li>
 						</ul>
 					</div>
 					<div class="number-pack">
 						<div class="label-pack">2.选择礼物个数</div>
-						<div>
+						<div class="value-pack">
 							<select class="mui-btn mui-btn-block">
 								<option value="item-1">1个</option>
 								<option value="item-2">2个</option>
@@ -297,8 +320,13 @@
 							</select>
 						</div>
 					</div>
-					<div class="submit-pack">
-						<button id="submit" type="button" data-loading-text = "加载中"  class="mui-btn mui-btn-block">微信支付</button>
+					<div class="btn-pack">
+						<div class="mall-pack">
+							<button id="mall" type="button" data-loading-text = "加载中"  class="mui-btn mui-btn-block">去礼物商城</button>
+						</div>
+						<div class="submit-pack">
+							<button id="submit" type="button" data-loading-text = "加载中"  class="mui-btn mui-btn-block">支持他 / 她</button>
+						</div>
 					</div>
 				</div>
 
@@ -321,12 +349,6 @@
 				mui.init({
 					swipeBack: true //启用右滑关闭功能
 				});
-				mui(document.body).on('tap', '#loadMore', function(e) {
-					mui(this).button('loading');
-					setTimeout(function() {
-						mui(this).button('reset');
-					}.bind(this), 2000);
-				});
 
 				$('.mui-table-view-cell').on('touchstart', function(){
 					$('.mui-table-view-cell').css('border', '0px solid #f45d4a!important')
@@ -337,8 +359,15 @@
 					window.location.href = 'details.html';
 				})
 
+				$('#mall').tap(function(){
+					window.location.href = 'mall.html';
+				})
 
-
+				$('#submit').on('touchstart', function(){
+					mui.alert('恭喜您，支持成功！', '启后书法院', function() {
+						console.info('你刚关闭了警告框');
+					});
+				})
 			});
 		</script>
 	</body>
