@@ -40,49 +40,49 @@
 				background: #f7f7f7;
 			}
 
-			.mall-page .all-pack {
+			.recharge-page .all-pack {
 				margin-bottom: 10px;
 			}
 
-			.mall-page .all-pack .title-pack {
+			.recharge-page .all-pack .title-pack {
 				padding: 10px 15px;
 				display: -webkit-flex; /* Safari */
 				display: flex;
 				align-items: center;
 			}
 
-			.mall-page .all-pack .title-pack .icon-pack {
+			.recharge-page .all-pack .title-pack .icon-pack {
 				font-size: 16px;
 				color: #c59c51;
 				margin-right: 10px;
 			}
 
-			.mall-page .all-pack .content-pack {
+			.recharge-page .all-pack .content-pack {
 				background: #fff;
 				padding: 10px;
 			}
 
-			.mall-page .all-pack .content-pack .desc-pack {
+			.recharge-page .all-pack .content-pack .desc-pack {
 				color: #c59c51;
 				font-size: 14px;
 				border-bottom: 1px solid #eae9ea;
 				padding-bottom: 10px;
 			}
 
-			.mall-page .all-pack .content-pack .mui-table-view {
+			.recharge-page .all-pack .content-pack .mui-table-view {
 				background: #fff;
 				border: 0px solid #fff!important;
 			}
-			.mall-page .all-pack .content-pack .mui-table-view-cell {
+			.recharge-page .all-pack .content-pack .mui-table-view-cell {
 				border: 0px solid #fff!important;
 			}
 
-			.mall-page .all-pack .content-pack .mui-table-view-cell img {
+			.recharge-page .all-pack .content-pack .mui-table-view-cell img {
 				width: 42px;
 				height: 42px;
 			}
 
-			.mall-page .all-pack .number-pack {
+			.recharge-page .all-pack .number-pack {
 				background: #fff;
 				font-size: 14px;
 				margin-top: 10px;
@@ -93,15 +93,15 @@
 				justify-content: space-between;
 			}
 
-			.mall-page .all-pack .number-pack div {
+			.recharge-page .all-pack .number-pack div {
 				width: 50%;
 			}
 
-			.mall-page .all-pack .number-pack .label-pack {
+			.recharge-page .all-pack .number-pack .label-pack {
 				color: #c59c51;
 			}
 
-			.mall-page .all-pack .number-pack div select {
+			.recharge-page .all-pack .number-pack div select {
 				padding: 10px;
 				background: #ddf4ee;
 				margin-bottom: 0px;
@@ -109,12 +109,12 @@
 				color: #000;
 			}
 
-			.mall-page .all-pack .submit-pack {
+			.recharge-page .all-pack .submit-pack {
 				margin-top: 10px;
 				padding: 0 10px;
 			}
 
-			.mall-page .all-pack .mui-btn-block {
+			.recharge-page .all-pack .mui-btn-block {
 				font-size: 14px;
 				display: block;
 				width: 100%;
@@ -133,70 +133,46 @@
 	</head>
 	<body>
 		<!-- 礼物页面 -->
-		<div id="mall_page" class="mall-page">
+		<div id="mall_page" class="recharge-page">
 			<header id="header" class="mui-bar mui-bar-nav">
 				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-				<h1 class="mui-title">礼物商城</h1>
+				<h1 class="mui-title">充值中心</h1>
 			</header>
 			<div class="page-pack">
 				<div class="all-pack">
 					<div class="title-pack">
-						<div class="icon-pack"><span class="mui-icon-extra mui-icon-extra-gift"></span></div>
-						<div class="name">礼物商城</div>
+						<div class="icon-pack"><span class="mui-icon-extra mui-icon-extra-gold"></span></div>
+						<div class="name">充值中心</div>
 					</div>
 					<div class="content-pack">
 						<div class="desc-pack">
-							1.选中心仪的礼物
+							选中要充值的金额
 						</div>
 						<ul class="mui-table-view mui-grid-view mui-grid-9">
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-								<img src="i/diamond.png" />
-								<div class="mui-media-body">钻石（1元）</div></a></li>
+								<div style="font-size: 24px;margin-top:10px;margin-bottom:20px;color:#dca135;">1元</div>
+								<div style="font-size: 14px;color:#ceae74!important;" class="mui-media-body">10个积分</div></a></li>
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-								<img src="i/pen.png" />
-								<div class="mui-media-body">毛笔（5元）</div></a></li>
+								<div style="font-size: 24px;margin-top:10px;margin-bottom:20px;color:#dca135;">10元</div>
+								<div style="font-size: 14px;color:#ceae74!important;" class="mui-media-body">100个积分</div></a></li>
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-								<img src="i/certificate.png" />
-								<div class="mui-media-body">证书（10元）</div></a></li>
+								<div style="font-size: 24px;margin-top:10px;margin-bottom:20px;color:#dca135;">50元</div>
+								<div style="font-size: 14px;color:#ceae74!important;" class="mui-media-body">500个积分</div></a></li>
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-								<img src="i/cup.png" />
-								<div class="mui-media-body">奖杯（30元）</div></a></li>
+								<div style="font-size: 24px;margin-top:10px;margin-bottom:20px;color:#dca135;">100元</div>
+								<div style="font-size: 14px;color:#ceae74!important;" class="mui-media-body">1,000个积分</div></a></li>
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-								<img src="i/crown.png" />
-								<div class="mui-media-body">皇冠（50元）</div></a></li>
+								<div style="font-size: 24px;margin-top:10px;margin-bottom:20px;color:#dca135;">300元</div>
+								<div style="font-size: 14px;color:#ceae74!important;" class="mui-media-body">3,000个积分</div></a></li>
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-								<img src="i/medal.png" />
-								<div class="mui-media-body">金牌（100元）</div></a></li>
+								<div style="font-size: 24px;margin-top:10px;margin-bottom:20px;color:#dca135;">500元</div>
+								<div style="font-size: 14px;color:#ceae74!important;" class="mui-media-body">5,000个积分</div></a></li>
 						</ul>
-					</div>
-					<div class="number-pack">
-						<div class="label-pack">2.选择礼物个数</div>
-						<div>
-							<select class="mui-btn mui-btn-block">
-								<option value="item-1">1个</option>
-								<option value="item-2">2个</option>
-								<option value="item-3">3个</option>
-								<option value="item-4">4个</option>
-								<option value="item-5">5个</option>
-								<option value="item-6">6个</option>
-								<option value="item-7">7个</option>
-								<option value="item-8">8个</option>
-								<option value="item-9">9个</option>
-								<option value="item-10">10个</option>
-								<option value="item-20">20个</option>
-								<option value="item-50">50个</option>
-								<option value="item-100">100个</option>
-								<option value="item-200">200个</option>
-								<option value="item-500">500个</option>
-								<option value="item-1000">1000个</option>
-							</select>
-						</div>
 					</div>
 					<div class="submit-pack">
 						<button id="submit" type="button" data-loading-text = "加载中"  class="mui-btn mui-btn-block">微信支付</button>
 					</div>
 				</div>
-
 			</div>
 		</div>
 
@@ -224,7 +200,7 @@
 				});
 
 				$('.mui-table-view-cell').on('touchstart', function(){
-					$('.mui-table-view-cell').css('border', '0px solid #f45d4a!important')
+					$('.mui-table-view-cell').css('border', '0px solid #ffc900!important')
 					$(this).css('border', '1px solid #ffc900!important')
 				})
 			});
