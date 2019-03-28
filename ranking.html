@@ -513,7 +513,7 @@
 				getMegagameProductionList();
 
 				$('#loadMore').on('touchstart', function(){
-					// mui(this).button('loading');
+					mui($('#loadMore')[0]).button('loading');
 					page++;
 					// 获取本次大赛的作品列表
 					getMegagameProductionList()
@@ -536,7 +536,7 @@
 				// 获取大赛基本信息
 				function getMegagameBaseInfo () {
 					$.ajax({
-						url: "http://47.92.216.253/GetIndexBaseInfo",
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetIndexBaseInfo",
 						type: "get",
 						dataType: "json",
 						success: function(result) {
@@ -584,6 +584,7 @@
 						type: "get",
 						dataType: "json",
 						success: function(result) {
+							mui($('#loadMore')[0]).button('reset');
 							if (result.state === 1) {
 								// mui(self).button('reset');
 								if (result.data != null) {
@@ -628,6 +629,7 @@
 							}
 						},
 						error: function() {
+							mui($('#loadMore')[0]).button('reset');
 							// mui(self).button('reset');
 							mui.alert('获取大赛作品列表出错！', '启后书法院', function() {
 								console.info('你刚关闭了警告框');
@@ -643,7 +645,7 @@
 				function dateCount(endTime){
 					// 获取现在的时间
 					var start = new Date();
-					var stop = new Date(endTime);
+					var stop = new Date(endTime.replace(/-/g, "/"));
 					// 计算时会发生隐式转换，调用valueOf()方法，转化成时间戳的形式
 					var days = (stop - start)/1000/3600/24;
 					// 下面都是简单的数学计算

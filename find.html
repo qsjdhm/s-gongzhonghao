@@ -349,7 +349,7 @@
 					});
 				})
 				$('#loadMore').on('touchstart', function(){
-					// mui(this).button('loading');
+					mui($('#loadMore')[0]).button('loading');
 					page++;
 					var value = $('#searchInput').val();
 					getMegagameProductionList(value)
@@ -423,8 +423,8 @@
 						type: "get",
 						dataType: "json",
 						success: function(result) {
+							mui($('#loadMore')[0]).button('reset');
 							if (result.state === 1) {
-								// mui(this).button('reset');
 								if (result.data != null) {
 									$('.empty-pack').css('display', 'none')
 									var html = '';
@@ -458,8 +458,8 @@
 							}
 						},
 						error: function() {
+							mui($('#loadMore')[0]).button('reset');
 							$('.empty-pack').css('display', 'block')
-							// mui(self).button('reset');
 							mui.alert('获取大赛作品列表出错！', '启后书法院', function() {
 								console.info('你刚关闭了警告框');
 							});

@@ -178,6 +178,7 @@
 				}
 
 				$('#submit').on('touchstart', function(){
+					mui($('#submit')[0]).button('loading');
 					var phone = $('#phone').val()
 					$.ajax({
 						url: "http://47.92.216.253/tools/wechatpn.ashx?action=UpdateUserInfoOperate",
@@ -189,6 +190,7 @@
 							"author_mobile": phone
 						},
 						success: function(result) {
+							mui($('#submit')[0]).button('reset');
 							if (result.state === 1) {
 								mui.alert(result.msg, '启后书法院', function() {
 									console.info('你刚关闭了警告框');
@@ -200,6 +202,7 @@
 							}
 						},
 						error: function() {
+							mui($('#submit')[0]).button('reset');
 							mui.alert('获取大赛基本信息出错！', '启后书法院', function() {
 								console.info('你刚关闭了警告框');
 							});

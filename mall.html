@@ -266,9 +266,11 @@
 				})
 
 				$('#submit').on('touchstart', function(){
+					mui($('#submit')[0]).button('loading');
 					if (selectGiftId == '') {
 						mui.alert('请先选中您要兑换的礼物！', '启后书法院', function() {
 							console.info('你刚关闭了警告框');
+							mui($('#submit')[0]).button('reset');
 						});
 					} else {
 						selectGiftNum = $('#giftNumSelect').val()
@@ -283,6 +285,7 @@
 								gift_num: selectGiftNum
 							},
 							success: function(result) {
+								mui($('#submit')[0]).button('reset');
 								if (result.state === 1) {
 									mui.alert(result.msg, '启后书法院', function() {
 										console.info('你刚关闭了警告框');
@@ -294,6 +297,7 @@
 								}
 							},
 							error: function() {
+								mui($('#submit')[0]).button('reset');
 								mui.alert('获取大赛基本信息出错！', '启后书法院', function() {
 									console.info('你刚关闭了警告框');
 								});
