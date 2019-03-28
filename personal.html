@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="">
 	<head>
-		<title>react-native</title>
+		<title>个人中心</title>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="description" content="" />
@@ -84,6 +84,7 @@
 				width: 48px;
 				margin-top: 6px;
 				margin-left: 15px;
+				border-radius: 50%;
 			}
 
 			.personal-page .top-pack .left-pack .p-info-pack {
@@ -199,15 +200,15 @@
 	<body>
 		<div class="personal-page">
 			<div class="top-pack">
-				<img src="i/personal-banner.png" />
+				<img src="i/personal-banner.png">
 				<div class="info-pack">
 					<div class="left-pack">
 						<div class="portrait-pack">
-							<img src="i/portrait.png">
+							<img id="headImg" src=""/>
 						</div>
 						<div class="p-info-pack">
-							<div class="name-pack">张三李四</div>
-							<div class="phone-pack">13589511274</div>
+							<div id="name" class="name-pack">张三李四</div>
+							<div id="phone" class="phone-pack"></div>
 						</div>
 					</div>
 					<div class="right-pack">
@@ -221,25 +222,25 @@
 					<div class="card-pack">
 						<div class="row-pack">
 							<div id="integral" class="item-pack">
-								<div class="item-top-pack">1234</div>
+								<div class="item-top-pack">0</div>
 								<div class="item-bottom-pack">我的积分</div>
 							</div>
 							<div id="consumption" class="item-pack">
-								<div class="item-top-pack">50.5</div>
+								<div class="item-top-pack">0</div>
 								<div class="item-bottom-pack">我的消费</div>
 							</div>
 							<div id="vote" class="item-pack">
-								<div class="item-top-pack">103</div>
+								<div class="item-top-pack">0</div>
 								<div class="item-bottom-pack">我的投票</div>
 							</div>
 						</div>
 						<div class="row-pack">
 							<div id="gift" class="item-pack">
-								<div class="item-top-pack">23</div>
+								<div class="item-top-pack">0</div>
 								<div class="item-bottom-pack">我的礼物</div>
 							</div>
 							<div id="details" class="item-pack">
-								<div class="item-top-pack">3</div>
+								<div class="item-top-pack">0</div>
 								<div class="item-bottom-pack">我的作品</div>
 							</div>
 							<div id="recharge" class="item-pack">
@@ -270,7 +271,7 @@
 						</a>
 					</li>
 					<li id="service" class="mui-table-view-cell">
-						<a href="tel:400-0000-688" class="mui-navigate-right">
+						<a href="tel:0531-88769067" class="mui-navigate-right">
 							<span class="mui-icon-extra mui-icon-extra-custom"></span><span>联系客服</span>
 						</a>
 					</li>
@@ -315,6 +316,39 @@
 					swipeBack: true //启用右滑关闭功能
 				});
 
+				getUserInfo()
+
+				// 获取用户基本信息
+				function getUserInfo () {
+					$.ajax({
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=UserBaseInfo&we_chat_user_id="+window.localStorage.getItem('qh_user_id')+"&open_id="+window.localStorage.getItem('qh_open_id'),
+						type: "get",
+						dataType: "json",
+						success: function(result) {
+							if (result.state === 1) {
+								console.info(result)
+								$('#name').html(result.data.we_chat_nick)
+								$('#phone').html(result.data.phone)
+								$('#headImg').attr('src', result.data.head_img)
+								$('#integral .item-top-pack').html(result.data.integral_num)
+								$('#consumption .item-top-pack').html(result.data.cost_num)
+								$('#vote .item-top-pack').html(result.data.vote_num)
+								$('#gift .item-top-pack').html(result.data.gife_num)
+								$('#details .item-top-pack').html(result.data.works_num)
+							} else {
+								mui.alert(result.msg, '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
+							}
+						},
+						error: function() {
+							mui.alert('获取大赛基本信息出错！', '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
+						}
+					});
+				}
+
 				$('#home').tap(function(){
 					window.location.href = 'home.html';
 				})
@@ -327,8 +361,6 @@
 				$('#apply').tap(function(){
 					window.location.href = 'apply.html';
 				})
-
-
 				$('#info').tap(function(){
 					window.location.href = 'info.html';
 				})
@@ -359,10 +391,6 @@
 				$('#applyBtn').tap(function(){
 					window.location.href = 'apply.html';
 				})
-
-
-
-
 			});
 		</script>
 	</body>

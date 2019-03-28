@@ -87,7 +87,7 @@
 					type: "get",
 					dataType: "json",
 					success: function(result) {
-						if (result.state === 0) {
+						if (result.state === 1) {
 							$('.page-pack').append(result.data.active_detail)
 						} else {
 							mui.alert('请求本届大赛详情出错！', '启后书法院', function() {

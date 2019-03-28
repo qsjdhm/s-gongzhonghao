@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="">
 	<head>
-		<title>react-native</title>
+		<title>搜索作品</title>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="description" content="" />
@@ -195,6 +195,7 @@
 			}
 
 			.search-page .production-pack .list-pack .empty-pack {
+				text-align: center;
 				margin-top: 80px;
 				margin-bottom: 80px;
 				display: -webkit-flex; /* Safari */
@@ -230,9 +231,9 @@
 			<!-- 搜索框 -->
 			<div class="search-pack">
 				<div class="mui-input-row mui-search">
-					<input type="search" class="mui-input-clear" placeholder="可输入 编号ID 或者 昵称、姓名">
+					<input id="searchInput" type="search" class="mui-input-clear" placeholder="可输入 编号ID 或者 昵称、姓名">
 				</div>
-				<div class="btn-pack">搜索</div>
+				<div id="searchBtn" class="btn-pack">搜索</div>
 			</div>
 
 			<!-- 参赛作品列表 -->
@@ -243,32 +244,6 @@
 						<span>暂无匹配作品</span>
 					</div>
 					<div id="macyContainer">
-						<div class="production">
-							<img src="i/personal-banner.png" alt="" class="demo-image">
-							<div class="info-pack"><span>4526号</span><span>张三</span></div>
-							<div class="vote-pack">
-								<div class="left-pack">
-									<span class="mui-icon-extra mui-icon-extra-heart-filled"></span>
-								</div>
-								<div class="right-pack">
-									12345845
-								</div>
-							</div>
-						</div>
-						<div class="production">
-							<img src="i/personal-banner.png" alt="" class="demo-image">
-							<div class="info-pack"><span>4526号</span><span>张三</span></div>
-							<div class="vote-pack">
-								<div class="left-pack">
-									<span class="have-vote">已投</span>
-								</div>
-								<div class="right-pack">
-									12345845
-								</div>
-							</div>
-						</div>
-						<div class="production"><img src="i/personal-banner.png" alt="" class="demo-image"></div>
-						<div class="production"><img src="i/personal-banner.png" alt="" class="demo-image"></div>
 					</div>
 					<div class="load-more">
 						<button id="loadMore" type="button" data-loading-text = "加载中"  class="mui-btn mui-btn-block">点击加载更多</button>
@@ -318,15 +293,67 @@
 					swipeBack: true //启用右滑关闭功能
 				});
 
-				mui(document.body).on('tap', '#loadMore', function(e) {
-					mui(this).button('loading');
-					page++;
-					getData();
-					setTimeout(function() {
-						mui(this).button('reset');
-					}.bind(this), 2000);
+				// 初始化瀑布流
+				var masonry = new Macy({
+					container: '#macyContainer',
+					trueOrder: false,
+					waitForImages: false,
+					useOwnImageLoader: false,
+					debug: true,
+					mobileFirst: true,
+					columns: 2,
+					margin: 10,
+					breakAt: {
+						1200: 2,
+						940: 2,
+						520: 2,
+						400: 2
+					}
 				});
 
+				// 先获取全部作品
+				getMegagameProductionList('')
+
+				$('#searchBtn').on('touchstart', function(){
+					$('#macyContainer').empty()
+					page = 1;
+					var value = $('#searchInput').val();
+					getMegagameProductionList(value)
+				})
+				$('.vote-pack').live('touchstart', function(){
+					var self = this;
+					var code = $(this).attr('id')
+					$.ajax({
+						url: "http://47.92.216.253/UserVoteOperate",
+						type: "post",
+						dataType: "json",
+						data: {
+							we_chat_user_id: window.localStorage.getItem('qh_user_id'),
+							open_id: window.localStorage.getItem('qh_open_id'),
+							author_code: code
+						},
+						success: function(result) {
+							if (result.state === 1) {
+								$(self).find('.left-pack').html('<span class="have-vote">已投</span>')
+							} else {
+								mui.alert(result.msg, '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
+							}
+						},
+						error: function() {
+							mui.alert('投票失败！', '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
+						}
+					});
+				})
+				$('#loadMore').on('touchstart', function(){
+					// mui(this).button('loading');
+					page++;
+					var value = $('#searchInput').val();
+					getMegagameProductionList(value)
+				});
 				$('#home').tap(function(){
 					window.location.href = 'home.html';
 				})
@@ -378,42 +405,69 @@
 
 
 
-				// 初始化瀑布流
-				var masonry = new Macy({
-					container: '#macyContainer',
-					trueOrder: false,
-					waitForImages: false,
-					useOwnImageLoader: false,
-					debug: true,
-					mobileFirst: true,
-					columns: 2,
-					margin: 10,
-					breakAt: {
-						1200: 2,
-						940: 2,
-						520: 2,
-						400: 2
+
+
+
+
+				// 获取本次大赛的作品列表
+				function getMegagameProductionList(searchKey) {
+					var self = this;
+					var url = '';
+					if (searchKey == '') {
+						url = "http://47.92.216.253/tools/wechatpn.ashx?action=GetCompetitionList&page_index="+page+"&page_size=20"
+					} else {
+						url = "http://47.92.216.253/tools/wechatpn.ashx?action=GetCompetitionList&page_index="+page+"&page_size=20&search_key="+searchKey
 					}
-				});
-
-				// getData();
-
-				function getData () {
-					setTimeout (function () {
-						var html = '';
-						for (var i = 0; i < 15; i++) {
-							if (i%2 ==0) {
-								html += '<div class="demo">'+page+'--'+i+'<img src="i/personal-banner.png" alt="" class="demo-image"></div>';
+					$.ajax({
+						url: url,
+						type: "get",
+						dataType: "json",
+						success: function(result) {
+							if (result.state === 1) {
+								// mui(this).button('reset');
+								if (result.data != null) {
+									$('.empty-pack').css('display', 'none')
+									var html = '';
+									for (var i=0; i< result.data.length; i++) {
+										html += '<div class="production">';
+										html += '	<img src="'+result.data[i].com_img+'" alt="" class="demo-image">';
+										html += '	<div class="info-pack"><span>'+result.data[i].author_code+'号</span><span>'+result.data[i].author_name+'</span></div>';
+										html += '	<div class="vote-pack" id="'+result.data[i].author_code+'">';
+										html += '		<div class="left-pack">';
+										html += '			<span class="mui-icon-extra mui-icon-extra-heart-filled"></span>';
+										html += '		</div>';
+										html += '		<div class="right-pack">'+result.data[i].vote_num+'</div>';
+										html += '	</div>';
+										html += '</div>';
+									}
+									console.info(html)
+									$('#macyContainer').append(html);
+									masonry.runOnImageLoad(function () {
+										masonry.recalculate(true);
+									}, true);
+								} else {
+									$('.empty-pack').css('display', 'block')
+									$('.load-more').css('display', 'none')
+								}
 							} else {
-								html += '<div class="demo">'+page+'--'+i+'<img src="i/personal-banner.png" alt="" class="demo-image"></div>';
+								$('.empty-pack').css('display', 'block')
+								// mui(self).button('reset');
+								mui.alert(result.msg, '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
 							}
+						},
+						error: function() {
+							$('.empty-pack').css('display', 'block')
+							// mui(self).button('reset');
+							mui.alert('获取大赛作品列表出错！', '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
 						}
-						$('#macyContainer').append(html);
-						masonry.runOnImageLoad(function () {
-							masonry.recalculate(true);
-						}, true);
-					}, 1000)
+					});
 				}
+
+
 			});
 		</script>
 	</body>

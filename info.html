@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="">
 	<head>
-		<title>react-native</title>
+		<title>更改个人信息</title>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="description" content="" />
@@ -92,7 +92,7 @@
 
 			.info-page .mui-input-row label~input,
 			.info-page .mui-input-row label~textarea {
-				width: 73%;
+				width: 65%;
 				font-size: 16px;
 				height: 50px;
 				line-height: 50px;
@@ -117,7 +117,7 @@
 					<div class="content-pack">
 						<div class="mui-input-row" style="height: 50px; line-height: 50px;">
 							<label>选手姓名</label>
-							<input id='name' value="张三李四" disabled type="text" class="mui-input-clear mui-input" placeholder="请输入姓名或昵称">
+							<input id='name' value="" disabled type="text" class="mui-input-clear mui-input" placeholder="请输入姓名或昵称">
 						</div>
 						<!--<div class="mui-input-row" style="height: 50px; line-height: 50px;">
 							<label>作品介绍</label>
@@ -125,7 +125,7 @@
 						</div>-->
 						<div class="mui-input-row" style="height: 50px; line-height: 50px;">
 							<label>手机</label>
-							<input id='phone' value="123456789" type="text" class="mui-input-clear mui-input" placeholder="手机号我司不会对外公布">
+							<input id='phone' value="" type="text" class="mui-input-clear mui-input" placeholder="手机号我司不会对外公布">
 						</div>
 						<div style="width: 100%; padding: 15px;">
 							<button id='submit' type="button" class="mui-btn mui-btn-block mui-btn-primary">更新个人信息</button>
@@ -149,6 +149,62 @@
 				// 初始化加载更多
 				mui.init({
 					swipeBack: true //启用右滑关闭功能
+				});
+				getUserInfo()
+
+				// 获取用户基本信息
+				function getUserInfo () {
+					$.ajax({
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=UserBaseInfo&we_chat_user_id="+window.localStorage.getItem('qh_user_id')+"&open_id="+window.localStorage.getItem('qh_open_id'),
+						type: "get",
+						dataType: "json",
+						success: function(result) {
+							if (result.state === 1) {
+								console.info(result)
+								$('#name').val(result.data.we_chat_nick)
+								$('#phone').val(result.data.phone)
+							} else {
+								mui.alert(result.msg, '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
+							}
+						},
+						error: function() {
+							mui.alert('获取大赛基本信息出错！', '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
+						}
+					});
+				}
+
+				$('#submit').on('touchstart', function(){
+					var phone = $('#phone').val()
+					$.ajax({
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=UpdateUserInfoOperate",
+						type: "post",
+						dataType: "json",
+						data: {
+							"we_chat_user_id": window.localStorage.getItem('qh_user_id'),
+							"open_id": window.localStorage.getItem('qh_open_id'),
+							"author_mobile": phone
+						},
+						success: function(result) {
+							if (result.state === 1) {
+								mui.alert(result.msg, '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
+							} else {
+								mui.alert(result.msg, '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
+							}
+						},
+						error: function() {
+							mui.alert('获取大赛基本信息出错！', '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
+						}
+					});
 				});
 			});
 		</script>

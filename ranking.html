@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="">
 	<head>
-		<title>react-native</title>
+		<title>作品排行榜</title>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="description" content="" />
@@ -259,6 +259,7 @@
 				height: 48px;
 				position: absolute;
 				top: 25px;
+				border-radius: 50%;
 			}
 
 			.ranking-page .production-pack .list-pack .item-pack .crown {
@@ -370,27 +371,27 @@
 				<img src="i/time.png" />
 				<span>活动结束：</span>
 				<span>
-					<span class="time">1</span>天
-					<span class="time">12</span>小时
-					<span class="time">30</span>分钟
-					<span class="time">13</span>秒
+					<span id="day" class="time">0</span>天
+					<span id="hour" class="time">0</span>小时
+					<span id="minute" class="time">0</span>分钟
+					<span id="second" class="time">0</span>秒
 				</span>
 			</div>
 
 			<!-- 参赛信息 -->
 			<div class="entrant-pack">
 				<div class="entrant-item-pack">
-					<div class="value">1000</div>
+					<div id="applyNumber" class="value">0</div>
 					<div class="label">参赛人数</div>
 				</div>
 				<div class="right-line"></div>
 				<div class="entrant-item-pack">
-					<div class="value">4420800</div>
+					<div id="voteNumber" class="value">0</div>
 					<div class="label">累积投票</div>
 				</div>
 				<div class="right-line"></div>
 				<div class="entrant-item-pack">
-					<div class="value">200155</div>
+					<div id="participantsNumber" class="value">0</div>
 					<div class="label">参与人数</div>
 				</div>
 			</div>
@@ -416,7 +417,7 @@
 				</div>
 				<div class="list-pack-pack">
 					<div class="list-pack">
-						<div class="item-pack">
+						<!--<div class="item-pack">
 							<div class="left-pack">
 								<img src="i/portrait.png" class="portrait" />
 								<img src="i/crown-golden.png" class="crown" />
@@ -439,46 +440,6 @@
 						<div class="item-pack">
 							<div class="left-pack">
 								<img src="i/portrait.png" class="portrait" />
-								<img src="i/crown-golden.png" class="crown" />
-							</div>
-							<div class="center-pack">
-								<div class="name-pack">
-									<span>书写人生</span><span>931号</span>
-								</div>
-								<div class="poll-pack">
-									<span>票数</span><span>235546</span>
-								</div>
-								<div class="aphorism-pack">
-									<span>重在参与，学习提高！</span>
-								</div>
-							</div>
-							<div class="right-pack">
-								<span class="top">2</span>
-							</div>
-						</div>
-						<div class="item-pack">
-							<div class="left-pack">
-								<img src="i/portrait.png" class="portrait" />
-								<img src="i/crown-golden.png" class="crown" />
-							</div>
-							<div class="center-pack">
-								<div class="name-pack">
-									<span>书写人生</span><span>931号</span>
-								</div>
-								<div class="poll-pack">
-									<span>票数</span><span>235546</span>
-								</div>
-								<div class="aphorism-pack">
-									<span>重在参与，学习提高！</span>
-								</div>
-							</div>
-							<div class="right-pack">
-								<span class="top">3</span>
-							</div>
-						</div>
-						<div class="item-pack">
-							<div class="left-pack">
-								<img src="i/portrait.png" class="portrait" />
 								<img src="i/crown-silver.png" class="crown" />
 							</div>
 							<div class="center-pack">
@@ -495,7 +456,7 @@
 							<div class="right-pack">
 								<span class="conventional">4</span>
 							</div>
-						</div>
+						</div>-->
 					</div>
 					<div class="load-more">
 						<button id="loadMore" type="button" data-loading-text = "加载中"  class="mui-btn mui-btn-block">点击加载更多</button>
@@ -536,6 +497,7 @@
 		<script>
 			$(function () {
 				var page = 1;
+				var endTime = '';
 
 				// 首先取消js在客户端的点击事件300毫秒延迟
 				FastClick.attach(document.body);
@@ -545,15 +507,17 @@
 					swipeBack: true //启用右滑关闭功能
 				});
 
-				mui(document.body).on('tap', '#loadMore', function(e) {
-					mui(this).button('loading');
-					page++;
-					getData();
-					setTimeout(function() {
-						mui(this).button('reset');
-					}.bind(this), 2000);
-				});
+				// 获取大赛基本数据
+				getMegagameBaseInfo()
+				// 获取大赛作品列表
+				getMegagameProductionList();
 
+				$('#loadMore').on('touchstart', function(){
+					// mui(this).button('loading');
+					page++;
+					// 获取本次大赛的作品列表
+					getMegagameProductionList()
+				});
 				$('#home').tap(function(){
 					window.location.href = 'home.html';
 				})
@@ -567,23 +531,135 @@
 					window.location.href = 'personal.html';
 				})
 
-				// getData();
 
-				function getData () {
-					setTimeout (function () {
-						var html = '';
-						for (var i = 0; i < 15; i++) {
-							if (i%2 ==0) {
-								html += '<div class="demo">'+page+'--'+i+'<img src="i/personal-banner.png" alt="" class="demo-image"></div>';
+
+				// 获取大赛基本信息
+				function getMegagameBaseInfo () {
+					$.ajax({
+						url: "http://47.92.216.253/GetIndexBaseInfo",
+						type: "get",
+						dataType: "json",
+						success: function(result) {
+							if (result.state === 1) {
+								$('title').html(result.data.active_name)
+								$('#banner').attr('src', result.data.active_img)
+								$('#applyNumber').html(result.data.competition_num)
+								$('#voteNumber').html(result.data.vote_num)
+								$('#participantsNumber').html(result.data.partake_num)
+								// 设置倒计时
+								endTime = result.data.end_time;
+								var timeObj = dateCount(result.data.end_time)
+								$('#day').html(timeObj.day)
+								$('#hour').html(timeObj.hour)
+								$('#minute').html(timeObj.minute)
+								$('#second').html(timeObj.second)
+								// 获取本次大赛的作品列表
+								getMegagameProductionList()
+								setInterval(function(){
+									var timeObj2 = dateCount(endTime)
+									$('#day').html(timeObj2.day)
+									$('#hour').html(timeObj2.hour)
+									$('#minute').html(timeObj2.minute)
+									$('#second').html(timeObj2.second)
+								}, 1000)
 							} else {
-								html += '<div class="demo">'+page+'--'+i+'<img src="i/personal-banner.png" alt="" class="demo-image"></div>';
+								mui.alert(result.msg, '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
 							}
+						},
+						error: function() {
+							mui.alert('获取大赛基本信息出错！', '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
 						}
-						$('#macyContainer').append(html);
-						masonry.runOnImageLoad(function () {
-							masonry.recalculate(true);
-						}, true);
-					}, 1000)
+					});
+				}
+
+				// 获取本次大赛的作品列表
+				function getMegagameProductionList() {
+					var self = this;
+					$.ajax({
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetRankingList&page_index="+page+"&page_size=20",
+						type: "get",
+						dataType: "json",
+						success: function(result) {
+							if (result.state === 1) {
+								// mui(self).button('reset');
+								if (result.data != null) {
+									var html = '';
+									for (var i=0; i< result.data.length; i++) {
+										html += '<div class="item-pack">';
+										html += '	<div class="left-pack">';
+										html += '		<img src="'+result.data[i].author_head_img+'" class="portrait" />';
+										if (i < 3) {
+											html += '	<img src="i/crown-golden.png" class="crown" />';
+										} else {
+											html += '	<img src="i/crown-silver.png" class="crown" />';
+										}
+										html += '	</div>';
+										html += '	<div class="center-pack">';
+										html += '		<div class="name-pack">';
+										html += '			<span>'+result.data[i].author_name+'</span><span>'+result.data[i].author_code+'号</span>';
+										html += '		</div>';
+										html += '		<div class="poll-pack">';
+										html += '			<span>票数</span><span>'+result.data[i].vote_num+'</span>';
+										html += '		</div>';
+										html += '		<div class="aphorism-pack">';
+										html += '			<span>'+result.data[i].active_introduce+'</span>';
+										html += '		</div>';
+										html += '	</div>';
+										html += '	<div class="right-pack">';
+										if (i < 3) {
+											html += '	<span class="top">'+result.data[i].active_sort+'</span>';
+										} else {
+											html += '	<span class="conventional">' + result.data[i].active_sort + '</span>';
+										}
+										html += '	</div>';
+										html += '</div>';
+									}
+									$('.list-pack').append(html);
+								}
+							} else {
+								// mui(self).button('reset');
+								mui.alert(result.msg, '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
+							}
+						},
+						error: function() {
+							// mui(self).button('reset');
+							mui.alert('获取大赛作品列表出错！', '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
+						}
+					});
+				}
+
+
+
+				// dateCount('2019-04-21 00:00:00')
+				// 倒计时
+				function dateCount(endTime){
+					// 获取现在的时间
+					var start = new Date();
+					var stop = new Date(endTime);
+					// 计算时会发生隐式转换，调用valueOf()方法，转化成时间戳的形式
+					var days = (stop - start)/1000/3600/24;
+					// 下面都是简单的数学计算
+					var day = Math.floor(days);
+					var hours = (days - day)*24;
+					var hour = Math.floor(hours);
+					var minutes = (hours - hour)*60;
+					var minute = Math.floor(minutes);
+					var seconds = (minutes - minute)*60;
+					var second = Math.floor(seconds);
+					return {
+						day: day,
+						hour: hour,
+						minute: minute,
+						second: second
+					};
 				}
 			});
 		</script>

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="">
 	<head>
-		<title>react-native</title>
+		<title>消息中心</title>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="description" content="" />
@@ -90,19 +90,8 @@
 						<div class="icon-pack"><span class="mui-icon-extra mui-icon-extra-order"></span></div>
 						<div class="name">消息列表</div>
 					</div>
-					<div class="list-pack">
-						<div class="item-pack">
-							<div class="time-pack">2019-03-25</div>
-							<div class="desc-pack">您充值了130元</div>
-						</div>
-						<div class="item-pack">
-							<div class="time-pack">2019-03-25</div>
-							<div class="desc-pack">您兑换了毛笔*10</div>
-						</div>
-						<div class="item-pack">
-							<div class="time-pack">2019-03-25</div>
-							<div class="desc-pack">您支持张三证书*10</div>
-						</div>
+					<div id="messageList" class="list-pack">
+
 					</div>
 				</div>
 			</div>
@@ -124,6 +113,39 @@
 				mui.init({
 					swipeBack: true //启用右滑关闭功能
 				});
+
+				getUserMessage()
+				// 获取用户的消息
+				function getUserMessage () {
+					$.ajax({
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetMyMessage&we_chat_user_id="+window.localStorage.getItem('qh_user_id')+"&open_id="+window.localStorage.getItem('qh_open_id'),
+						type: "get",
+						dataType: "json",
+						success: function(result) {
+							if (result.state === 1) {
+								if (result.data.details !== null) {
+									var html = '';
+									for (var i=0; i<result.data.details.length; i++) {
+										html += '<div class="item-pack">';
+										html += '	<div class="time-pack">'+result.data.details[i].create_time+'</div>';
+										html += '	<div class="desc-pack">'+result.data.details[i].detail_content+'</div>';
+										html += '</div>';
+									}
+									$('#messageList').append(html)
+								}
+							} else {
+								mui.alert(result.msg, '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
+							}
+						},
+						error: function() {
+							mui.alert('获取大赛基本信息出错！', '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
+						}
+					});
+				}
 			});
 		</script>
 	</body>

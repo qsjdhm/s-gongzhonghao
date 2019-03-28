@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="">
 	<head>
-		<title>react-native</title>
+		<title>我的礼物</title>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="description" content="" />
@@ -132,8 +132,8 @@
 					</div>
 					<div class="content-pack">
 
-						<ul class="mui-table-view mui-grid-view mui-grid-9">
-							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+						<ul id="giftList" class="mui-table-view mui-grid-view mui-grid-9">
+							<!--<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 								<img src="i/diamond.png" />
 								<div class="mui-media-body">钻石*10</div></a></li>
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
@@ -150,7 +150,7 @@
 								<div class="mui-media-body">皇冠*6</div></a></li>
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 								<img src="i/medal.png" />
-								<div class="mui-media-body">金牌*1</div></a></li>
+								<div class="mui-media-body">金牌*1</div></a></li>-->
 						</ul>
 
 					</div>
@@ -160,17 +160,11 @@
 						<div class="icon-pack"><span class="mui-icon-extra mui-icon-extra-order"></span></div>
 						<div class="name">礼物明细<span class="remark">朋友送的礼物会转化为投票数</span></div>
 					</div>
-					<div class="list-pack">
-						<div class="item-pack">
+					<div id="detailList" class="list-pack">
+						<!--<div class="item-pack">
 							<div class="time-pack">2019-03-25</div>
 							<div class="desc-pack">王五赵四支持了我毛笔*10</div>
-						</div>
-					</div>
-					<div class="list-pack">
-						<div class="item-pack">
-							<div class="time-pack">2019-03-25</div>
-							<div class="desc-pack">我使用120积分兑换了钻石*12</div>
-						</div>
+						</div>-->
 					</div>
 				</div>
 			</div>
@@ -192,6 +186,49 @@
 				mui.init({
 					swipeBack: true //启用右滑关闭功能
 				});
+
+				getUserGift()
+				// 获取用户的消费
+				function getUserGift () {
+					$.ajax({
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetMyGift&we_chat_user_id="+window.localStorage.getItem('qh_user_id')+"&open_id="+window.localStorage.getItem('qh_open_id'),
+						type: "get",
+						dataType: "json",
+						success: function(result) {
+							if (result.state === 1) {
+								if (result.data.belong_gife !== null) {
+									var html = '';
+									for (var i=0; i<result.data.belong_gife.length; i++) {
+										html += '<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">';
+										html += '	<img src="'+result.data.belong_gife[i].gift_img+'" />';
+										html += '	<div class="mui-media-body">'+result.data.belong_gife[i].gift_img+'*'+result.data.belong_gife[i].gift_num+'</div></a>';
+										html += '</li>';
+									}
+									$('#giftList').append(html)
+								}
+								if (result.data.gift_detail !== null) {
+									var html = '';
+									for (var i=0; i<result.data.gift_detail.length; i++) {
+										html += '<div class="item-pack">';
+										html += '	<div class="time-pack">'+result.data.gift_detail[i].create_time+'</div>';
+										html += '	<div class="desc-pack">'+result.data.gift_detail[i].detail_content+'</div>';
+										html += '</div>';
+									}
+									$('#detailList').append(html)
+								}
+							} else {
+								mui.alert(result.msg, '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
+							}
+						},
+						error: function() {
+							mui.alert('获取大赛基本信息出错！', '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
+						}
+					});
+				}
 			});
 		</script>
 	</body>

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="">
 	<head>
-		<title>react-native</title>
+		<title>我的消费</title>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="description" content="" />
@@ -122,7 +122,7 @@
 				<div class="all-pack">
 					<div class="title-pack">
 						<div class="icon-pack"><span class="mui-icon-extra mui-icon-extra-people"></span></div>
-						<div class="name">张三李四</div>
+						<div id="name" class="name"></div>
 					</div>
 					<div class="content-pack">
 						<div class="logo-pack">
@@ -130,7 +130,7 @@
 						</div>
 						<div class="value-pack">
 							<span style="font-size: 20px;">总消费：</span>
-							<span class="integral">1234.5元</span>
+							<span id="total" class="integral">0.00元</span>
 						</div>
 					</div>
 				</div>
@@ -139,31 +139,8 @@
 						<div class="icon-pack"><span class="mui-icon-extra mui-icon-extra-order"></span></div>
 						<div class="name">消费明细</div>
 					</div>
-					<div class="list-pack">
-						<div class="item-pack">
-							<div class="time-pack">2019-03-25</div>
-							<div class="desc-pack">充值120元兑换了120个积分</div>
-						</div>
-						<div class="item-pack">
-							<div class="time-pack">2019-03-25</div>
-							<div class="desc-pack">充值120元兑换了120个积分</div>
-						</div>
-						<div class="item-pack">
-							<div class="time-pack">2019-03-25</div>
-							<div class="desc-pack">充值120元兑换了120个积分</div>
-						</div>
-						<div class="item-pack">
-							<div class="time-pack">2019-03-25</div>
-							<div class="desc-pack">充值120元兑换了120个积分</div>
-						</div>
-						<div class="item-pack">
-							<div class="time-pack">2019-03-25</div>
-							<div class="desc-pack">充值120元兑换了120个积分</div>
-						</div>
-						<div class="item-pack">
-							<div class="time-pack">2019-03-25</div>
-							<div class="desc-pack">充值120元兑换了120个积分</div>
-						</div>
+					<div id="consumptionList" class="list-pack">
+
 					</div>
 				</div>
 			</div>
@@ -185,6 +162,41 @@
 				mui.init({
 					swipeBack: true //启用右滑关闭功能
 				});
+
+				getUserConsumption()
+				// 获取用户的消费
+				function getUserConsumption () {
+					$.ajax({
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetMyCost&we_chat_user_id="+window.localStorage.getItem('qh_user_id')+"&open_id="+window.localStorage.getItem('qh_open_id'),
+						type: "get",
+						dataType: "json",
+						success: function(result) {
+							if (result.state === 1) {
+								$('#name').html(result.data.we_chat_nick)
+								$('#total').html(result.data.total_cost_num)
+								if (result.data.cost_detail !== null) {
+									var html = '';
+									for (var i=0; i<result.data.cost_detail.length; i++) {
+										html += '<div class="item-pack">';
+										html += '	<div class="time-pack">'+result.data.cost_detail[i].create_time+'</div>';
+										html += '	<div class="desc-pack">'+result.data.cost_detail[i].detail_content+'</div>';
+										html += '</div>';
+									}
+									$('#consumptionList').append(html)
+								}
+							} else {
+								mui.alert(result.msg, '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
+							}
+						},
+						error: function() {
+							mui.alert('获取大赛基本信息出错！', '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
+						}
+					});
+				}
 			});
 		</script>
 	</body>
