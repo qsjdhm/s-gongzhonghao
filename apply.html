@@ -458,35 +458,33 @@
 					fileInput.setAttribute('accept', 'image/*');
 					fileInput.setAttribute('id', 'image-' + imageIndexIdNum);
 					fileInput.addEventListener('change', function(event) {
-						var file = fileInput.files[0];
-						if (file) {
-							var reader = new FileReader();
-							reader.onload = function() {
-								//处理 android 4.1 兼容问题
-								var base64 = reader.result.split(',')[1];
-								var dataUrl = 'data:image/png;base64,' + base64;
-								//
-								placeholder.style.backgroundImage = 'url(' + dataUrl + ')';
-								placeholder.setAttribute('base64', base64)
+						if ($(ui.imageList).find('.image-item').length > 3) {
+							mui.alert('作品最多只能上传3个！', '启后书法院', function () {});
+						} else {
+							var file = fileInput.files[0];
+							if (file) {
+								var reader = new FileReader();
+								reader.onload = function() {
+									//处理 android 4.1 兼容问题
+									var base64 = reader.result.split(',')[1];
+									var dataUrl = 'data:image/png;base64,' + base64;
+									//
+									placeholder.style.backgroundImage = 'url(' + dataUrl + ')';
+									placeholder.setAttribute('base64', base64)
+								}
+								reader.readAsDataURL(file);
+								placeholder.classList.remove('space');
+								ui.newPlaceholder();
 							}
-							reader.readAsDataURL(file);
-							placeholder.classList.remove('space');
-							ui.newPlaceholder();
 						}
 					}, false);
 					placeholder.appendChild(closeButton);
 					placeholder.appendChild(fileInput);
+					console.info($(ui.imageList).find('.image-item').length)
 					ui.imageList.appendChild(placeholder);
 				};
 				ui.newPlaceholder();
 
-
-				// mui(document.body).on('tap', '#submit', function(e) {
-				// 	mui(this).button('loading');
-				// 	setTimeout(function() {
-				// 		mui(this).button('reset');
-				// 	}.bind(this), 2000);
-				// });
 
 				mui(document.body).on('tap', '#submit', function(e) {
 					mui(this).button('loading');
@@ -503,9 +501,9 @@
 						data: {
 							"we_chat_user_id": localStorage.getItem('qh_user_id'),
 							"open_id": localStorage.getItem('qh_open_id'),
-							"author_name": "张三李四",
-							"author_mobile": "12364155862",
-							"works_introduce": "我的作品中国风",
+							"author_name": $('#name').val(),
+							"author_mobile": $('#phone').val(),
+							"works_introduce": $('#manifesto').val(),
 							"imgs": imgList,
 						},
 						success: function (result) {
@@ -520,7 +518,7 @@
 							}
 						},
 						error: function () {
-							mui.alert('请求openid出错！', '启后书法院', function () {
+							mui.alert('报名失败！', '启后书法院', function () {
 								console.info('你刚关闭了警告框');
 								mui(self).button('reset');
 							});
@@ -577,12 +575,6 @@
 						second: second
 					};
 				}
-				// mui(document.body).on('tap', '#submit', function(e) {
-				// 	mui(this).button('loading');
-				// 	setTimeout(function() {
-				// 		mui(this).button('reset');
-				// 	}.bind(this), 2000);
-				// });
 			})(mui, window, document, undefined);
 		</script>
 	</body>

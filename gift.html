@@ -200,8 +200,8 @@
 									var html = '';
 									for (var i=0; i<result.data.belong_gife.length; i++) {
 										html += '<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">';
-										html += '	<img src="'+result.data.belong_gife[i].gift_img+'" />';
-										html += '	<div class="mui-media-body">'+result.data.belong_gife[i].gift_img+'*'+result.data.belong_gife[i].gift_num+'</div></a>';
+										html += '	<img src="http://47.92.216.253/'+result.data.belong_gife[i].gift_img+'" />';
+										html += '	<div class="mui-media-body">'+result.data.belong_gife[i].gift_name+'*'+result.data.belong_gife[i].gift_num+'</div></a>';
 										html += '</li>';
 									}
 									$('#giftList').append(html)
@@ -223,7 +223,7 @@
 							}
 						},
 						error: function() {
-							mui.alert('获取大赛基本信息出错！', '启后书法院', function() {
+							mui.alert('获取我所拥有的礼物出错！', '启后书法院', function() {
 								console.info('你刚关闭了警告框');
 							});
 						}

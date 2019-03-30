@@ -324,7 +324,7 @@
 					var self = this;
 					var code = $(this).attr('id')
 					$.ajax({
-						url: "http://47.92.216.253/UserVoteOperate",
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=UserVoteOperate",
 						type: "post",
 						dataType: "json",
 						data: {
@@ -334,6 +334,9 @@
 						},
 						success: function(result) {
 							if (result.state === 1) {
+								mui.alert(result.msg, '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
 								$(self).find('.left-pack').html('<span class="have-vote">已投</span>')
 							} else {
 								mui.alert(result.msg, '启后书法院', function() {
@@ -365,6 +368,10 @@
 				})
 				$('#personal').tap(function(){
 					window.location.href = 'personal.html';
+				})
+				$('.production img').live('touchstart', function(){
+					var code = $(this).attr('code')
+					window.location.href = 'details.html?from=find&code='+code;
 				})
 
 
@@ -430,7 +437,7 @@
 									var html = '';
 									for (var i=0; i< result.data.length; i++) {
 										html += '<div class="production">';
-										html += '	<img src="'+result.data[i].com_img+'" alt="" class="demo-image">';
+										html += '	<img code="'+result.data[i].author_code+'" src="http://47.92.216.253/'+result.data[i].com_img+'" alt="" class="demo-image">';
 										html += '	<div class="info-pack"><span>'+result.data[i].author_code+'号</span><span>'+result.data[i].author_name+'</span></div>';
 										html += '	<div class="vote-pack" id="'+result.data[i].author_code+'">';
 										html += '		<div class="left-pack">';
@@ -460,7 +467,7 @@
 						error: function() {
 							mui($('#loadMore')[0]).button('reset');
 							$('.empty-pack').css('display', 'block')
-							mui.alert('获取大赛作品列表出错！', '启后书法院', function() {
+							mui.alert('获取参赛作品出错！', '启后书法院', function() {
 								console.info('你刚关闭了警告框');
 							});
 						}

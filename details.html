@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="">
 	<head>
-		<title>react-native</title>
+		<title>作品详情</title>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="description" content="" />
@@ -56,9 +56,10 @@
 			}
 
 			.details-page .author-pack .portrait-pack img {
-				width: 48px;
-				height: 48px;
+				width: 52px;
+				height: 52px;
 				z-index: 3;
+				border-radius: 50%;
 			}
 
 			.details-page .author-pack .info-pack {
@@ -449,21 +450,23 @@
 			<div class="top-pack">
 				<div class="author-pack">
 					<div class="portrait-pack">
-						<img src="i/portrait.png" class="portrait" />
+						<img id="portrait" src="i/portrait.png" class="portrait" />
 					</div>
 					<div class="info-pack">
-						<span>张三四</span>
-						<span>票数：1515532</span>
+						<span id="name"></span>
+						<span>票数：<span id="poll">0</span></span>
 					</div>
 				</div>
 			</div>
 			<!-- 作品轮播图 -->
 			<div class="production-pack">
 				<div class="swiper-container" >
-					<div class="swiper-wrapper">
+					<div id="productionList" class="swiper-wrapper">
+						<!--
 						<div class="swiper-slide"><img src="i/product1.jpg" data-preview-src="" data-preview-group="1" class="main-img"></div>
 						<div class="swiper-slide"><img src="i/product2.jpg" data-preview-src="" data-preview-group="1" class="main-img"></div>
 						<div class="swiper-slide"><img src="i/product3.jpg" data-preview-src="" data-preview-group="1" class="main-img"></div>
+					-->
 					</div>
 				</div>
 			</div>
@@ -474,88 +477,21 @@
 					<span class="mui-icon mui-icon-settings"></span>
 					<span>送礼物列表</span>
 				</div>
-				<div class="list-pack">
-					<!--<div class="empty-pack">
-						他暂时还没有收到过礼物！
+				<div id="giftList" class="list-pack">
+					<!--<div class="empty-pack">他/她暂时还没有收到过礼物！</div>
+					<div class="item-pack">
+						<div class="left-pack">
+							<img src="i/portrait.png" class="portrait" />
+						</div>
+						<div class="right-pack">
+							<div class="desc-pack">
+								微信用户，送给TA了1份证书！
+							</div>
+							<div class="time-pack">
+								2019-03-03 02:22:22
+							</div>
+						</div>
 					</div>-->
-					<div class="item-pack">
-						<div class="left-pack">
-							<img src="i/portrait.png" class="portrait" />
-						</div>
-						<div class="right-pack">
-							<div class="desc-pack">
-								微信用户，送给TA了1份证书！
-							</div>
-							<div class="time-pack">
-								2019-03-03 02:22:22
-							</div>
-						</div>
-					</div>
-					<div class="item-pack">
-						<div class="left-pack">
-							<img src="i/portrait.png" class="portrait" />
-						</div>
-						<div class="right-pack">
-							<div class="desc-pack">
-								微信用户，送给TA了1份证书！
-							</div>
-							<div class="time-pack">
-								2019-03-03 02:22:22
-							</div>
-						</div>
-					</div>
-					<div class="item-pack">
-						<div class="left-pack">
-							<img src="i/portrait.png" class="portrait" />
-						</div>
-						<div class="right-pack">
-							<div class="desc-pack">
-								微信用户，送给TA了1份证书！
-							</div>
-							<div class="time-pack">
-								2019-03-03 02:22:22
-							</div>
-						</div>
-					</div>
-					<div class="item-pack">
-						<div class="left-pack">
-							<img src="i/portrait.png" class="portrait" />
-						</div>
-						<div class="right-pack">
-							<div class="desc-pack">
-								微信用户，送给TA了1份证书！
-							</div>
-							<div class="time-pack">
-								2019-03-03 02:22:22
-							</div>
-						</div>
-					</div>
-					<div class="item-pack">
-						<div class="left-pack">
-							<img src="i/portrait.png" class="portrait" />
-						</div>
-						<div class="right-pack">
-							<div class="desc-pack">
-								微信用户，送给TA了1份证书！
-							</div>
-							<div class="time-pack">
-								2019-03-03 02:22:22
-							</div>
-						</div>
-					</div>
-					<div class="item-pack">
-						<div class="left-pack">
-							<img src="i/portrait.png" class="portrait" />
-						</div>
-						<div class="right-pack">
-							<div class="desc-pack">
-								微信用户，送给TA了1份证书！
-							</div>
-							<div class="time-pack">
-								2019-03-03 02:22:22
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 
@@ -563,7 +499,7 @@
 			<div class="operation-pack">
 				<div class="back-pack">
 					<div class="icon-pack"><span class="mui-icon-extra mui-icon-extra-arrowleftcricle"></span></div>
-					<div class="label-pack">回首页</div>
+					<div class="label-pack">页面返回</div>
 				</div>
 				<div class="vote-pack">
 					<div class="icon-pack"><span class="mui-icon-extra mui-icon-extra-heart-filled"></span></div>
@@ -589,47 +525,163 @@
 
 		<script>
 			$(function () {
+				var from = 'home';
+				var code = '';
+				from = getQueryString('from');
+				code = getQueryString('code');
+
 				// 首先取消js在客户端的点击事件300毫秒延迟
 				FastClick.attach(document.body);
 
-				var mySwiper = new Swiper('.swiper-container',{
-					slidesPerView : 'auto',
-					centeredSlides : true,
-					watchSlidesProgress: true,
-					paginationClickable: true,
-					onProgress: function(swiper){
-						for (var i = 0; i < swiper.slides.length; i++){
-							var slide = swiper.slides[i];
-							var progress = slide.progress;
-							scale = 1 - Math.min(Math.abs(progress * 0.2), 1);
-							es = slide.style;
-							es.opacity = 1 - Math.min(Math.abs(progress/2),1);
-							es.webkitTransform = es.MsTransform = es.msTransform = es.MozTransform = es.OTransform = es.transform = 'translate3d(0px,0,'+(-Math.abs(progress*150))+'px)';
+				getCompetitionDetail()
+				GetGiftDetail()
+
+				// 获取作者信息
+				function getCompetitionDetail () {
+					$.ajax({
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetCompetitionDetail&author_code="+code,
+						type: "get",
+						dataType: "json",
+						success: function(result) {
+							$('#portrait').attr('src', result.data.author_head_img)
+							$('#name').html(result.data.author_name)
+							$('#poll').html(result.data.vote_num)
+							if (result.data.author_imgs != null) {
+								var html = '';
+								for (var i=0; i<result.data.author_imgs.length; i++) {
+									html += '<div class="swiper-slide"><img src="'+result.data.author_imgs[i].img_url+'" data-preview-src="" data-preview-group="1" class="main-img"></div>'
+								}
+								$('#productionList').append(html)
+								initSwiper()
+							}
+
+//							var html = '';
+//							for (var i=1; i<4; i++) {
+//								html += '<div class="swiper-slide"><img src="i/product'+i+'.jpg" data-preview-src="" data-preview-group="1" class="main-img"></div>'
+//							}
+//							$('#productionList').append(html)
+//							initSwiper()
+						},
+						error: function() {
+							mui.alert('获取作品信息出错！', '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
 						}
-					},
-					onSetTransition: function(swiper, speed) {
-						for (var i = 0; i < swiper.slides.length; i++) {
-							es = swiper.slides[i].style;
-							es.webkitTransitionDuration = es.MsTransitionDuration = es.msTransitionDuration = es.MozTransitionDuration = es.OTransitionDuration = es.transitionDuration = speed + 'ms';
+					});
+				}
+
+				// 获取收礼列表
+				function GetGiftDetail () {
+					$.ajax({
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetCompetitionDetail&author_code="+code+"&page_index=1&page_size=1000",
+						type: "get",
+						dataType: "json",
+						success: function(result) {
+							var html = '';
+							if (result.data == null) {
+								html = '<div class="empty-pack">他/她暂时还没有收到过礼物！</div>'
+							} else {
+								for (var i=0; i<result.data.length; i++) {
+									html += '<div class="item-pack">';
+									html += '	<div class="left-pack">';
+									html += '		<img src="'+result.data[i].send_head_img+'" class="portrait" />';
+									html += '	</div>';
+									html += '	<div class="right-pack">';
+									html += '		<div class="desc-pack">'+result.data[i].send_name+'，送给TA了'+result.data[i].gift_num+'份'+result.data[i].gift_name+'！</div>';
+									html += '		<div class="time-pack">'+result.data[i].send_time+'</div>';
+									html += '	</div>';
+									html += '</div>';
+								}
+							}
+							$('#giftList').append(html)
+						},
+						error: function() {
+							mui.alert('获取作者收到的礼物出错！', '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
 						}
-					}
-				});
+					});
+				}
+
+
+
+
+
+
+				function initSwiper () {
+					var mySwiper = new Swiper('.swiper-container',{
+						slidesPerView : 'auto',
+						centeredSlides : true,
+						watchSlidesProgress: true,
+						paginationClickable: true,
+						onProgress: function(swiper){
+							for (var i = 0; i < swiper.slides.length; i++){
+								var slide = swiper.slides[i];
+								var progress = slide.progress;
+								scale = 1 - Math.min(Math.abs(progress * 0.2), 1);
+								es = slide.style;
+								es.opacity = 1 - Math.min(Math.abs(progress/2),1);
+								es.webkitTransform = es.MsTransform = es.msTransform = es.MozTransform = es.OTransform = es.transform = 'translate3d(0px,0,'+(-Math.abs(progress*150))+'px)';
+							}
+						},
+						onSetTransition: function(swiper, speed) {
+							for (var i = 0; i < swiper.slides.length; i++) {
+								es = swiper.slides[i].style;
+								es.webkitTransitionDuration = es.MsTransitionDuration = es.msTransitionDuration = es.MozTransitionDuration = es.OTransitionDuration = es.transitionDuration = speed + 'ms';
+							}
+						}
+					});
+					mui.previewImage();
+				}
+
+
 
 				$('.back-pack').tap(function(){
-					window.location.href = 'home.html';
+					window.location.href = from+'.html';
 				})
 
 				$('.vote-pack').on('touchstart', function(){
-					mui.alert('恭喜您，投票成功！', '启后书法院', function() {
-						console.info('你刚关闭了警告框');
+					$.ajax({
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=UserVoteOperate",
+						type: "post",
+						dataType: "json",
+						data: {
+							we_chat_user_id: window.localStorage.getItem('qh_user_id'),
+							open_id: window.localStorage.getItem('qh_open_id'),
+							author_code: code
+						},
+						success: function(result) {
+							if (result.state === 1) {
+								mui.alert(result.msg, '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
+							} else {
+								mui.alert(result.msg, '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
+							}
+						},
+						error: function() {
+							mui.alert('投票出错！', '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
+						}
 					});
 				})
 
 				$('.gift-pack').tap(function(){
-					window.location.href = 'give.html';
+					window.location.href = 'give.html?code='+code;
 				})
 
-				mui.previewImage();
+
+
+				//目标页（redirect_uri跳转页） 获取code，code来自页面返回
+				function getQueryString(name) {
+					var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+					var r = window.location.search.substr(1).match(reg);
+					if (r != null) return unescape(r[2]);
+					return null;
+				}
 			});
 		</script>
 	</body>

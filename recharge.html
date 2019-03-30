@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="">
 	<head>
-		<title>react-native</title>
+		<title>充值中心</title>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="description" content="" />
@@ -148,8 +148,8 @@
 						<div class="desc-pack">
 							选中要充值的金额
 						</div>
-						<ul class="mui-table-view mui-grid-view mui-grid-9">
-							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+						<ul id="rechargeList" class="mui-table-view mui-grid-view mui-grid-9">
+							<!--<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 								<div style="font-size: 24px;margin-top:10px;margin-bottom:20px;color:#dca135;">1元</div>
 								<div style="font-size: 14px;color:#ceae74!important;" class="mui-media-body">10个积分</div></a></li>
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
@@ -166,11 +166,11 @@
 								<div style="font-size: 14px;color:#ceae74!important;" class="mui-media-body">3,000个积分</div></a></li>
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 								<div style="font-size: 24px;margin-top:10px;margin-bottom:20px;color:#dca135;">500元</div>
-								<div style="font-size: 14px;color:#ceae74!important;" class="mui-media-body">5,000个积分</div></a></li>
+								<div style="font-size: 14px;color:#ceae74!important;" class="mui-media-body">5,000个积分</div></a></li>-->
 						</ul>
 					</div>
 					<div class="submit-pack">
-						<button id="submit" type="button" data-loading-text = "加载中"  class="mui-btn mui-btn-block">微信支付</button>
+						<button id="submit" type="button" data-loading-text = "支付中"  class="mui-btn mui-btn-block">微信支付</button>
 					</div>
 				</div>
 			</div>
@@ -185,6 +185,8 @@
 
 		<script>
 			$(function () {
+				var selectRechargeId = '';
+				var selectRechargeNum = '';
 				// 首先取消js在客户端的点击事件300毫秒延迟
 				FastClick.attach(document.body);
 
@@ -192,17 +194,60 @@
 				mui.init({
 					swipeBack: true //启用右滑关闭功能
 				});
-				mui(document.body).on('tap', '#loadMore', function(e) {
-					mui(this).button('loading');
-					setTimeout(function() {
-						mui(this).button('reset');
-					}.bind(this), 2000);
-				});
 
-				$('.mui-table-view-cell').on('touchstart', function(){
+
+				$('.mui-table-view-cell').live('touchstart', function(){
 					$('.mui-table-view-cell').css('border', '0px solid #ffc900!important')
 					$(this).css('border', '1px solid #ffc900!important')
+					selectRechargeId = $(this).attr("id")
 				})
+
+				$('#submit').live('touchstart', function(){
+					if (selectRechargeId == '') {
+						mui.alert('请先选择您要充值的金额！', '启后书法院', function() {
+							console.info('你刚关闭了警告框');
+						});
+					} else {
+
+					}
+					console.info('调支付页面')
+				})
+
+
+
+
+				getIntegralList()
+				// 获取用户的消息
+				function getIntegralList () {
+					$.ajax({
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetIntegralList",
+						type: "get",
+						dataType: "json",
+						success: function(result) {
+							if (result.state === 1) {
+								if (result.data !== null) {
+									var html = '';
+									for (var i=0; i<result.data.integral_list.length; i++) {
+										html += '<li id="'+result.data.integral_list[i].integral_id+'" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">';
+										html += '	<div style="font-size: 24px;margin-top:10px;margin-bottom:20px;color:#dca135;">'+result.data.integral_list[i].cost_num+'元</div>';
+										html += '	<div style="font-size: 14px;color:#ceae74!important;" class="mui-media-body">'+result.data.integral_list[i].integral_num+'个积分</div></a>';
+										html += '</li>';
+									}
+									$("#rechargeList").append(html)
+								}
+							} else {
+								mui.alert(result.msg, '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
+							}
+						},
+						error: function() {
+							mui.alert('获取可充值金额出错！', '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
+						}
+					});
+				}
 			});
 		</script>
 	</body>

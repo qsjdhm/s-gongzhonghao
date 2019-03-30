@@ -417,46 +417,6 @@
 				</div>
 				<div class="list-pack-pack">
 					<div class="list-pack">
-						<!--<div class="item-pack">
-							<div class="left-pack">
-								<img src="i/portrait.png" class="portrait" />
-								<img src="i/crown-golden.png" class="crown" />
-							</div>
-							<div class="center-pack">
-								<div class="name-pack">
-									<span>书写人生</span><span>931号</span>
-								</div>
-								<div class="poll-pack">
-									<span>票数</span><span>235546</span>
-								</div>
-								<div class="aphorism-pack">
-									<span>重在参与，学习提高！</span>
-								</div>
-							</div>
-							<div class="right-pack">
-								<span class="top">1</span>
-							</div>
-						</div>
-						<div class="item-pack">
-							<div class="left-pack">
-								<img src="i/portrait.png" class="portrait" />
-								<img src="i/crown-silver.png" class="crown" />
-							</div>
-							<div class="center-pack">
-								<div class="name-pack">
-									<span>书写人生</span><span>931号</span>
-								</div>
-								<div class="poll-pack">
-									<span>票数</span><span>235546</span>
-								</div>
-								<div class="aphorism-pack">
-									<span>重在参与，学习提高！</span>
-								</div>
-							</div>
-							<div class="right-pack">
-								<span class="conventional">4</span>
-							</div>
-						</div>-->
 					</div>
 					<div class="load-more">
 						<button id="loadMore" type="button" data-loading-text = "加载中"  class="mui-btn mui-btn-block">点击加载更多</button>
@@ -541,7 +501,7 @@
 						dataType: "json",
 						success: function(result) {
 							if (result.state === 1) {
-								$('title').html(result.data.active_name)
+//								$('title').html(result.data.active_name)
 								$('#banner').attr('src', result.data.active_img)
 								$('#applyNumber').html(result.data.competition_num)
 								$('#voteNumber').html(result.data.vote_num)
@@ -553,8 +513,6 @@
 								$('#hour').html(timeObj.hour)
 								$('#minute').html(timeObj.minute)
 								$('#second').html(timeObj.second)
-								// 获取本次大赛的作品列表
-								getMegagameProductionList()
 								setInterval(function(){
 									var timeObj2 = dateCount(endTime)
 									$('#day').html(timeObj2.day)
@@ -630,8 +588,7 @@
 						},
 						error: function() {
 							mui($('#loadMore')[0]).button('reset');
-							// mui(self).button('reset');
-							mui.alert('获取大赛作品列表出错！', '启后书法院', function() {
+							mui.alert('获取参赛作品出错！', '启后书法院', function() {
 								console.info('你刚关闭了警告框');
 							});
 						}

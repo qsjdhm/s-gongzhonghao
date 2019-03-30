@@ -73,6 +73,7 @@
 				width: 48px;
 				margin-top: 6px;
 				margin-left: 15px;
+				border-radius: 50%;
 			}
 
 			.give-page .all-pack .left-pack .p-info-pack {
@@ -245,11 +246,11 @@
 					<div class="info-pack">
 						<div class="left-pack">
 							<div class="portrait-pack">
-								<img src="i/portrait.png">
+								<img id="portrait" src="i/portrait.png">
 							</div>
 							<div class="p-info-pack">
-								<div class="name-pack">张三李四</div>
-								<div class="phone-pack">我的作品天下第一，独特的中国风</div>
+								<div id="name" class="name-pack"></div>
+								<div id="introduce" class="phone-pack"></div>
 							</div>
 						</div>
 						<div class="right-pack">
@@ -260,27 +261,27 @@
 					<!-- 所得票数信息 -->
 					<div class="poll-pack">
 						<div class="desc-pack">
-							他的战绩
+							他/她的战绩
 						</div>
 						<ul class="mui-table-view mui-grid-view mui-grid-9">
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 								<span>编号</span>
-								<div class="mui-media-body">9527</div></a></li>
+								<div id="id" class="mui-media-body">0</div></a></li>
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 								<span>投票数</span>
-								<div class="mui-media-body">19527票</div></a></li>
+								<div id="vote" class="mui-media-body">0票</div></a></li>
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 								<span>收到礼物</span>
-								<div class="mui-media-body">527个</div></a></li>
+								<div id="gift" class="mui-media-body">0个</div></a></li>
 						</ul>
 					</div>
 
 					<div class="content-pack">
 						<div class="desc-pack">
-							1.选择支持他的礼物
+							1.选择赠送他/她的礼物
 						</div>
-						<ul class="mui-table-view mui-grid-view mui-grid-9">
-							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+						<ul id="giftList" class="mui-table-view mui-grid-view mui-grid-9">
+							<!--<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 								<img src="i/diamond.png" />
 								<div class="mui-media-body">钻石*30</div></a></li>
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
@@ -294,14 +295,14 @@
 								<div class="mui-media-body">皇冠*10</div></a></li>
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 								<img src="i/medal.png" />
-								<div class="mui-media-body">金牌*2</div></a></li>
+								<div class="mui-media-body">金牌*2</div></a></li>-->
 						</ul>
 					</div>
 					<div class="number-pack">
 						<div class="label-pack">2.选择礼物个数</div>
 						<div class="value-pack">
-							<select class="mui-btn mui-btn-block">
-								<option value="item-1">1个</option>
+							<select id="giftNumSelect" class="mui-btn mui-btn-block">
+								<option selected value="1">1个</option>
 								<option value="item-2">2个</option>
 								<option value="item-3">3个</option>
 								<option value="item-4">4个</option>
@@ -325,7 +326,7 @@
 							<button id="mall" type="button" data-loading-text = "加载中"  class="mui-btn mui-btn-block">去礼物商城</button>
 						</div>
 						<div class="submit-pack">
-							<button id="submit" type="button" data-loading-text = "加载中"  class="mui-btn mui-btn-block">支持他 / 她</button>
+							<button id="submit" type="button" data-loading-text = "加载中"  class="mui-btn mui-btn-block">赠送他 / 她</button>
 						</div>
 					</div>
 				</div>
@@ -342,6 +343,9 @@
 
 		<script>
 			$(function () {
+				var code = '';
+				var selectGiftId = '';
+				var selectGiftNum = '1';
 				// 首先取消js在客户端的点击事件300毫秒延迟
 				FastClick.attach(document.body);
 
@@ -350,9 +354,68 @@
 					swipeBack: true //启用右滑关闭功能
 				});
 
-				$('.mui-table-view-cell').on('touchstart', function(){
+				getAuthorScore()
+				getUserGift()
+
+				// 获取作者战绩
+				function getAuthorScore () {
+					$.ajax({
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetAuthorScore&author_code="+getQueryString('code')+"&we_chat_user_id="+window.localStorage.getItem('qh_user_id')+"&open_id="+window.localStorage.getItem('qh_open_id'),
+						type: "get",
+						dataType: "json",
+						success: function(result) {
+							$('#portrait').attr('src', result.data.author_head_img)
+							$('#name').html(result.data.author_name)
+							$('#introduce').html(result.data.works_introduce)
+							$('#id').html(result.data.author_code)
+							$('#vote').html(result.data.vote_num+'票')
+							$('#gift').html(result.data.gife_num+'个')
+						},
+						error: function() {
+							mui.alert('获取作者战绩出错！', '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
+						}
+					});
+				}
+
+				// 获取用户所拥有的礼物
+				function getUserGift () {
+					$.ajax({
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetMyGift&we_chat_user_id="+window.localStorage.getItem('qh_user_id')+"&open_id="+window.localStorage.getItem('qh_open_id'),
+						type: "get",
+						dataType: "json",
+						success: function(result) {
+							if (result.state === 1) {
+								if (result.data.belong_gife !== null) {
+									var html = '';
+									for (var i=0; i<result.data.belong_gife.length; i++) {
+										html += '<li id="'+result.data.belong_gife[i].gift_id+'" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">';
+										html += '	<img src="http://47.92.216.253/'+result.data.belong_gife[i].gift_img+'" />';
+										html += '	<div class="mui-media-body">'+result.data.belong_gife[i].gift_name+'*'+result.data.belong_gife[i].gift_num+'</div></a>';
+										html += '</li>';
+									}
+									$('#giftList').append(html)
+								}
+							} else {
+								mui.alert(result.msg, '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
+							}
+						},
+						error: function() {
+							mui.alert('获取我所拥有的礼物出错！', '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
+						}
+					});
+				}
+
+
+				$('.mui-table-view-cell').live('touchstart', function(){
 					$('.mui-table-view-cell').css('border', '0px solid #f45d4a!important')
 					$(this).css('border', '1px solid #ffc900!important')
+					selectGiftId = $(this).attr("id")
 				})
 
 				$('.info-pack').tap(function(){
@@ -364,10 +427,54 @@
 				})
 
 				$('#submit').on('touchstart', function(){
-					mui.alert('恭喜您，支持成功！', '启后书法院', function() {
-						console.info('你刚关闭了警告框');
-					});
+					mui($('#submit')[0]).button('loading');
+					if (selectGiftId == '') {
+						mui.alert('请先选中您赠送的礼物！', '启后书法院', function() {
+							console.info('你刚关闭了警告框');
+							mui($('#submit')[0]).button('reset');
+						});
+					} else {
+						selectGiftNum = $('#giftNumSelect').val()
+						$.ajax({
+							url: "http://47.92.216.253/tools/wechatpn.ashx?action=UserSendGiftOperate",
+							type: "post",
+							dataType: "json",
+							data: {
+								we_chat_user_id: window.localStorage.getItem('qh_user_id'),
+								open_id: window.localStorage.getItem('qh_open_id'),
+								author_code: getQueryString('code'),
+								gift_id: selectGiftId,
+								gift_num: selectGiftNum
+							},
+							success: function(result) {
+								mui($('#submit')[0]).button('reset');
+								if (result.state === 1) {
+									mui.alert('恭喜您，支持成功！', '启后书法院', function() {
+										console.info('你刚关闭了警告框');
+									});
+								} else {
+									mui.alert(result.msg, '启后书法院', function() {
+										console.info('你刚关闭了警告框');
+									});
+								}
+							},
+							error: function() {
+								mui($('#submit')[0]).button('reset');
+								mui.alert('赠送礼物出错！', '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
+							}
+						});
+					}
 				})
+
+				//目标页（redirect_uri跳转页） 获取code，code来自页面返回
+				function getQueryString(name) {
+					var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+					var r = window.location.search.substr(1).match(reg);
+					if (r != null) return unescape(r[2]);
+					return null;
+				}
 			});
 		</script>
 	</body>
