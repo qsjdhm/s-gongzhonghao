@@ -543,6 +543,7 @@
 						type: "get",
 						dataType: "json",
 						success: function(result) {
+							$('title').html(result.data.author_name+'的作品')
 							$('#portrait').attr('src', result.data.author_head_img)
 							$('#name').html(result.data.author_name)
 							$('#poll').html(result.data.vote_num)
