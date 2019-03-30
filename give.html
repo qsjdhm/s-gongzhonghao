@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="">
 	<head>
-		<title>react-native</title>
+		<title>赠送礼物</title>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="description" content="" />
@@ -253,9 +253,9 @@
 								<div id="introduce" class="phone-pack"></div>
 							</div>
 						</div>
-						<div class="right-pack">
+						<!--<div class="right-pack">
 							<span class="mui-icon mui-icon-arrowright"></span>
-						</div>
+						</div>-->
 					</div>
 
 					<!-- 所得票数信息 -->
@@ -418,9 +418,9 @@
 					selectGiftId = $(this).attr("id")
 				})
 
-				$('.info-pack').tap(function(){
-					window.location.href = 'details.html';
-				})
+//				$('.info-pack').tap(function(){
+//					window.location.href = 'details.html?from=give&code='+getQueryString('code');
+//				})
 
 				$('#mall').tap(function(){
 					window.location.href = 'mall.html';
