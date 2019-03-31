@@ -337,6 +337,7 @@
 								mui.alert(result.msg, '启后书法院', function() {
 									console.info('你刚关闭了警告框');
 								});
+								$(self).find('.right-pack').html(parseInt($(self).find('.right-pack').html())+1)
 								$(self).find('.left-pack').html('<span class="have-vote">已投</span>')
 							} else {
 								mui.alert(result.msg, '启后书法院', function() {
@@ -369,7 +370,7 @@
 				$('#personal').tap(function(){
 					window.location.href = 'personal.html';
 				})
-				$('.production img').live('touchstart', function(){
+				$('.production img').live('tap', function(){
 					var code = $(this).attr('code')
 					window.location.href = 'details.html?from=find&code='+code;
 				})
@@ -447,7 +448,6 @@
 										html += '	</div>';
 										html += '</div>';
 									}
-									console.info(html)
 									$('#macyContainer').append(html);
 									masonry.runOnImageLoad(function () {
 										masonry.recalculate(true);

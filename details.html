@@ -142,6 +142,7 @@
 
 			.details-page .record-pack {
 				background: #f9f9f9;
+				margin-top: 50px;
 			}
 
 			.details-page .record-pack .title-pack {
@@ -550,18 +551,11 @@
 							if (result.data.author_imgs != null) {
 								var html = '';
 								for (var i=0; i<result.data.author_imgs.length; i++) {
-									html += '<div class="swiper-slide"><img src="'+result.data.author_imgs[i].img_url+'" data-preview-src="" data-preview-group="1" class="main-img"></div>'
+									html += '<div class="swiper-slide"><img src="http://47.92.216.253'+result.data.author_imgs[i].img_url+'" data-preview-src="" data-preview-group="1" class="main-img"></div>'
 								}
 								$('#productionList').append(html)
 								initSwiper()
 							}
-
-//							var html = '';
-//							for (var i=1; i<4; i++) {
-//								html += '<div class="swiper-slide"><img src="i/product'+i+'.jpg" data-preview-src="" data-preview-group="1" class="main-img"></div>'
-//							}
-//							$('#productionList').append(html)
-//							initSwiper()
 						},
 						error: function() {
 							mui.alert('获取作品信息出错！', '启后书法院', function() {
@@ -574,18 +568,18 @@
 				// 获取收礼列表
 				function GetGiftDetail () {
 					$.ajax({
-						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetCompetitionDetail&author_code="+code+"&page_index=1&page_size=1000",
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetAuthorSendGiftList&author_code="+code+"&page_index=1&page_size=1000",
 						type: "get",
 						dataType: "json",
 						success: function(result) {
 							var html = '';
-							if (result.data == null) {
+							if (result.data == null || result.data.length == 0) {
 								html = '<div class="empty-pack">他/她暂时还没有收到过礼物！</div>'
 							} else {
 								for (var i=0; i<result.data.length; i++) {
 									html += '<div class="item-pack">';
 									html += '	<div class="left-pack">';
-									html += '		<img src="'+result.data[i].send_head_img+'" class="portrait" />';
+									html += '		<img src="'+result.data[i].send_head_img+'" style="width: 52px;height:52px;border-radius: 50%" class="portrait" />';
 									html += '	</div>';
 									html += '	<div class="right-pack">';
 									html += '		<div class="desc-pack">'+result.data[i].send_name+'，送给TA了'+result.data[i].gift_num+'份'+result.data[i].gift_name+'！</div>';
