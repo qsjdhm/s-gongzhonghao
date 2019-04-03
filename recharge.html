@@ -1,281 +1,279 @@
 <!doctype html>
 <html lang="">
-	<head>
-		<title>充值中心</title>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="description" content="" />
-		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-		<meta name="renderer" content="webkit" />
-		<meta http-equiv="Cache-Control" content="no-siteapp" />
-		<meta name="format-detection" content="telephone=no" />
-		<link rel="stylesheet" href="js/lib/mui/css/mui.min.css" />
-		<link rel="stylesheet" href="js/lib/swiper/swiper.min.css">
-		<link rel="stylesheet" type="text/css" href="js/lib/mui/css/icons-extra.css" />
-		<link rel="stylesheet" href="css/app.css" />
-		<style>
-			.mui-bar {
-				background: #fff;
-			}
-			.mui-bar .mui-pull-left .mui-icon {
-				padding-right: 5px;
-				font-size: 28px;
-			}
-			.mui-bar .mui-btn {
-				font-weight: normal;
-				font-size: 17px;
-			}
-			.mui-bar .mui-btn-link {
-				top: 1px;
-			}
+<head>
+	<title>充值中心</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta name="renderer" content="webkit" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="stylesheet" href="js/lib/mui/css/mui.min.css" />
+	<link rel="stylesheet" href="js/lib/swiper/swiper.min.css">
+	<link rel="stylesheet" type="text/css" href="js/lib/mui/css/icons-extra.css" />
+	<link rel="stylesheet" href="css/app.css" />
+	<style>
+		.mui-bar {
+			background: #fff;
+		}
+		.mui-bar .mui-pull-left .mui-icon {
+			padding-right: 5px;
+			font-size: 28px;
+		}
+		.mui-bar .mui-btn {
+			font-weight: normal;
+			font-size: 17px;
+		}
+		.mui-bar .mui-btn-link {
+			top: 1px;
+		}
 
-			.page-pack {
-				position: absolute;
-				top: 43px;
-				bottom: 0;
-				left: 0;
-				right: 0;
-				overflow-y: auto;
-				overflow-x: hidden;
-				background: #f7f7f7;
-			}
+		.page-pack {
+			position: absolute;
+			top: 43px;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			overflow-y: auto;
+			overflow-x: hidden;
+			background: #f7f7f7;
+		}
 
-			.recharge-page .all-pack {
-				margin-bottom: 10px;
-			}
+		.recharge-page .all-pack {
+			margin-bottom: 10px;
+		}
 
-			.recharge-page .all-pack .title-pack {
-				padding: 10px 15px;
-				display: -webkit-flex; /* Safari */
-				display: flex;
-				align-items: center;
-			}
+		.recharge-page .all-pack .title-pack {
+			padding: 10px 15px;
+			display: -webkit-flex; /* Safari */
+			display: flex;
+			align-items: center;
+		}
 
-			.recharge-page .all-pack .title-pack .icon-pack {
-				font-size: 16px;
-				color: #c59c51;
-				margin-right: 10px;
-			}
+		.recharge-page .all-pack .title-pack .icon-pack {
+			font-size: 16px;
+			color: #c59c51;
+			margin-right: 10px;
+		}
 
-			.recharge-page .all-pack .content-pack {
-				background: #fff;
-				padding: 10px;
-			}
+		.recharge-page .all-pack .content-pack {
+			background: #fff;
+			padding: 10px;
+		}
 
-			.recharge-page .all-pack .content-pack .desc-pack {
-				color: #c59c51;
-				font-size: 14px;
-				border-bottom: 1px solid #eae9ea;
-				padding-bottom: 10px;
-			}
+		.recharge-page .all-pack .content-pack .desc-pack {
+			color: #c59c51;
+			font-size: 14px;
+			border-bottom: 1px solid #eae9ea;
+			padding-bottom: 10px;
+		}
 
-			.recharge-page .all-pack .content-pack .mui-table-view {
-				background: #fff;
-				border: 0px solid #fff!important;
-			}
-			.recharge-page .all-pack .content-pack .mui-table-view-cell {
-				border: 0px solid #fff!important;
-			}
+		.recharge-page .all-pack .content-pack .mui-table-view {
+			background: #fff;
+			border: 0px solid #fff!important;
+		}
+		.recharge-page .all-pack .content-pack .mui-table-view-cell {
+			border: 0px solid #fff!important;
+		}
 
-			.recharge-page .all-pack .content-pack .mui-table-view-cell img {
-				width: 42px;
-				height: 42px;
-			}
+		.recharge-page .all-pack .content-pack .mui-table-view-cell img {
+			width: 42px;
+			height: 42px;
+		}
 
-			.recharge-page .all-pack .number-pack {
-				background: #fff;
-				font-size: 14px;
-				margin-top: 10px;
-				padding: 5px 10px;
-				display: -webkit-flex; /* Safari */
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-			}
+		.recharge-page .all-pack .number-pack {
+			background: #fff;
+			font-size: 14px;
+			margin-top: 10px;
+			padding: 5px 10px;
+			display: -webkit-flex; /* Safari */
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
 
-			.recharge-page .all-pack .number-pack div {
-				width: 50%;
-			}
+		.recharge-page .all-pack .number-pack div {
+			width: 50%;
+		}
 
-			.recharge-page .all-pack .number-pack .label-pack {
-				color: #c59c51;
-			}
+		.recharge-page .all-pack .number-pack .label-pack {
+			color: #c59c51;
+		}
 
-			.recharge-page .all-pack .number-pack div select {
-				padding: 10px;
-				background: #ddf4ee;
-				margin-bottom: 0px;
-				font-size: 14px;
-				color: #000;
-			}
+		.recharge-page .all-pack .number-pack div select {
+			padding: 10px;
+			background: #ddf4ee;
+			margin-bottom: 0px;
+			font-size: 14px;
+			color: #000;
+		}
 
-			.recharge-page .all-pack .submit-pack {
-				margin-top: 10px;
-				padding: 0 10px;
-			}
+		.recharge-page .all-pack .submit-pack {
+			margin-top: 10px;
+			padding: 0 10px;
+		}
 
-			.recharge-page .all-pack .mui-btn-block {
-				font-size: 14px;
-				display: block;
-				width: 100%;
-				margin-bottom: 10px;
-				padding: 10px 0;
-				border: 0px solid #fff;
-				background: #1ec622;
-				color: #fff;
-			}
-
-
+		.recharge-page .all-pack .mui-btn-block {
+			font-size: 14px;
+			display: block;
+			width: 100%;
+			margin-bottom: 10px;
+			padding: 10px 0;
+			border: 0px solid #fff;
+			background: #1ec622;
+			color: #fff;
+		}
 
 
 
-		</style>
-	</head>
-	<body>
-		<!-- 礼物页面 -->
-		<div id="mall_page" class="recharge-page">
-			<header id="header" class="mui-bar mui-bar-nav">
-				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-				<h1 class="mui-title">充值中心</h1>
-			</header>
-			<div class="page-pack">
-				<div class="all-pack">
-					<div class="title-pack">
-						<div class="icon-pack"><span class="mui-icon-extra mui-icon-extra-gold"></span></div>
-						<div class="name">充值中心</div>
-					</div>
-					<div class="content-pack">
-						<div class="desc-pack">
-							选中要充值的金额
-						</div>
-						<ul id="rechargeList" class="mui-table-view mui-grid-view mui-grid-9">
-						</ul>
-					</div>
-					<div class="submit-pack">
-						<button id="submit" type="button" data-loading-text = "支付中"  class="mui-btn mui-btn-block">微信支付</button>
-					</div>
+
+
+	</style>
+</head>
+<body>
+<!-- 礼物页面 -->
+<div id="mall_page" class="recharge-page">
+	<header id="header" class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">充值中心</h1>
+	</header>
+	<div class="page-pack">
+		<div class="all-pack">
+			<div class="title-pack">
+				<div class="icon-pack"><span class="mui-icon-extra mui-icon-extra-gold"></span></div>
+				<div class="name">充值中心</div>
+			</div>
+			<div class="content-pack">
+				<div class="desc-pack">
+					选中要充值的金额
 				</div>
+				<ul id="rechargeList" class="mui-table-view mui-grid-view mui-grid-9">
+				</ul>
+			</div>
+			<div class="submit-pack">
+				<button id="submit" type="button" data-loading-text = "支付中"  class="mui-btn mui-btn-block">微信支付</button>
 			</div>
 		</div>
+	</div>
+</div>
 
 
-		<!-- 通用类库 -->
-		<script src="js/lib/zepto.js"></script>
-		<script src="js/lib/zepto.touch.js"></script>
-		<script src="js/lib/fastclick.js"></script>
-		<script src="js/lib/mui/js/mui.min.js"></script>
-		<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<!-- 通用类库 -->
+<script src="js/lib/zepto.js"></script>
+<script src="js/lib/zepto.touch.js"></script>
+<script src="js/lib/fastclick.js"></script>
+<script src="js/lib/mui/js/mui.min.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
-		<script>
-			$(function () {
-				var selectRechargeId = '';
-				var selectRechargeNum = '';
-				// 首先取消js在客户端的点击事件300毫秒延迟
-				FastClick.attach(document.body);
+<script>
+	$(function () {
+		var selectRechargeId = '';
+		var selectRechargeNum = '';
+		// 首先取消js在客户端的点击事件300毫秒延迟
+		FastClick.attach(document.body);
 
-				// 初始化加载更多
-				mui.init({
-					swipeBack: true //启用右滑关闭功能
+		// 初始化加载更多
+		mui.init({
+			swipeBack: true //启用右滑关闭功能
+		});
+
+
+		$('.mui-table-view-cell').live('touchstart', function(){
+			$('.mui-table-view-cell').css('border', '0px solid #ffc900!important')
+			$(this).css('border', '1px solid #ffc900!important')
+			selectRechargeId = $(this).attr("id")
+		})
+
+		$('#submit').live('touchstart', function(){
+			if (selectRechargeId == '') {
+				mui.alert('请先选择您要充值的金额！', '启后书法院', function() {
+					console.info('你刚关闭了警告框');
 				});
-
-
-				$('.mui-table-view-cell').live('touchstart', function(){
-					$('.mui-table-view-cell').css('border', '0px solid #ffc900!important')
-					$(this).css('border', '1px solid #ffc900!important')
-					selectRechargeId = $(this).attr("id")
-				})
-
-				$('#submit').live('touchstart', function(){
-					if (selectRechargeId == '') {
-						mui.alert('请先选择您要充值的金额！', '启后书法院', function() {
-							console.info('你刚关闭了警告框');
-						});
-					} else {
-						mui($('#submit')[0]).button('loading');
-						$.ajax({
-							url: "http://47.92.216.253/tools/wechatpn.ashx?action=IntegralPay&we_chat_user_id="+window.localStorage.getItem('qh_user_id')+"&integral_id="+selectRechargeId+"&open_id="+window.localStorage.getItem('qh_open_id'),
-							type: "get",
-							dataType: "json",
-							success: function (result) {
-								mui($('#submit')[0]).button('reset');
-								if (result.state == 1) {
-									WeixinJSBridge.invoke('getBrandWCPayRequest', {
-										"appId": result.data.appId, //公众号名称，由商户传入
-										"timeStamp": result.data.timeStamp, //时间戳
-										"nonceStr": result.data.nonceStr, //随机串
-										"package": result.data.package, //扩展包
-										"signType": result.data.signType, //微信签名方式:1.sha1
-										"paySign": result.data.paySign //微信签名
-									}, function (res) {
-										if (res.err_msg == "get_brand_wcpay_request:ok") {
-//											$("#message").val(result.data.orderId);
-//											alert(result.data.orderId);
-											location.href = "http://manbuba.imwork.net/wechatnumdesign/notify_url.html?out_trade_no=" + result.data.orderId;
-										} else if (res.err_msg == "get_brand_wcpay_request:cancel") {
-											mui.alert('用户取消支付', '启后书法院', function() {
-												console.info('你刚关闭了警告框');
-											});
-										} else {
-											mui.alert(res.err_msg, '启后书法院', function() {
-												console.info('你刚关闭了警告框');
-											});
-										}
-										// 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
-										//因此微信团队建议，当收到ok返回时，向商户后台询问是否收到交易成功的通知，若收到通知，前端展示交易成功的界面；若此时未收到通知，商户后台主动调用查询订单接口，查询订单的当前状态，并反馈给前端展示相应的界面。
+			} else {
+				mui($('#submit')[0]).button('loading');
+				$.ajax({
+					url: "http://47.92.216.253/tools/wechatpn.ashx?action=IntegralPay&we_chat_user_id="+window.localStorage.getItem('qh_user_id')+"&integral_id="+selectRechargeId+"&open_id="+window.localStorage.getItem('qh_open_id'),
+					type: "get",
+					dataType: "json",
+					success: function (result) {
+						mui($('#submit')[0]).button('reset');
+						if (result.state == 1) {
+							WeixinJSBridge.invoke('getBrandWCPayRequest', {
+								"appId": result.data.appId, //公众号名称，由商户传入
+								"timeStamp": result.data.timeStamp, //时间戳
+								"nonceStr": result.data.nonceStr, //随机串
+								"package": result.data.package, //扩展包
+								"signType": result.data.signType, //微信签名方式:1.sha1
+								"paySign": result.data.paySign //微信签名
+							}, function (res) {
+								if (res.err_msg == "get_brand_wcpay_request:ok") {
+									window.location.href = "paymentSuccess.html?out_trade_no="+result.data.orderId;
+								} else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+									mui.alert('用户取消支付', '启后书法院', function() {
+										console.info('你刚关闭了警告框');
 									});
 								} else {
-									mui.alert(result.msg, '启后书法院', function() {
+									mui.alert(res.err_msg, '启后书法院', function() {
 										console.info('你刚关闭了警告框');
 									});
 								}
-							},
-							error: function () {
-								mui($('#submit')[0]).button('reset');
-								mui.alert('支付失败', '启后书法院', function() {
-									console.info('你刚关闭了警告框');
-								});
-							}
-						});
-					}
-					console.info('调支付页面')
-				})
-
-
-
-
-				getIntegralList()
-				// 获取用户的消息
-				function getIntegralList () {
-					$.ajax({
-						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetIntegralList",
-						type: "get",
-						dataType: "json",
-						success: function(result) {
-							if (result.state === 1) {
-								if (result.data !== null) {
-									var html = '';
-									for (var i=0; i<result.data.integral_list.length; i++) {
-										html += '<li id="'+result.data.integral_list[i].integral_id+'" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">';
-										html += '	<div style="font-size: 24px;margin-top:10px;margin-bottom:20px;color:#dca135;">'+result.data.integral_list[i].cost_num+'元</div>';
-										html += '	<div style="font-size: 14px;color:#ceae74!important;" class="mui-media-body">'+result.data.integral_list[i].integral_num+'个积分</div></a>';
-										html += '</li>';
-									}
-									$("#rechargeList").append(html)
-								}
-							} else {
-								mui.alert(result.msg, '启后书法院', function() {
-									console.info('你刚关闭了警告框');
-								});
-							}
-						},
-						error: function() {
-							mui.alert('获取可充值金额出错！', '启后书法院', function() {
+								// 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+								//因此微信团队建议，当收到ok返回时，向商户后台询问是否收到交易成功的通知，若收到通知，前端展示交易成功的界面；若此时未收到通知，商户后台主动调用查询订单接口，查询订单的当前状态，并反馈给前端展示相应的界面。
+							});
+						} else {
+							mui.alert(result.msg, '启后书法院', function() {
 								console.info('你刚关闭了警告框');
 							});
 						}
+					},
+					error: function () {
+						mui($('#submit')[0]).button('reset');
+						mui.alert('支付失败', '启后书法院', function() {
+							console.info('你刚关闭了警告框');
+						});
+					}
+				});
+			}
+			console.info('调支付页面')
+		})
+
+
+
+
+		getIntegralList()
+		// 获取用户的消息
+		function getIntegralList () {
+			$.ajax({
+				url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetIntegralList",
+				type: "get",
+				dataType: "json",
+				success: function(result) {
+					if (result.state === 1) {
+						if (result.data !== null) {
+							var html = '';
+							for (var i=0; i<result.data.integral_list.length; i++) {
+								html += '<li id="'+result.data.integral_list[i].integral_id+'" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">';
+								html += '	<div style="font-size: 24px;margin-top:10px;margin-bottom:20px;color:#dca135;">'+result.data.integral_list[i].cost_num+'元</div>';
+								html += '	<div style="font-size: 14px;color:#ceae74!important;" class="mui-media-body">'+result.data.integral_list[i].integral_num+'个积分</div></a>';
+								html += '</li>';
+							}
+							$("#rechargeList").append(html)
+						}
+					} else {
+						mui.alert(result.msg, '启后书法院', function() {
+							console.info('你刚关闭了警告框');
+						});
+					}
+				},
+				error: function() {
+					mui.alert('获取可充值金额出错！', '启后书法院', function() {
+						console.info('你刚关闭了警告框');
 					});
 				}
 			});
-		</script>
-	</body>
+		}
+	});
+</script>
+</body>
 </html>
