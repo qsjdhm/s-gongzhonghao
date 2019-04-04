@@ -181,6 +181,8 @@
 										html += '</div>';
 									}
 									$('#integralList').append(html)
+								} else {
+									$('.details-pack').append('<div style="width:100%;text-align:center;padding: 35px 0px;font-size: 14px;color:#999;">您暂时还没有积分明细！</div>')
 								}
 							} else {
 								mui.alert(result.msg, '启后书法院', function() {

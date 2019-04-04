@@ -398,6 +398,8 @@
 										html += '</li>';
 									}
 									$('#giftList').append(html)
+								} else {
+									$('.content-pack').append('<div style="margin: 35px 20px;font-size: 14px;color:#999;">您暂时没有可赠送的礼物，您也可以通过<span style="color:#FEAE1B">购买礼物按钮</span>进行赠送！</div>')
 								}
 							} else {
 								mui.alert(result.msg, '启后书法院', function() {

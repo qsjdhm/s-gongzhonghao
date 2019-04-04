@@ -383,12 +383,15 @@
 					if (code === '' || code == null || code == undefined) {
 						mui.alert('你还没有参赛报名，赶紧去报名参赛吧', '启后书法院', function() {
 						});
-					} else if ($('#details .item-top-pack').html() == '0') {
+						return false
+					}
+					if ($('#details .item-top-pack').html() == '0') {
 						mui.alert('你还没有参赛参赛作品，赶紧去报名参赛吧', '启后书法院', function() {
 						});
-					} else {
-						window.location.href = 'details.html?from=personal&code='+code;
+						return false
 					}
+					window.location.href = 'details.html?from=personal&code='+code;
+
 				})
 				$('#recharge').tap(function(){
 					window.location.href = 'recharge.html';

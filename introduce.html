@@ -82,6 +82,28 @@
 					swipeBack: true //启用右滑关闭功能
 				});
 
+				// 获取大赛基本信息
+				$.ajax({
+					url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetIndexBaseInfo",
+					type: "get",
+					dataType: "json",
+					success: function(result) {
+						if (result.state === 1) {
+							$('title').html(result.data.active_name+'参赛详情')
+							$('.mui-title').html(result.data.active_name)
+						} else {
+							mui.alert(result.msg, '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
+						}
+					},
+					error: function() {
+						mui.alert('获取大赛基本信息出错！', '启后书法院', function() {
+							console.info('你刚关闭了警告框');
+						});
+					}
+				});
+
 				$.ajax({
 					url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetNowActiveDetail",
 					type: "get",

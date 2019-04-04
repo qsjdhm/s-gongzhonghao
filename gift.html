@@ -205,6 +205,8 @@
 										html += '</li>';
 									}
 									$('#giftList').append(html)
+								} else {
+									$('.content-pack').append('<div style="width:100%;text-align:center;margin: 35px 0px;font-size: 14px;color:#999;">您暂时还没有礼物！</div>')
 								}
 								if (result.data.gift_detail !== null) {
 									var html = '';
@@ -215,6 +217,8 @@
 										html += '</div>';
 									}
 									$('#detailList').append(html)
+								} else {
+									$('.details-pack').append('<div style="width:100%;text-align:center;padding: 35px 0px;font-size: 14px;color:#999;">您暂时还没有礼物明细！</div>')
 								}
 							} else {
 								mui.alert(result.msg, '启后书法院', function() {
