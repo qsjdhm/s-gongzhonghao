@@ -310,7 +310,7 @@
 								<option value="6">6个</option>
 								<option value="7">7个</option>
 								<option value="8">8个</option>
-								<option value="9">9个</option> 
+								<option value="9">9个</option>
 								<option value="10">10个</option>
 								<option value="20">20个</option>
 								<option value="50">50个</option>
@@ -323,7 +323,7 @@
 					</div>
 					<div class="btn-pack">
 						<div class="mall-pack">
-							<button id="mall" type="button" data-loading-text = "加载中"  class="mui-btn mui-btn-block">去礼物商城</button>
+							<button id="buy" type="button" data-loading-text = "加载中"  class="mui-btn mui-btn-block">购买礼物</button>
 						</div>
 						<div class="submit-pack">
 							<button id="submit" type="button" data-loading-text = "加载中"  class="mui-btn mui-btn-block">赠送他 / 她</button>
@@ -344,6 +344,7 @@
 		<script>
 			$(function () {
 				var code = '';
+				var name = '';
 				var selectGiftId = '';
 				var selectGiftNum = '1';
 				// 首先取消js在客户端的点击事件300毫秒延迟
@@ -370,6 +371,7 @@
 							$('#id').html(result.data.author_code)
 							$('#vote').html(result.data.vote_num+'票')
 							$('#gift').html(result.data.gife_num+'个')
+							name = result.data.author_name
 						},
 						error: function() {
 							mui.alert('获取作者战绩出错！', '启后书法院', function() {
@@ -422,8 +424,8 @@
 //					window.location.href = 'details.html?from=give&code='+getQueryString('code');
 //				})
 
-				$('#mall').tap(function(){
-					window.location.href = 'mall.html';
+				$('#buy').tap(function(){
+					window.location.href = 'buy.html?code='+getQueryString('code')+'&name='+encodeURI(encodeURI(name))+'&from='+getQueryString('from');
 				})
 
 				$('#submit').on('touchstart', function(){
@@ -449,8 +451,8 @@
 							success: function(result) {
 								mui($('#submit')[0]).button('reset');
 								if (result.state === 1) {
-									mui.alert('恭喜您，支持成功！', '启后书法院', function() {
-										console.info('你刚关闭了警告框');
+									mui.alert('您赠送的礼物'+name+'已收到，小启代作者向您说一声感谢，谢谢您的支持！', '启后书法院', function() {
+										window.location.href = 'details.html?from='+getQueryString('from')+'&code='+getQueryString('code');
 									});
 								} else {
 									mui.alert(result.msg, '启后书法院', function() {

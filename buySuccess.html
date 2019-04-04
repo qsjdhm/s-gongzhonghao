@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="">
+	<head>
+		<title>充值通知</title>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="renderer" content="webkit" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" href="js/lib/mui/css/mui.min.css" />
+		<link rel="stylesheet" href="js/lib/swiper/swiper.min.css">
+		<link rel="stylesheet" type="text/css" href="js/lib/mui/css/icons-extra.css" />
+		<link rel="stylesheet" href="css/app.css" />
+		<style>
+			.mui-bar {
+				background: #fff;
+			}
+			.mui-bar .mui-pull-left .mui-icon {
+				padding-right: 5px;
+				font-size: 28px;
+			}
+			.mui-bar .mui-btn {
+				font-weight: normal;
+				font-size: 17px;
+			}
+			.mui-bar .mui-btn-link {
+				top: 1px;
+			}
+
+			.page-pack {
+				position: absolute;
+				top: 43px;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				overflow-y: auto;
+				overflow-x: hidden;
+				background: #f7f7f7;
+				text-align: center;
+			}
+
+			.page-pack img {
+				width: 128px;
+				margin-top: 40px;
+				margin-left: -15px;
+			}
+
+			.page-pack .tip1 {
+				font-size: 24px;
+				color: #FEAE1B;
+			}
+
+			.page-pack .tip2 {
+				font-size: 14px;
+				color: #999;
+				margin-top: 14px;
+				margin-left: 20px;
+				margin-right: 20px;
+			}
+
+			.page-pack .back-pack {
+				width: 100%;
+				padding: 30px;
+			}
+
+			.page-pack .back-pack .mui-btn-block {
+				background: #FEAE1B;
+				font-size: 14px;
+				display: block;
+				width: 100%;
+				margin-bottom: 10px;
+				padding: 10px 0;
+				border: 0px solid #fff;
+				color: #fff;
+			}
+
+		</style>
+	</head>
+	<body>
+		<!-- 礼物页面 -->
+		<div id="paymentSuccessPage" class="payment-success-page">
+			<header id="header" class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<h1 class="mui-title">赠送通知</h1>
+			</header>
+			<div class="page-pack">
+				<img src="i/paymentSuccess.png" />
+				<div class="tip1">赠送成功！</div>
+				<div class="tip2">您赠送的礼物</div>
+				<div class="back-pack">
+					<button id="back" type="button" data-loading-text = "加载中"  class="mui-btn mui-btn-block">返回作品</button>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- 通用类库 -->
+		<script src="js/lib/zepto.js"></script>
+		<script src="js/lib/zepto.touch.js"></script>
+		<script src="js/lib/fastclick.js"></script>
+		<script src="js/lib/mui/js/mui.min.js"></script>
+		<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+		<script>
+			$(function () {
+				// 首先取消js在客户端的点击事件300毫秒延迟
+				FastClick.attach(document.body);
+
+				// 初始化加载更多
+				mui.init({
+					swipeBack: true //启用右滑关闭功能
+				});
+
+
+				$('#back').live('tap', function(){
+					window.location.href = 'details.html?from='+getQueryString('from')+'&code='+getQueryString('code')
+				})
+
+				$('.tip2').html('您赠送的礼物'+decodeURI(decodeURI(getQueryString('name')))+'已收到，小启代作者向您说一声感谢，谢谢您的支持！')
+
+				updateOrderId();
+
+				function updateOrderId () {
+					$.ajax({
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=FinishPay&out_trade_no=" + getQueryString('out_trade_no'),
+						type: "get",
+						dataType: "json",
+						success: function(result) {
+							if (result.state === 1) {
+
+							} else {
+								mui.alert(result.msg, '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
+							}
+						},
+						error: function() {
+							mui.alert('数据库更新订单信息失败！', '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
+						}
+					});
+				}
+
+
+				//目标页（redirect_uri跳转页） 获取code，code来自页面返回
+				function getQueryString(name) {
+					var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+					var r = window.location.search.substr(1).match(reg);
+					if (r != null) return unescape(r[2]);
+					return null;
+				}
+
+			});
+		</script>
+	</body>
+</html>
