@@ -317,6 +317,14 @@
 				background: #f7f7f7;
 			}
 
+			.home-page .introduce-pack {
+				padding: 10px;
+			}
+
+			.home-page .introduce-pack img {
+				width: 100%!important;
+			}
+
 		</style>
 
 	</head>
@@ -398,6 +406,23 @@
 					</div>
 				</div>
 			</div>
+
+			<!-- 参赛规则 -->
+			<div style="margin: 10px 0;" class="production-pack">
+				<div class="top-pack">
+					<div class="bg-line"></div>
+					<div class="title-big-pack">
+						<div class="title-pack">
+							<div class="title">本届大赛详情</div>
+							<div class="tip-pack">
+								<div class="tip-tag">奖品多多</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="introduce-pack">
+				</div>
+			</div>
 		</div>
 		<nav class="mui-bar mui-bar-tab">
 			<a class="mui-tab-item mui-active" id="home">
@@ -443,6 +468,8 @@
 				getMegagameBaseInfo()
 				// 3. 获取本次大赛的作品列表
 				getMegagameProductionList()
+				// 4. 获取本届大赛参赛规则
+				getWechatpn()
 
 				// 初始化加载更多
 				mui.init({
@@ -638,6 +665,31 @@
 						error: function() {
 							mui($('#loadMore')[0]).button('reset');
 							mui.alert('获取参赛作品出错！', '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
+						}
+					});
+				}
+
+				// 获取本届大赛参赛规则
+				function getWechatpn () {
+					$.ajax({
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetNowActiveDetail",
+						type: "get",
+						dataType: "json",
+						success: function(result) {
+							if (result.state === 1) {
+								$('.introduce-pack').append(result.data.active_detail)
+							} else {
+								mui.alert('请求本届大赛详情出错！', '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
+							}
+							console.info(result)
+							// $('.page-pack').append(result)
+						},
+						error: function() {
+							mui.alert('请求本届大赛详情出错！', '启后书法院', function() {
 								console.info('你刚关闭了警告框');
 							});
 						}

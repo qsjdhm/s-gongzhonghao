@@ -94,11 +94,12 @@
 			}
 
 			.buy-page .all-pack .number-pack div {
-				width: 50%;
+				width: 40%;
 			}
 
 			.buy-page .all-pack .number-pack .label-pack {
 				color: #c59c51;
+				width: 60%;
 			}
 
 			.buy-page .all-pack .number-pack div select {
@@ -146,7 +147,7 @@
 					</div>
 					<div class="content-pack">
 						<div class="desc-pack">
-							1.选中心仪的礼物（礼物通过积分兑换）
+							选中心仪的礼物（礼物会转换为票数）
 						</div>
 						<ul id="giftList" class="mui-table-view mui-grid-view mui-grid-9">
 							<!--<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
@@ -170,7 +171,7 @@
 						</ul>
 					</div>
 					<div class="number-pack">
-						<div class="label-pack">2.选择礼物个数</div>
+						<div class="label-pack">选择礼物个数</div>
 						<div>
 							<select id="giftNumSelect" class="mui-btn mui-btn-block">
 								<option selected value="1">1个</option>
@@ -236,9 +237,14 @@
 								if (result.data !== null) {
 									var html = '';
 									for (var i=0; i<result.data.gift_list.length; i++) {
-										html += '<li id="'+result.data.gift_list[i].gift_id+'" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">';
-										html += '	<img src="http://47.92.216.253/'+result.data.gift_list[i].gift_img+'" />';
-										html += '	<div class="mui-media-body">'+result.data.gift_list[i].gift_name+'('+result.data.gift_list[i].integral_num+'积分)</div></a>';
+//										result.data.gift_list[i].vote_num = 12;
+//										result.data.gift_list[i].cost_num = 120;
+										html += '<li id="'+result.data.gift_list[i].gift_id+'" vote="'+result.data.gift_list[i].vote_num+'" cost="'+result.data.gift_list[i].cost_num+'"  class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">';
+										html += '	<a href="#">';
+										html += '		<img src="http://47.92.216.253/'+result.data.gift_list[i].gift_img+'" />';
+										html += '		<div class="mui-media-body">'+result.data.gift_list[i].gift_name+'</div>';
+										html += '		<div style="color: #FF4351!important;" class="mui-media-body">'+result.data.gift_list[i].cost_num+'元</div>';
+										html += '	</a>';
 										html += '</li>';
 									}
 									$("#giftList").append(html)
@@ -261,6 +267,10 @@
 					$('.mui-table-view-cell').css('border', '0px solid #f45d4a!important')
 					$(this).css('border', '1px solid #ffc900!important')
 					selectGiftId = $(this).attr("id")
+					var vote = $(this).attr("vote")
+					var cost = $(this).attr("cost")
+					$('.buy-page .all-pack .number-pack .label-pack').html('单价'+cost+'元，可抵'+vote+'票')
+					$('.buy-page .all-pack .number-pack .label-pack').css('color', '#333')
 				})
 
 				$('#submit').on('touchstart', function(){

@@ -173,16 +173,14 @@
 				justify-content: space-between;
 			}
 
-			.give-page .all-pack .number-pack div {
-				width: 50%;
-			}
-
 			.give-page .all-pack .number-pack .label-pack {
 				color: #c59c51;
+				width: 60%;
 			}
 
 			.give-page .all-pack .number-pack .value-pack {
 				padding-left: 5px;
+				width: 40%;
 			}
 
 			.give-page .all-pack .number-pack div select {
@@ -278,7 +276,7 @@
 
 					<div class="content-pack">
 						<div class="desc-pack">
-							1.选择赠送他/她的礼物
+							我拥有的礼物（礼物会转换为票数）
 						</div>
 						<ul id="giftList" class="mui-table-view mui-grid-view mui-grid-9">
 							<!--<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
@@ -299,7 +297,7 @@
 						</ul>
 					</div>
 					<div class="number-pack">
-						<div class="label-pack">2.选择礼物个数</div>
+						<div class="label-pack">选择礼物个数</div>
 						<div class="value-pack">
 							<select id="giftNumSelect" class="mui-btn mui-btn-block">
 								<option selected value="1">1个</option>
@@ -392,14 +390,19 @@
 								if (result.data.belong_gife !== null) {
 									var html = '';
 									for (var i=0; i<result.data.belong_gife.length; i++) {
-										html += '<li id="'+result.data.belong_gife[i].gift_id+'" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">';
-										html += '	<img src="http://47.92.216.253/'+result.data.belong_gife[i].gift_img+'" />';
-										html += '	<div class="mui-media-body">'+result.data.belong_gife[i].gift_name+'*'+result.data.belong_gife[i].gift_num+'</div></a>';
+//										result.data.belong_gife[i].vote_num = 12;
+//										result.data.belong_gife[i].cost_num = 120;
+										html += '<li id="'+result.data.belong_gife[i].gift_id+'" vote="'+result.data.belong_gife[i].vote_num+'" cost="'+result.data.belong_gife[i].cost_num+'"  class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">';
+										html += '	<a href="#">';
+										html += '		<img src="http://47.92.216.253/'+result.data.belong_gife[i].gift_img+'" />';
+										html += '		<div class="mui-media-body">'+result.data.belong_gife[i].gift_name+'*'+result.data.belong_gife[i].gift_num+'</div>';
+										html += '		<div style="color: #FF4351!important;" class="mui-media-body">单价'+result.data.belong_gife[i].cost_num+'元</div>';
+										html += '	</a>';
 										html += '</li>';
 									}
 									$('#giftList').append(html)
 								} else {
-									$('.content-pack').append('<div style="margin: 35px 20px;font-size: 14px;color:#999;">您暂时没有可赠送的礼物，您也可以通过<span style="color:#FEAE1B">购买礼物按钮</span>进行赠送！</div>')
+									$('.content-pack').append('<div style="margin: 35px 20px;font-size: 14px;color:#999;">您的账户暂时没有礼物，您也可以通过<span style="color:#FEAE1B">购买礼物按钮</span>进行赠送支持作者！</div>')
 								}
 							} else {
 								mui.alert(result.msg, '启后书法院', function() {
@@ -420,6 +423,10 @@
 					$('.mui-table-view-cell').css('border', '0px solid #f45d4a!important')
 					$(this).css('border', '1px solid #ffc900!important')
 					selectGiftId = $(this).attr("id")
+					var vote = $(this).attr("vote")
+					var cost = $(this).attr("cost")
+					$('.give-page .all-pack .number-pack .label-pack').html('单价'+cost+'元，可抵'+vote+'票')
+					$('.give-page .all-pack .number-pack .label-pack').css('color', '#333')
 				})
 
 //				$('.info-pack').tap(function(){

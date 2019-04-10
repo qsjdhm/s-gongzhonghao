@@ -398,8 +398,8 @@
 
 			<!-- 参赛详情 -->
 			<div class="detail-pack">
-				<div>参赛详情</div>
-				<div>我要报名</div>
+				<div id="introduceBtn">参赛详情</div>
+				<div id="applyBtn">我要报名</div>
 			</div>
 
 			<!-- 排名列表 -->
@@ -490,6 +490,16 @@
 				$('#personal').tap(function(){
 					window.location.href = 'personal.html';
 				})
+				$('#introduceBtn').tap(function(){
+					window.location.href = 'introduce.html';
+				})
+				$('#applyBtn').tap(function(){
+					window.location.href = 'apply.html';
+				})
+				$('.item-pack').live('tap', function(){
+					var code = $(this).attr('code')
+					window.location.href = 'details.html?from=ranking&code='+code;
+				})
 
 
 
@@ -548,7 +558,7 @@
 								if (result.data != null) {
 									var html = '';
 									for (var i=0; i< result.data.length; i++) {
-										html += '<div class="item-pack">';
+										html += '<div class="item-pack" code="'+result.data[i].author_code+'">';
 										html += '	<div class="left-pack">';
 										html += '		<img src="'+result.data[i].author_head_img+'" class="portrait" />';
 										if (i < 3) {

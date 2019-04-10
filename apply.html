@@ -11,6 +11,8 @@
 		<meta name="format-detection" content="telephone=no" />
 		<link rel="stylesheet" href="js/lib/mui/css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="js/lib/mui/css/icons-extra.css" />
+		<link rel="stylesheet" type="text/css" href="js/lib/mui/css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="js/lib/mui/css/mui.poppicker.css" />
 		<link rel="stylesheet" href="css/app.css" />
 		<style>
 			.mui-bar-tab .mui-tab-item.mui-active {
@@ -253,6 +255,18 @@
 			.apply-page .image-item.space .image-close {
 				display: none;
 			}
+			h5.mui-content-padded {
+				margin-left: 3px;
+				margin-top: 20px !important;
+			}
+			h5.mui-content-padded:first-child {
+				margin-top: 12px !important;
+			}
+			.ui-alert {
+				text-align: center;
+				padding: 20px 10px;
+				font-size: 16px;
+			}
 
 		</style>
 
@@ -304,6 +318,10 @@
 					<label>手机</label>
 					<input id='phone' type="text" class="mui-input-clear mui-input" placeholder="手机号我司不会对外公布">
 				</div>
+				<div class="mui-input-row" style="height: 50px; line-height: 50px;">
+					<label>城市</label>
+					<button id='showCityPickerBtn' style="text-align:left;color: #999;padding-left:0;color: #333;background:#fff;width: 73%;font-size: 16px;height: 40px;margin-top: 4px;" class="mui-btn mui-btn-block" type='button'>请选择您所在的城市</button>
+				</div>
 				<div class="mui-input-row" style="padding-top: 15px;color: #777;">
 					<span style="padding: 15px;">选择上传1-3张照片，第一张为封面图。</span>
 					<div id='image-list' class="row image-list"></div>
@@ -340,10 +358,31 @@
 		<script src="js/lib/zepto.touch.js"></script>
 		<script src="js/lib/fastclick.js"></script>
 		<script src="js/lib/mui/js/mui.min.js"></script>
+		<script src="js/lib/mui/js/mui.picker.js"></script>
+		<script src="js/lib/mui/js/mui.poppicker.js"></script>
+		<script src="js/lib/mui/js/city.data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/lib/mui/js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
 
 		<script>
 			(function(mui, window, document, undefined) {
 				mui.init();
+				var cityList = [];
+
+				// 初始化地区选择器
+				var cityPicker = new mui.PopPicker({
+					layer: 3
+				});
+				cityPicker.setData(cityData3);
+				var showCityPickerButton = document.getElementById('showCityPickerBtn');
+				showCityPickerButton.addEventListener('tap', function(event) {
+					cityPicker.show(function(items) {
+						$('#showCityPickerBtn').html(items[0].text+' '+items[1].text+' '+items[2].text)
+						cityList = items;
+						console.info(cityList)
+					});
+				}, false);
+
+
 				var endTime = '';
 
 				getMegagameBaseInfo ();
