@@ -13,6 +13,7 @@
 		<link rel="stylesheet" type="text/css" href="js/lib/mui/css/icons-extra.css" />
 		<link rel="stylesheet" type="text/css" href="js/lib/mui/css/mui.picker.css" />
 		<link rel="stylesheet" type="text/css" href="js/lib/mui/css/mui.poppicker.css" />
+		<link rel="stylesheet" type="text/css" href="js/lib/mui/css/mui.showLoading.css" />
 		<link rel="stylesheet" href="css/app.css" />
 		<style>
 
@@ -278,7 +279,6 @@
 				width: 100%;
 			}
 
-
 		</style>
 
 	</head>
@@ -373,6 +373,7 @@
 		<script src="js/lib/mui/js/mui.min.js"></script>
 		<script src="js/lib/mui/js/mui.picker.js"></script>
 		<script src="js/lib/mui/js/mui.poppicker.js"></script>
+		<script src="js/lib/mui/js/mui.showLoading.js"></script>
 		<script src="js/lib/mui/js/city.data.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/lib/mui/js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
 
@@ -543,13 +544,16 @@
 						imgList.push('data:image/png;base64,' + $($('.image-item')[i]).attr('base64'))
 					}
 					var self = this;
+
+					mui.showLoading("上传作品比较慢，请耐心等待...", "div");
+
 					$.ajax({
 						url: "http://47.92.216.253//tools/wechatpn.ashx?action=UserSignUp",
 						type: 'POST',
 						dataType: "json",
 						data: {
-							"we_chat_user_id": localStorage.getItem('qh_user_id'),
-							"open_id": localStorage.getItem('qh_open_id'),
+							"we_chat_user_id": sessionStorage.getItem('qh_user_id'),
+							"open_id": sessionStorage.getItem('qh_open_id'),
 							"author_name": $('#name').val(),
 							"author_mobile": $('#phone').val(),
 							"works_introduce": $('#manifesto').val(),
@@ -559,6 +563,7 @@
 							"imgs": imgList,
 						},
 						success: function (result) {
+							mui.hideLoading(function(){});
 							if (result.state === 1) {
 								mui.alert(result.msg, '启后书法院', function () {
 									mui(self).button('reset');
@@ -570,6 +575,7 @@
 							}
 						},
 						error: function () {
+							mui.hideLoading(function(){});
 							mui.alert('报名失败！', '启后书法院', function () {
 								console.info('你刚关闭了警告框');
 								mui(self).button('reset');

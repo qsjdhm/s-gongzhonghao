@@ -166,7 +166,7 @@
 				// 获取用户的消费
 				function getUserVote () {
 					$.ajax({
-						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetMyVote&we_chat_user_id="+window.localStorage.getItem('qh_user_id')+"&open_id="+window.localStorage.getItem('qh_open_id'),
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetMyVote&we_chat_user_id="+window.sessionStorage.getItem('qh_user_id')+"&open_id="+window.sessionStorage.getItem('qh_open_id'),
 						type: "get",
 						dataType: "json",
 						success: function(result) {

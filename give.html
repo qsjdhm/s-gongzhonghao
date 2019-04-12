@@ -359,7 +359,7 @@
 				// 获取作者战绩
 				function getAuthorScore () {
 					$.ajax({
-						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetAuthorScore&author_code="+getQueryString('code')+"&we_chat_user_id="+window.localStorage.getItem('qh_user_id')+"&open_id="+window.localStorage.getItem('qh_open_id'),
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetAuthorScore&author_code="+getQueryString('code')+"&we_chat_user_id="+window.sessionStorage.getItem('qh_user_id')+"&open_id="+window.sessionStorage.getItem('qh_open_id'),
 						type: "get",
 						dataType: "json",
 						success: function(result) {
@@ -382,7 +382,7 @@
 				// 获取用户所拥有的礼物
 				function getUserGift () {
 					$.ajax({
-						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetMyGift&we_chat_user_id="+window.localStorage.getItem('qh_user_id')+"&open_id="+window.localStorage.getItem('qh_open_id'),
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetMyGift&we_chat_user_id="+window.sessionStorage.getItem('qh_user_id')+"&open_id="+window.sessionStorage.getItem('qh_open_id'),
 						type: "get",
 						dataType: "json",
 						success: function(result) {
@@ -451,8 +451,8 @@
 							type: "post",
 							dataType: "json",
 							data: {
-								we_chat_user_id: window.localStorage.getItem('qh_user_id'),
-								open_id: window.localStorage.getItem('qh_open_id'),
+								we_chat_user_id: window.sessionStorage.getItem('qh_user_id'),
+								open_id: window.sessionStorage.getItem('qh_open_id'),
 								author_code: getQueryString('code'),
 								gift_id: selectGiftId,
 								gift_num: selectGiftNum

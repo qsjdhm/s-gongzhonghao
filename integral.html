@@ -165,7 +165,7 @@
 				// 获取用户的积分
 				function getUserIntegral () {
 					$.ajax({
-						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetMyIntegral&we_chat_user_id="+window.localStorage.getItem('qh_user_id')+"&open_id="+window.localStorage.getItem('qh_open_id'),
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetMyIntegral&we_chat_user_id="+window.sessionStorage.getItem('qh_user_id')+"&open_id="+window.sessionStorage.getItem('qh_open_id'),
 						type: "get",
 						dataType: "json",
 						success: function(result) {

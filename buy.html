@@ -284,9 +284,9 @@
 						selectGiftNum = $('#giftNumSelect').val()
 						$.ajax({
 							url: "http://47.92.216.253/tools/wechatpn.ashx?action=IntegralPay"+
-							"&we_chat_user_id="+window.localStorage.getItem('qh_user_id')+
-							"&open_id="+window.localStorage.getItem('qh_open_id')+
-							"&gift_id="+selectGiftId+
+							"&we_chat_user_id="+window.sessionStorage.getItem('qh_user_id')+
+							"&open_id="+window.sessionStorage.getItem('qh_open_id')+
+							"&integral_id="+selectGiftId+
 							"&goods_num="+selectGiftNum+
 							"&pay_type=2"+
 							"&authorCode="+getQueryString('code'),

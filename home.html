@@ -551,12 +551,12 @@
 
 				var page = 1;
 				var endTime = '';
-				// localStorage首先取消js在客户端的点击事件300毫秒延迟
+				// 首先取消js在客户端的点击事件300毫秒延迟
 				FastClick.attach(document.body);
 				// 1. 登录
 				userLogin()
-				// window.localStorage.setItem('qh_user_id', 1)
-				// window..setItem('qh_open_id', 'on8qq1cQtiZjXFMTOege0ylv2Vr8')
+				// window.sessionStorage.setItem('qh_user_id', 22)
+				// window.sessionStorage.setItem('qh_open_id', 'omcwj5kPXXJnyH0IBapxmD1p1Ar4')
 				// 2. 获取大赛基本信息
 				getMegagameBaseInfo()
 				// 3. 获取本次大赛的作品列表
@@ -619,8 +619,8 @@
 						type: "post",
 						dataType: "json",
 						data: {
-							we_chat_user_id: window.localStorage.getItem('qh_user_id'),
-							open_id: window.localStorage.getItem('qh_open_id'),
+							we_chat_user_id: window.sessionStorage.getItem('qh_user_id'),
+							open_id: window.sessionStorage.getItem('qh_open_id'),
 							author_code: code
 						},
 						success: function(result) {
@@ -652,8 +652,8 @@
 
 				// 1.用户登录
 				function userLogin () {
-					var userId = window.localStorage.getItem('qh_user_id');
-					var openId = window.localStorage.getItem('qh_open_id');
+					var userId = window.sessionStorage.getItem('qh_user_id');
+					var openId = window.sessionStorage.getItem('qh_open_id');
 					if (userId != null && userId != undefined && userId != '' && openId != null && openId != undefined && openId != '') {
 						// 存在就不再获取了
 					} else {
@@ -663,8 +663,8 @@
 							dataType: "json",
 							success: function(result) {
 								if (result.state === 1) {
-									window.localStorage.setItem('qh_user_id', result.data.we_chat_user_id)
-									window.localStorage.setItem('qh_open_id', result.data.open_id)
+									window.sessionStorage.setItem('qh_user_id', result.data.we_chat_user_id)
+									window.sessionStorage.setItem('qh_open_id', result.data.open_id)
 								} else {
 									mui.alert(result.msg, '启后书法院', function() {
 										console.info('你刚关闭了警告框');

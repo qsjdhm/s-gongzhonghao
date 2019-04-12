@@ -343,8 +343,8 @@
 						type: "post",
 						dataType: "json",
 						data: {
-							we_chat_user_id: window.localStorage.getItem('qh_user_id'),
-							open_id: window.localStorage.getItem('qh_open_id'),
+							we_chat_user_id: window.sessionStorage.getItem('qh_user_id'),
+							open_id: window.sessionStorage.getItem('qh_open_id'),
 							author_code: code
 						},
 						success: function(result) {

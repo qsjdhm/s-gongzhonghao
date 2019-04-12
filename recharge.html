@@ -194,8 +194,8 @@
 				mui($('#submit')[0]).button('loading');
 				$.ajax({
 					url: "http://47.92.216.253/tools/wechatpn.ashx?action=IntegralPay"+
-					"&we_chat_user_id="+window.localStorage.getItem('qh_user_id')+
-					"&open_id="+window.localStorage.getItem('qh_open_id')+
+					"&we_chat_user_id="+window.sessionStorage.getItem('qh_user_id')+
+					"&open_id="+window.sessionStorage.getItem('qh_open_id')+
 					"&integral_id="+selectRechargeId+
 					"&pay_type=1",
 					type: "get",
