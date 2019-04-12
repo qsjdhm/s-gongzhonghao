@@ -15,6 +15,10 @@
 		<link rel="stylesheet" type="text/css" href="js/lib/mui/css/mui.poppicker.css" />
 		<link rel="stylesheet" href="css/app.css" />
 		<style>
+
+			marquee p {
+				color: #d6d5d5;
+			}
 			.mui-bar-tab .mui-tab-item.mui-active {
 				color: #4cb89e;
 			}
@@ -53,7 +57,7 @@
 
 			.apply-page {
 				position: absolute;
-				top: 0;
+				top: 30px;
 				bottom: 50px;
 				left: 0;
 				right: 0;
@@ -268,10 +272,19 @@
 				font-size: 16px;
 			}
 
+			marquee {
+				height: 30px;
+				line-height: 30px;
+				width: 100%;
+			}
+
+
 		</style>
 
 	</head>
 	<body>
+		<marquee bgcolor=#000 behavior="scroll" loop="infinite" direction="left" ><P align=left>公告：一旦发现刷票行为，一律取消参赛资格！</P></marquee>
+
 		<!-- 首页面 -->
 		<div id="apply_page" class="apply-page">
 
@@ -366,22 +379,6 @@
 		<script>
 			(function(mui, window, document, undefined) {
 				mui.init();
-				var cityList = [];
-
-				// 初始化地区选择器
-				var cityPicker = new mui.PopPicker({
-					layer: 3
-				});
-				cityPicker.setData(cityData3);
-				var showCityPickerButton = document.getElementById('showCityPickerBtn');
-				showCityPickerButton.addEventListener('tap', function(event) {
-					cityPicker.show(function(items) {
-						$('#showCityPickerBtn').html(items[0].text+' '+items[1].text+' '+items[2].text)
-						cityList = items;
-						console.info(cityList)
-					});
-				}, false);
-
 
 				var endTime = '';
 
@@ -519,11 +516,24 @@
 					}, false);
 					placeholder.appendChild(closeButton);
 					placeholder.appendChild(fileInput);
-					console.info($(ui.imageList).find('.image-item').length)
 					ui.imageList.appendChild(placeholder);
 				};
 				ui.newPlaceholder();
 
+				var cityList = [];
+
+				// 初始化地区选择器
+				var cityPicker = new mui.PopPicker({
+					layer: 3
+				});
+				cityPicker.setData(cityData3);
+				var showCityPickerButton = document.getElementById('showCityPickerBtn');
+				showCityPickerButton.addEventListener('tap', function(event) {
+					cityPicker.show(function(items) {
+						$('#showCityPickerBtn').html(items[0].text+' '+items[1].text+' '+items[2].text)
+						cityList = items;
+					});
+				}, false);
 
 				mui(document.body).on('tap', '#submit', function(e) {
 					mui(this).button('loading');
@@ -543,6 +553,9 @@
 							"author_name": $('#name').val(),
 							"author_mobile": $('#phone').val(),
 							"works_introduce": $('#manifesto').val(),
+							"province": cityList[0].value+'-'+cityList[0].text,
+							"city": cityList[1].value+'-'+cityList[1].text,
+							"county": cityList[2].value+'-'+cityList[2].text,
 							"imgs": imgList,
 						},
 						success: function (result) {
@@ -564,32 +577,6 @@
 						}
 					});
 				})
-				// ui.submit.addEventListener('tap', function(event) {
-				// 	var imgList = [];
-				// 	var imgLength = $('.image-item').length;
-				// 	for (var i=0; i<(imgLength-1); i++) {
-				// 		imgList.push($($('.image-item')[i]).find('input').prop('files')[0])
-				// 	}
-				// 	console.info(imgList)
-				// }, false);
-				// ui.submit.addEventListener('tap', function(event) {
-				// 	if (ui.question.value == '' ||
-				// 		(ui.contact.value != '' &&
-				// 			ui.contact.value.search(/^(\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+)|([1-9]\d{4,9})$/) != 0)) {
-				// 		return mui.toast('信息填写不符合规范');
-				// 	}
-				// 	plus.nativeUI.showWaiting();
-				// 	feedback.send({
-				// 		question: ui.question.value,
-				// 		contact: ui.contact.value,
-				// 		images: ui.getFileInputIdArray()
-				// 	}, function() {
-				// 		plus.nativeUI.closeWaiting();
-				// 		mui.toast('感谢您的建议~');
-				// 		ui.clearForm();
-				// 		mui.back();
-				// 	});
-				// }, false);
 
 				// dateCount('2019-04-21 00:00:00')
 				// 倒计时

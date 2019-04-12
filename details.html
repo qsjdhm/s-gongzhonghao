@@ -14,9 +14,12 @@
 		<link rel="stylesheet" type="text/css" href="js/lib/mui/css/icons-extra.css" />
 		<link rel="stylesheet" href="css/app.css" />
 		<style>
+			marquee p {
+				color: #d6d5d5;
+			}
 			.details-page {
 				position: absolute;
-				top: 0;
+				top: 30px;
 				bottom: 0;
 				left: 0;
 				right: 0;
@@ -442,9 +445,17 @@
 				height: auto;
 			}
 
+			marquee {
+				height: 30px;
+				line-height: 30px;
+				width: 100%;
+			}
+
 		</style>
 	</head>
 	<body>
+		<marquee bgcolor=#000 behavior="scroll" loop="infinite" direction="left" ><P align=left>公告：一旦发现刷票行为，一律取消参赛资格！</P></marquee>
+
 		<!-- 作品页面 -->
 		<div id="details_page" class="details-page">
 			<!-- 人员信息 -->

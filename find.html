@@ -96,6 +96,7 @@
 				height: 35px;
 				left: 0;
 				right: 50px;
+				top: 0;
 			}
 
 			.search-page .search-pack .mui-search::before {
@@ -111,6 +112,7 @@
 				height: 35px;
 				line-height: 35px;
 				width: 49px;
+				top: 0;
 				right: 0;
 				font-size: 14px;
 				text-align: center;
@@ -230,10 +232,12 @@
 
 			<!-- 搜索框 -->
 			<div class="search-pack">
-				<div class="mui-input-row mui-search">
-					<input id="searchInput" type="search" class="mui-input-clear" placeholder="可输入 编号ID 或者 昵称、姓名">
-				</div>
-				<div id="searchBtn" class="btn-pack">搜索</div>
+				<form action="">
+					<div class="mui-input-row mui-search">
+						<input id="searchInput" type="search" class="mui-input-clear" placeholder="可输入 编号ID 或者 昵称、姓名">
+					</div>
+					<div id="searchBtn" class="btn-pack">搜索</div>
+				</form>
 			</div>
 
 			<!-- 参赛作品列表 -->
@@ -320,6 +324,17 @@
 					var value = $('#searchInput').val();
 					getMegagameProductionList(value)
 				})
+				document.getElementById("searchInput").addEventListener("keydown",function(e){
+					if(13 == e.keyCode){ //点击了“搜索”
+						document.activeElement.blur();//隐藏软键盘
+						//请求搜索接口
+						$('#macyContainer').empty()
+						page = 1;
+						var value = $('#searchInput').val();
+						getMegagameProductionList(value)
+						e.preventDefault();
+					}
+				},false);
 				$('.vote-pack').live('touchstart', function(){
 					var self = this;
 					var code = $(this).attr('id')

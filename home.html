@@ -14,6 +14,8 @@
 		<link rel="stylesheet" href="css/app.css" />
 		<link rel="stylesheet" href="js/lib/macy/assets/css/macy.css">
 		<style>
+
+
 			.mui-popup-button {
 				color: #4eb99e;
 			}
@@ -63,10 +65,41 @@
 				background-image: url("data:image/svg+xml;charset=utf-8,<svg viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><defs><line id='l' x1='60' x2='60' y1='7' y2='27' stroke='red' stroke-width='11' stroke-linecap='round'/></defs><g><use xlink:href='%23l' opacity='.27'/><use xlink:href='%23l' opacity='.27' transform='rotate(30 60,60)'/><use xlink:href='%23l' opacity='.27' transform='rotate(60 60,60)'/><use xlink:href='%23l' opacity='.27' transform='rotate(90 60,60)'/><use xlink:href='%23l' opacity='.27' transform='rotate(120 60,60)'/><use xlink:href='%23l' opacity='.27' transform='rotate(150 60,60)'/><use xlink:href='%23l' opacity='.37' transform='rotate(180 60,60)'/><use xlink:href='%23l' opacity='.46' transform='rotate(210 60,60)'/><use xlink:href='%23l' opacity='.56' transform='rotate(240 60,60)'/><use xlink:href='%23l' opacity='.66' transform='rotate(270 60,60)'/><use xlink:href='%23l' opacity='.75' transform='rotate(300 60,60)'/><use xlink:href='%23l' opacity='.85' transform='rotate(330 60,60)'/></g></svg>");
 			}
 
+			.music-pic{
+				display: inline-block;
+				width: 30px;
+				height: 30px;
+				overflow: hidden;
+				background: url('i/mopen.png');
+				background-size: 100%;
+				-webkit-animation: reverseRotataZ 1.2s linear infinite;
+				position: absolute;
+				z-index: 99;
+				left: 20px;
+				top: 45px;
+				-webkit-tap-highlight-color: rgba(0, 0, 0, 0);  /*移动端，div点击瞬间，出现阴影问题*/
+			}
+			.music-pic.close{
+				display: inline-block;
+				width: 30px;
+				height: 30px;
+				overflow: hidden;
+				background: url('i/mclose.png');;
+				background-size: 100%;
+				-webkit-animation: none;
+			}
+			@-webkit-keyframes reverseRotataZ{
+				0%{-webkit-transform: rotateZ(0deg);}
+				100%{-webkit-transform: rotateZ(-360deg);}
+			}
+			@-webkit-keyframes rotataZ{
+				0%{-webkit-transform: rotateZ(0deg);}
+				100%{-webkit-transform: rotateZ(360deg);}
+			}
 
 			.home-page {
 				position: absolute;
-				top: 0;
+				top: 30px;
 				bottom: 50px;
 				left: 0;
 				right: 0;
@@ -325,10 +358,28 @@
 				width: 100%!important;
 			}
 
+			marquee {
+				height: 30px;
+				line-height: 30px;
+				width: 100%;
+			}
+
+			marquee p {
+				color: #d6d5d5;
+			}
+
+
+
 		</style>
 
 	</head>
 	<body>
+		<div class="music-pic">
+			<audio id="audio" src="http://go.163.com/2018/0209/mengniu/audio/bgm.mp3" preload="auto" loop="loop" ></audio>
+		</div>
+
+		<marquee bgcolor=#000 behavior="scroll" loop="infinite" direction="left" ><P align=left>公告：一旦发现刷票行为，一律取消参赛资格！</P></marquee>
+
 		<!-- 首页面 -->
 		<div class="home-page">
 
@@ -450,20 +501,62 @@
 
 		<!-- 通用类库 -->
 		<script src="js/lib/zepto.js"></script>
+		<script src="js/lib/jweixin-1.0.0.js"></script>
 		<script src="js/lib/zepto.touch.js"></script>
 		<script src="js/lib/fastclick.js"></script>
 		<script src="js/lib/mui/js/mui.min.js"></script>
 		<script src="js/lib/macy/macy.js"></script>
 		<script>
+			function autoPlayMusic() {
+				// 自动播放音乐效果，解决浏览器或者APP自动播放问题
+				function musicInBrowserHandler() {
+					musicPlay(true);
+					document.body.removeEventListener('touchstart', musicInBrowserHandler);
+				}
+				document.body.addEventListener('touchstart', musicInBrowserHandler);
+
+				// 自动播放音乐效果，解决微信自动播放问题
+				function musicInWeixinHandler() {
+					musicPlay(true);
+					document.addEventListener("WeixinJSBridgeReady", function () {
+						musicPlay(true);
+					}, false);
+					document.removeEventListener('DOMContentLoaded', musicInWeixinHandler);
+				}
+				document.addEventListener('DOMContentLoaded', musicInWeixinHandler);
+			}
+			function musicPlay(isPlay) {
+				var audio = document.getElementById('audio');
+				if (isPlay && audio.paused) {
+					audio.play();
+				}
+				if (!isPlay && !audio.paused) {
+					audio.pause();
+				}
+			};
+			autoPlayMusic();
+
+			// 关闭音乐
+			$('.music-pic').click(function () {
+				if($('.music-pic').hasClass('close')){
+					document.getElementById("audio").muted=false;
+					$('.music-pic').removeClass('close');
+				}else {
+					$('.music-pic').addClass('close');
+					document.getElementById("audio").muted=true;
+				}
+			});
+
 			$(function () {
+
 				var page = 1;
 				var endTime = '';
-				// 首先取消js在客户端的点击事件300毫秒延迟
+				// localStorage首先取消js在客户端的点击事件300毫秒延迟
 				FastClick.attach(document.body);
 				// 1. 登录
-				// userLogin()
-				window.localStorage.setItem('qh_user_id', 1)
-				window.localStorage.setItem('qh_open_id', 'on8qq1cQtiZjXFMTOege0ylv2Vr8')
+				userLogin()
+				// window.localStorage.setItem('qh_user_id', 1)
+				// window..setItem('qh_open_id', 'on8qq1cQtiZjXFMTOege0ylv2Vr8')
 				// 2. 获取大赛基本信息
 				getMegagameBaseInfo()
 				// 3. 获取本次大赛的作品列表
@@ -493,6 +586,7 @@
 						400: 2
 					}
 				});
+
 
 				$('#introduceBtn').tap(function(){
 					window.location.href = 'introduce.html';
@@ -731,6 +825,7 @@
 					if (r != null) return unescape(r[2]);
 					return null;
 				}
+
 			});
 		</script>
 	</body>
