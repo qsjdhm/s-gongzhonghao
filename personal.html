@@ -255,6 +255,11 @@
 			</div>
 			<div class="list-pack mui-content">
 				<ul class="mui-table-view">
+					<li id="poster" class="mui-table-view-cell">
+						<a class="mui-navigate-right">
+							<span class="mui-icon-extra mui-icon-extra-lamp"></span><span>个人海报</span>
+						</a>
+					</li>
 					<li id="mall" class="mui-table-view-cell">
 						<a class="mui-navigate-right">
 							<span class="mui-icon-extra mui-icon-extra-gift"></span><span>礼物商城</span>
@@ -396,6 +401,14 @@
 				})
 				$('#recharge').tap(function(){
 					window.location.href = 'recharge.html';
+				})
+				$('#poster').tap(function(){
+					if (code === '' || code == null || code == undefined) {
+						mui.alert('你还没有参赛报名，赶紧去报名参赛吧', '启后书法院', function() {
+						});
+						return false
+					}
+					window.location.href = 'poster.html?code='+code;
 				})
 				$('#mall').tap(function(){
 					window.location.href = 'mall.html';

@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="">
+	<head>
+		<title>个人海报</title>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="renderer" content="webkit" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" href="js/lib/mui/css/mui.min.css" />
+		<link rel="stylesheet" href="js/lib/swiper/swiper.min.css">
+		<link rel="stylesheet" type="text/css" href="js/lib/mui/css/icons-extra.css" />
+		<link rel="stylesheet" href="css/app.css" />
+		<style>
+			.mui-bar {
+				/*background: #fef102;*/
+				background: #fff;
+			}
+			.mui-bar .mui-pull-left .mui-icon {
+				padding-right: 5px;
+				font-size: 28px;
+			}
+			.mui-bar .mui-btn {
+				font-weight: normal;
+				font-size: 17px;
+			}
+			.mui-bar .mui-btn-link {
+				top: 1px;
+			}
+			.mui-bar-nav {
+				top: 30px;
+			}
+
+			marquee {
+				height: 30px;
+				line-height: 30px;
+				width: 100%;
+			}
+
+			marquee p {
+				color: #d6d5d5;
+			}
+
+			.page-pack {
+				position: absolute;
+				top: 73px;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				overflow-y: auto;
+				overflow-x: hidden;
+				background: #f7f7f7;
+			}
+
+			.poster-pack {
+				margin: 30px;
+				height: auto;
+				position: absolute;
+				top: 0px;
+				z-index: -1;
+			}
+
+			.tip-pack {
+				margin-left: 10px;
+				margin-right: 10px;
+				margin-bottom: 30px;
+				height: auto;
+				border: 1px solid #f1e2a8;
+				background: #fdf8e5;
+				border-radius: 5px;
+				font-size: 14px;
+				color: #8f6f40;
+				padding: 20px;
+			}
+
+			#bgImg {
+				width: 100%;
+				background: #eee;
+			}
+
+			.save-poster-pack {
+				margin: 30px;
+				height: auto;
+				position: relative;
+			}
+
+			#posterImg {
+				width: 100%;
+				background: #eee;
+		  	}
+			.info-pack {
+				width: 100%;
+				height: 65px;
+				position: absolute;
+				background-color: rgba(246, 246,246, 0.7);
+				z-index: 9;
+				top: 0;
+			}
+
+			.left-pack {
+				height: 65px;
+				width: 100%;
+				display: -webkit-flex;
+				display: flex;
+			}
+
+			.left-pack .portrait-pack {
+				height: 65px;
+				width: 60px;
+			}
+
+			.left-pack .portrait-pack img {
+				height: 48px;
+				width: 48px;
+				margin-top: 10px;
+				margin-left: 15px;
+				border-radius: 50%;
+			}
+
+			.left-pack .p-info-pack {
+				margin-left: 10px;
+			}
+
+			.left-pack .p-info-pack .name-pack {
+				font-size: 16px;
+				height: 35px;
+				line-height: 45px;
+				color: #333;
+			}
+
+			.left-pack .p-info-pack .phone-pack {
+				font-size: 16px;
+				height: 30px;
+				line-height: 23px;
+				color: #333;
+			}
+			.code-img-pack {
+				position: absolute;
+				left: 10px;
+				bottom: 20px;
+				height: 100px;
+				width: 100px;
+				background: #fff;
+				padding: 1px;
+			}
+
+			.code-img-pack img {
+				width: 100%;
+				height: 100%;
+			}
+
+
+			.canvas {
+				align-items: center;
+				display: flex;
+				height: 10em;
+				justify-content: center;
+				margin: 1em 1em 2em 1em;
+			}
+
+			/* Spinner 1 starts here */
+			.spinner1 {
+				align-items: center;
+				border: .3em solid transparent;
+				border-top: .3em solid #4DB6AC;
+				border-right: .3em solid #4DB6AC;
+				border-radius: 100%;
+				display: flex;
+				justify-content: center;
+			}
+
+			.spinnerMax {
+				animation: spinnerOne 3s linear infinite;
+				height: 3em;
+				width: 3em;
+			}
+
+			.spinnerMid {
+				animation: spinnerOne 5s linear infinite;
+				height: 2.4em;
+				width: 2.4em;
+			}
+
+			.spinnerMin {
+				animation: spinnerOne 5s linear infinite;
+				height: 1.8em;
+				width: 1.8em;
+			}
+
+			@keyframes spinnerOne {
+				0% {
+					transform: rotate(0deg)
+				}
+				100% {
+					transform: rotate(360deg)
+				}
+			}
+			/* Spinner 1 ends here */
+
+			/* Spinner 2 starts here */
+			.canvas2 {
+				position: relative;
+			}
+
+			.spinner2 {
+				animation: spinnerTwo 1s linear infinite;
+				background: #4DB6AC;
+				border-radius: 100px;
+				height: 3em;
+				transform-origin: top;
+				position: absolute;
+				top: 50%;
+				width: .22em;
+			}
+
+			.hourHand {
+				animation: spinnerTwo 7s linear infinite;
+				background: #4DB6AC;
+				border-radius: 100px;
+				height: 2em;
+				transform-origin: top;
+				position: absolute;
+				top: 50%;
+				width: .2em;
+			}
+
+			.dot {
+				background: #4DB6AC;
+				border-radius: 100%;
+				height: .5em;
+				width: .5em;
+			}
+
+			@keyframes spinnerTwo {
+				0% {
+					transform: rotate(0deg)
+				}
+				100% {
+					transform: rotate(360deg)
+				}
+			}
+			/* Spinner 2 ends here */
+
+			/* Spinner 3 starts here */
+			.spinner3 {
+				animation: spinnerThree 1s linear infinite;
+				background: #4DB6AC;
+				border-radius: 100%;
+				width: 3em;
+				height: 3em;
+			}
+
+			@keyframes spinnerThree {
+				0%, 35% {
+					background: #4DB6AC;
+					transform: scale(1);
+				}
+				20%, 50% {
+					background: #80CBC4;
+					transform: scale(1.3);
+				}
+			}
+			/* Spinner 3 ends here */
+
+			/* Spinner 4 starts here */
+			.spinner4 {
+				animation: spinnerFour 1s linear infinite;
+				border: solid 7px transparent;
+				border-top: solid 7px #4DB6AC;
+				border-radius: 100%;
+				width: 3em;
+				height: 3em;
+			}
+
+			@keyframes spinnerFour {
+				0% {
+					transform: rotate(0deg);
+				}
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+			/* Spinner 4 ends here */
+
+			/* Spinner 5 starts here */
+			.spinner5 {
+				animation: spinnerFive 1s linear infinite;
+				border: solid 1.5em #4DB6AC;
+				border-right: solid 1.5em transparent;
+				border-left: solid 1.5em transparent;
+				border-radius: 100%;
+				width: 0;
+				height: 0;
+			}
+
+			@keyframes spinnerFive {
+				0% {
+					transform: rotate(0deg);
+				}
+				50% {
+					transform: rotate(60deg)
+				}
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+			/* Spinner 5 ends here */
+
+			/* Spinner 6 starts here */
+			.spinner6 {
+				background: #4DB6AC;
+				border-radius: 50%;
+				height: 1em;
+				margin: .1em;
+				width: 1em;
+			}
+
+			.p1 {
+				animation: fall 1s linear .3s infinite;
+			}
+
+			.p2 {
+				animation: fall 1s linear .2s infinite;
+			}
+
+			.p3 {
+				animation: fall 1s linear .1s infinite;
+			}
+
+			.p4 {
+				animation: fall 1s linear infinite;
+			}
+
+			@keyframes fall {
+				0% {
+					transform: translateY(-15px);
+				}
+				25%, 75% {
+					transform: translateY(0);
+				}
+				100% {
+					transform: translateY(-15px);
+				}
+			}
+
+		</style>
+	</head>
+	<body>
+		<marquee bgcolor=#000 behavior="scroll" loop="infinite" direction="left" ><P align=left>公告：一旦发现刷票行为，一律取消参赛资格！</P></marquee>
+		<!-- 个人海报页面 -->
+		<div id="poster_page" class="poster-page">
+			<header id="header" class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<h1 class="mui-title">个人海报</h1>
+			</header>
+			<div class="page-pack">
+				<div class="loading-pack">
+					<div class="canvas canvas5">
+						<div class="spinner5"></div>
+					</div>
+				</div>
+				<div class="poster-pack">
+					<img id="bgImg" src="" />
+					<div class="info-pack">
+						<div class="left-pack">
+							<div class="portrait-pack">
+								<img id="headImg" src=""/>
+							</div>
+							<div class="p-info-pack">
+								<div id="name" class="name-pack">我是：</div>
+								<div id="code" class="phone-pack">编号：</div>
+							</div>
+						</div>
+					</div>
+					<div class="code-img-pack">
+						<img id="codeImg" src="" />
+					</div>
+				</div>
+
+				<div class="save-poster-pack">
+					<img id="posterImg" src=""/>
+				</div>
+
+				<div class="tip-pack">
+					<span style="font-weight: bold">提示：</span><span>邀请方法：1、长按海报保存到手机；2、发送给好友或朋友圈叫好友帮忙投票；3、如有发现海报图片中没有出现微信头像、昵称、编号、二维码，请到<span style="font-weight: bold">个人中心</span>页面重新生成。</span>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- 通用类库 -->
+		<script src="js/lib/zepto.js"></script>
+		<script src="js/lib/zepto.touch.js"></script>
+		<script src="js/lib/fastclick.js"></script>
+		<script src="js/lib/mui/js/mui.min.js"></script>
+		<script src="js/lib/html2canvas/html2canvas.js"></script>
+
+		<script>
+			$(function () {
+				// 首先取消js在客户端的点击事件300毫秒延迟
+				FastClick.attach(document.body);
+
+				// 初始化加载更多
+				mui.init({
+					swipeBack: true //启用右滑关闭功能
+				});
+
+				getPosterList()
+				// 获取作者海报数据
+				function getPosterList () {
+					$.ajax({
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetPosterInfo&we_chat_user_id="+window.sessionStorage.getItem('qh_user_id')+"&open_id="+window.sessionStorage.getItem('qh_open_id')+"&author_code="+getQueryString('code'),
+						type: "get",
+						dataType: "json",
+						success: function(result) {
+							console.info(result)
+							if (result.state === 1) {
+								if (result.data !== null) {
+									$('#name').html('我是：'+result.data.author_name)
+									$('#code').html('编号：'+result.data.author_code)
+									$('#headImg').attr('src', 'data:image/png;base64,'+result.data.head_img)
+									$('#bgImg').attr('src', 'data:image/png;base64,'+result.data.poster_img)
+									$('#codeImg').attr('src', 'data:image/png;base64,'+result.data.code_img)
+
+									var w = $(".poster-pack").width();
+									var h = $(".poster-pack").height();
+									var canvas = document.createElement("canvas");
+									canvas.width = w;
+									canvas.height = h;
+									canvas.style.width = w + "px";
+									canvas.style.height = h + "px";
+									var context = canvas.getContext("2d");
+									context.scale(2,2);
+									let opts = {
+										allowTaint:false,//允许跨域（图片跨域相关）
+										canvas: canvas,                       // 将自定义canvas作为配置项
+										useCORS: true,                        // 允许图片跨域
+										logging:true // 修复截图不完整问题
+									}
+									html2canvas($(".poster-pack")[0], opts).then((canvas) => {
+										/* 此处的base64ImgSrc就是得到的img的base64字符串，直接在页面上显示即可 */
+										var base64ImgSrc = canvas.toDataURL("image/png").replace("image/png","image/octet-stream");
+										$('.loading-pack').empty()
+										$('#posterImg').attr('src', base64ImgSrc)
+									})
+								}
+							} else {
+								mui.alert(result.msg, '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
+							}
+						},
+						error: function() {
+							mui.alert('获取作者海报出错！', '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
+						}
+					});
+				}
+
+
+				//目标页（redirect_uri跳转页） 获取code，code来自页面返回
+				function getQueryString(name) {
+					var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+					var r = window.location.search.substr(1).match(reg);
+					if (r != null) return unescape(r[2]);
+					return null;
+				}
+			});
+		</script>
+	</body>
+</html>

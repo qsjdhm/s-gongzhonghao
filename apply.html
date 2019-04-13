@@ -624,6 +624,7 @@
 							if (result.state === 1) {
 								mui.alert(result.msg, '启后书法院', function () {
 									mui(self).button('reset');
+									window.location.href = 'poster.html?code='+result.data;
 								});
 							} else {
 								mui.alert(result.msg, '启后书法院', function () {
