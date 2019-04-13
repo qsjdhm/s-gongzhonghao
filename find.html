@@ -429,13 +429,22 @@
 
 
 
-
+				function stripscript(s)
+				{
+					var pattern = new RegExp("[%--`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]")        //格式 RegExp("[在中间定义特殊过滤字符]")
+					var rs = "";
+					for (var i = 0; i < s.length; i++) {
+						rs = rs+s.substr(i, 1).replace(pattern, '');
+					}
+					return rs;
+				}
 
 
 				// 获取本次大赛的作品列表
 				function getMegagameProductionList(searchKey) {
 					var self = this;
 					var url = '';
+					searchKey = stripscript($.trim(searchKey))
 					if (searchKey == '') {
 						url = "http://47.92.216.253/tools/wechatpn.ashx?action=GetCompetitionList&page_index="+page+"&page_size=20"
 					} else {
@@ -448,7 +457,7 @@
 						success: function(result) {
 							mui($('#loadMore')[0]).button('reset');
 							if (result.state === 1) {
-								if (result.data != null) {
+								if (result.data != null && result.data.length != 0) {
 									$('.empty-pack').css('display', 'none')
 									var html = '';
 									for (var i=0; i< result.data.length; i++) {

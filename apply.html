@@ -531,22 +531,79 @@
 				var showCityPickerButton = document.getElementById('showCityPickerBtn');
 				showCityPickerButton.addEventListener('tap', function(event) {
 					cityPicker.show(function(items) {
-						$('#showCityPickerBtn').html(items[0].text+' '+items[1].text+' '+items[2].text)
+						if (items[2].value != undefined) {
+							$('#showCityPickerBtn').html(items[0].text+' '+items[1].text+' '+items[2].text)
+						} else {
+							$('#showCityPickerBtn').html(items[0].text+' '+items[1].text)
+						}
 						cityList = items;
 					});
 				}, false);
 
+
+				function stripscript(s)
+				{
+					var pattern = new RegExp("[%--`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]")        //格式 RegExp("[在中间定义特殊过滤字符]")
+					var rs = "";
+					for (var i = 0; i < s.length; i++) {
+						rs = rs+s.substr(i, 1).replace(pattern, '');
+					}
+					return rs;
+				}
+				function isPoneAvailable (pone) {
+					var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+					if (!myreg.test(pone)) {
+						return false;
+					} else {
+						return true;
+					}
+				}
 				mui(document.body).on('tap', '#submit', function(e) {
 					mui(this).button('loading');
+					if ($.trim($('#name').val()) == '') {
+						mui.alert('请输入选手姓名', '启后书法院', function () {
+							mui($('#submit')[0]).button('reset');
+						});
+						return false
+					}
+					if ($.trim($('#manifesto').val()) == '') {
+						mui.alert('请输入作品简介', '启后书法院', function () {
+							mui($('#submit')[0]).button('reset');
+						});
+						return false
+					}
+					if ($.trim($('#phone').val()) == '') {
+						mui.alert('请输入手机号', '启后书法院', function () {
+							mui($('#submit')[0]).button('reset');
+						});
+						return false
+					}
+					if (!isPoneAvailable($.trim($('#phone').val()))) {
+						mui.alert('请输入正确格式的手机号', '启后书法院', function () {
+							mui($('#submit')[0]).button('reset');
+						});
+						return false
+					}
+					if (cityList.length == 0) {
+						mui.alert('请选择您所在的城市', '启后书法院', function () {
+							mui($('#submit')[0]).button('reset');
+						});
+						return false
+					}
 					var imgList = [];
 					var imgLength = $('.image-item').length;
 					for (var i=0; i<(imgLength-1); i++) {
 						imgList.push('data:image/png;base64,' + $($('.image-item')[i]).attr('base64'))
 					}
+					if (imgList.length === 0) {
+						mui.alert('最少要上传一张您的作品哦', '启后书法院', function () {
+							mui($('#submit')[0]).button('reset');
+						});
+						return false
+					}
+
 					var self = this;
-
 					mui.showLoading("上传作品比较慢，请耐心等待...", "div");
-
 					$.ajax({
 						url: "http://47.92.216.253//tools/wechatpn.ashx?action=UserSignUp",
 						type: 'POST',
@@ -554,9 +611,9 @@
 						data: {
 							"we_chat_user_id": sessionStorage.getItem('qh_user_id'),
 							"open_id": sessionStorage.getItem('qh_open_id'),
-							"author_name": $('#name').val(),
-							"author_mobile": $('#phone').val(),
-							"works_introduce": $('#manifesto').val(),
+							"author_name": stripscript($.trim($('#name').val())),
+							"author_mobile": stripscript($.trim($('#phone').val())),
+							"works_introduce": stripscript($.trim($('#manifesto').val())),
 							"province": cityList[0].value+'-'+cityList[0].text,
 							"city": cityList[1].value+'-'+cityList[1].text,
 							"county": cityList[2].value+'-'+cityList[2].text,
