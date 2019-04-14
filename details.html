@@ -538,20 +538,51 @@
 		<script>
 			$(function () {
 				var from = 'home';
-				var code = '';
+				var authorCode = '';
 				from = getQueryString('from');
-				code = getQueryString('code');
+				authorCode = getQueryString('author_code');
 
 				// 首先取消js在客户端的点击事件300毫秒延迟
 				FastClick.attach(document.body);
 
+				userLogin()
 				getCompetitionDetail()
 				GetGiftDetail()
+
+				// 1.用户登录
+				function userLogin () {
+					var userId = window.sessionStorage.getItem('qh_user_id');
+					var openId = window.sessionStorage.getItem('qh_open_id');
+					if (userId != null && userId != undefined && userId != '' && openId != null && openId != undefined && openId != '') {
+						// 存在就不再获取了
+					} else {
+						$.ajax({
+							url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetLoginByCode&code=" + getQueryString('code'),
+							type: "get",
+							dataType: "json",
+							success: function(result) {
+								if (result.state === 1) {
+									window.sessionStorage.setItem('qh_user_id', result.data.we_chat_user_id)
+									window.sessionStorage.setItem('qh_open_id', result.data.open_id)
+								} else {
+									mui.alert(result.msg, '启后书法院', function() {
+										console.info('你刚关闭了警告框');
+									});
+								}
+							},
+							error: function() {
+								mui.alert('请求openid出错！', '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
+							}
+						});
+					}
+				}
 
 				// 获取作者信息
 				function getCompetitionDetail () {
 					$.ajax({
-						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetCompetitionDetail&author_code="+code,
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetCompetitionDetail&author_code="+authorCode,
 						type: "get",
 						dataType: "json",
 						success: function(result) {
@@ -579,7 +610,7 @@
 				// 获取收礼列表
 				function GetGiftDetail () {
 					$.ajax({
-						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetAuthorSendGiftList&author_code="+code+"&page_index=1&page_size=1000",
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetAuthorSendGiftList&author_code="+authorCode+"&page_index=1&page_size=1000",
 						type: "get",
 						dataType: "json",
 						success: function(result) {
@@ -608,11 +639,6 @@
 						}
 					});
 				}
-
-
-
-
-
 
 				function initSwiper () {
 					var mySwiper = new Swiper('.swiper-container',{
@@ -654,7 +680,7 @@
 						data: {
 							we_chat_user_id: window.sessionStorage.getItem('qh_user_id'),
 							open_id: window.sessionStorage.getItem('qh_open_id'),
-							author_code: code
+							author_code: authorCode
 						},
 						success: function(result) {
 							if (result.state === 1) {
@@ -676,7 +702,7 @@
 				})
 
 				$('.gift-pack').tap(function(){
-					window.location.href = 'give.html?code='+code+'&from='+getQueryString('from');
+					window.location.href = 'give.html?code='+authorCode+'&from='+getQueryString('from');
 				})
 
 

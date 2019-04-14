@@ -115,7 +115,7 @@
 
 
 				$('#back').live('tap', function(){
-					window.location.href = 'details.html?from='+getQueryString('from')+'&code='+getQueryString('code')
+					window.location.href = 'details.html?from='+getQueryString('from')+'&author_code='+getQueryString('code')
 				})
 
 				$('.tip2').html('您赠送的礼物'+decodeURI(decodeURI(getQueryString('name')))+'已收到，小启代作者向您说一声感谢，谢谢您的支持！')

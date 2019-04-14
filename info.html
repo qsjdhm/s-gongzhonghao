@@ -180,6 +180,12 @@
 				$('#submit').on('touchstart', function(){
 					mui($('#submit')[0]).button('loading');
 					var phone = $('#phone').val()
+					if (!isPoneAvailable($.trim(phone))) {
+						mui.alert('请输入正确格式的手机号', '启后书法院', function () {
+							mui($('#submit')[0]).button('reset');
+						});
+						return false
+					}
 					$.ajax({
 						url: "http://47.92.216.253/tools/wechatpn.ashx?action=UpdateUserInfoOperate",
 						type: "post",
@@ -209,6 +215,15 @@
 						}
 					});
 				});
+
+				function isPoneAvailable (pone) {
+					var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+					if (!myreg.test(pone)) {
+						return false;
+					} else {
+						return true;
+					}
+				}
 			});
 		</script>
 	</body>

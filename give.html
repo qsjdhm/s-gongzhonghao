@@ -461,7 +461,7 @@
 								mui($('#submit')[0]).button('reset');
 								if (result.state === 1) {
 									mui.alert('您赠送的礼物'+name+'已收到，小启代作者向您说一声感谢，谢谢您的支持！', '启后书法院', function() {
-										window.location.href = 'details.html?from='+getQueryString('from')+'&code='+getQueryString('code');
+										window.location.href = 'details.html?from='+getQueryString('from')+'&author_code='+getQueryString('code');
 									});
 								} else {
 									mui.alert(result.msg, '启后书法院', function() {
