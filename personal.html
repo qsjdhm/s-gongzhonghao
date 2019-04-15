@@ -344,6 +344,36 @@
 								$('#vote .item-top-pack').html(result.data.vote_num)
 								$('#gift .item-top-pack').html(result.data.gife_num)
 								$('#details .item-top-pack').html(result.data.works_num)
+								reGetUserInfo()
+							} else {
+								mui.alert(result.msg, '启后书法院', function() {
+									console.info('你刚关闭了警告框');
+								});
+							}
+						},
+						error: function() {
+							mui.alert('获取用户基本信息出错！', '启后书法院', function() {
+								console.info('你刚关闭了警告框');
+							});
+						}
+					});
+				}
+
+				// 为了解决后台缓存问题，需再调一次接口
+				function reGetUserInfo () {
+					$.ajax({
+						url: "http://47.92.216.253/tools/wechatpn.ashx?action=UserBaseInfo&we_chat_user_id="+window.sessionStorage.getItem('qh_user_id')+"&open_id="+window.sessionStorage.getItem('qh_open_id'),
+						type: "get",
+						dataType: "json",
+						success: function(result) {
+							if (result.state === 1) {
+								code = result.data.author_code
+								$('#phone').html(result.data.phone)
+								$('#integral .item-top-pack').html(result.data.integral_num)
+								$('#consumption .item-top-pack').html(result.data.cost_num)
+								$('#vote .item-top-pack').html(result.data.vote_num)
+								$('#gift .item-top-pack').html(result.data.gife_num)
+								$('#details .item-top-pack').html(result.data.works_num)
 							} else {
 								mui.alert(result.msg, '启后书法院', function() {
 									console.info('你刚关闭了警告框');
@@ -386,7 +416,7 @@
 					window.location.href = 'gift.html';
 				})
 				$('#details').on('touchstart', function(){
-					if (code === '' || code == null || code == undefined) {
+					if (code === '0' || code == null || code == undefined) {
 						mui.alert('你还没有参赛报名，赶紧去报名参赛吧', '启后书法院', function() {
 						});
 						return false
@@ -402,8 +432,8 @@
 				$('#recharge').tap(function(){
 					window.location.href = 'recharge.html';
 				})
-				$('#poster').tap(function(){
-					if (code === '' || code == null || code == undefined) {
+				$('#poster').on('touchstart', function(){
+					if (code === '0' || code == null || code == undefined) {
 						mui.alert('你还没有参赛报名，赶紧去报名参赛吧', '启后书法院', function() {
 						});
 						return false

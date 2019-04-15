@@ -123,7 +123,9 @@
 						dataType: "json",
 						success: function(result) {
 							if (result.state === 1) {
-								if (result.data.details !== null && result.data.details.length != 0) {
+								if (result.data.details == null || result.data.details.length == 0) {
+									$('.details-pack').append('<div style="background:#fff;width:100%;text-align:center;padding: 35px 0px;font-size: 14px;color:#999;">您暂时还没有消息明细！</div>')
+								} else {
 									var html = '';
 									for (var i=0; i<result.data.details.length; i++) {
 										html += '<div class="item-pack">';
@@ -131,10 +133,7 @@
 										html += '	<div class="desc-pack">'+result.data.details[i].detail_content+'</div>';
 										html += '</div>';
 									}
-									$('#messageList').append(html)
-								} else {
-									$('.details-pack').append('<div style="background:#fff;width:100%;text-align:center;padding: 35px 0px;font-size: 14px;color:#999;">您暂时还没有消息明细！</div>')
-								}
+									$('#messageList').append(html)								}
 							} else {
 								mui.alert(result.msg, '启后书法院', function() {
 									console.info('你刚关闭了警告框');

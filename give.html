@@ -387,11 +387,11 @@
 						dataType: "json",
 						success: function(result) {
 							if (result.state === 1) {
-								if (result.data !== null && result.data) {
+								if (result.data == null || result.data.belong_gife == null || result.data.belong_gife.length == 0) {
+									$('.content-pack').append('<div style="margin: 35px 20px;font-size: 14px;color:#999;">您的账户暂时没有礼物，您也可以通过<span style="color:#FEAE1B">购买礼物按钮</span>进行赠送支持作者！</div>')
+								} else {
 									var html = '';
 									for (var i=0; i<result.data.belong_gife.length; i++) {
-//										result.data.belong_gife[i].vote_num = 12;
-//										result.data.belong_gife[i].cost_num = 120;
 										html += '<li id="'+result.data.belong_gife[i].gift_id+'" vote="'+result.data.belong_gife[i].vote_num+'" cost="'+result.data.belong_gife[i].cost_num+'"  class="gift-cell-pack mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">';
 										html += '	<a href="#">';
 										html += '		<img src="http://47.92.216.253/'+result.data.belong_gife[i].gift_img+'" />';
@@ -401,8 +401,6 @@
 										html += '</li>';
 									}
 									$('#giftList').append(html)
-								} else {
-									$('.content-pack').append('<div style="margin: 35px 20px;font-size: 14px;color:#999;">您的账户暂时没有礼物，您也可以通过<span style="color:#FEAE1B">购买礼物按钮</span>进行赠送支持作者！</div>')
 								}
 							} else {
 								mui.alert(result.msg, '启后书法院', function() {

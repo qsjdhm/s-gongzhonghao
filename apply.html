@@ -566,8 +566,20 @@
 						});
 						return false
 					}
+					if ($.trim($('#manifesto').val()).length > 30) {
+						mui.alert('选手姓名不能超过8个文字', '启后书法院', function () {
+							mui($('#submit')[0]).button('reset');
+						});
+						return false
+					}
 					if ($.trim($('#manifesto').val()) == '') {
 						mui.alert('请输入作品简介', '启后书法院', function () {
+							mui($('#submit')[0]).button('reset');
+						});
+						return false
+					}
+					if ($.trim($('#manifesto').val()).length > 30) {
+						mui.alert('作品简介不能超过30个文字', '启后书法院', function () {
 							mui($('#submit')[0]).button('reset');
 						});
 						return false

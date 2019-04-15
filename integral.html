@@ -172,7 +172,9 @@
 							if (result.state === 1) {
 								$('#name').html(result.data.we_chat_nick)
 								$('#total').html(result.data.total_integral_num)
-								if (result.data.integral_detail !== null) {
+								if (result.data.integral_detail == null || result.data.integral_detail.length == 0) {
+									$('.details-pack').append('<div style="width:100%;text-align:center;padding: 35px 0px;font-size: 14px;color:#999;">您暂时还没有积分明细！</div>')
+								} else {
 									var html = '';
 									for (var i=0; i<result.data.integral_detail.length; i++) {
 										html += '<div class="item-pack">';
@@ -181,8 +183,6 @@
 										html += '</div>';
 									}
 									$('#integralList').append(html)
-								} else {
-									$('.details-pack').append('<div style="width:100%;text-align:center;padding: 35px 0px;font-size: 14px;color:#999;">您暂时还没有积分明细！</div>')
 								}
 							} else {
 								mui.alert(result.msg, '启后书法院', function() {

@@ -196,7 +196,9 @@
 						dataType: "json",
 						success: function(result) {
 							if (result.state === 1) {
-								if (result.data.belong_gife !== null) {
+								if (result.data.belong_gife == null || result.data.belong_gife.length == 0) {
+									$('.content-pack').append('<div style="width:100%;text-align:center;margin: 35px 0px;font-size: 14px;color:#999;">您暂时还没有礼物！</div>')
+								} else {
 									var html = '';
 									for (var i=0; i<result.data.belong_gife.length; i++) {
 										html += '<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">';
@@ -205,10 +207,10 @@
 										html += '</li>';
 									}
 									$('#giftList').append(html)
-								} else {
-									$('.content-pack').append('<div style="width:100%;text-align:center;margin: 35px 0px;font-size: 14px;color:#999;">您暂时还没有礼物！</div>')
 								}
-								if (result.data.gift_detail !== null) {
+								if (result.data.belong_gife == null || result.data.belong_gife.length == 0) {
+									$('.details-pack').append('<div style="width:100%;text-align:center;padding: 35px 0px;font-size: 14px;color:#999;">您暂时还没有礼物明细！</div>')
+								} else {
 									var html = '';
 									for (var i=0; i<result.data.gift_detail.length; i++) {
 										html += '<div class="item-pack">';
@@ -217,8 +219,6 @@
 										html += '</div>';
 									}
 									$('#detailList').append(html)
-								} else {
-									$('.details-pack').append('<div style="width:100%;text-align:center;padding: 35px 0px;font-size: 14px;color:#999;">您暂时还没有礼物明细！</div>')
 								}
 							} else {
 								mui.alert(result.msg, '启后书法院', function() {
