@@ -457,7 +457,10 @@
 						success: function(result) {
 							mui($('#loadMore')[0]).button('reset');
 							if (result.state === 1) {
-								if (result.data != null && result.data.length != 0) {
+								if (result.total_num == 0) {
+									$('#macyContainer').html('').css('height', 'auto');
+									$('.empty-pack').css('display', 'block')
+								} else {
 									$('.empty-pack').css('display', 'none')
 									var html = '';
 									for (var i=0; i< result.data.length; i++) {
@@ -476,11 +479,9 @@
 									masonry.runOnImageLoad(function () {
 										masonry.recalculate(true);
 									}, true);
-								} else {
-									$('.empty-pack').css('display', 'block')
-									$('.load-more').css('display', 'none')
 								}
 							} else {
+								$('#macyContainer').html('').css('height', 'auto');
 								$('.empty-pack').css('display', 'block')
 								// mui(self).button('reset');
 								mui.alert(result.msg, '启后书法院', function() {
@@ -490,6 +491,7 @@
 						},
 						error: function() {
 							mui($('#loadMore')[0]).button('reset');
+							$('#macyContainer').html('').css('height', 'auto');
 							$('.empty-pack').css('display', 'block')
 							mui.alert('获取参赛作品出错！', '启后书法院', function() {
 								console.info('你刚关闭了警告框');

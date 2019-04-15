@@ -684,6 +684,7 @@
 						},
 						success: function(result) {
 							if (result.state === 1) {
+								$('#poll').html(parseInt($('#poll').html()) + 1)
 								mui.alert(result.msg, '启后书法院', function() {
 									console.info('你刚关闭了警告框');
 								});
