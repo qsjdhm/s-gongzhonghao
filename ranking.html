@@ -306,6 +306,12 @@
 
 			.ranking-page .production-pack .list-pack .item-pack .center-pack .aphorism-pack span {
 				margin-right: 10px;
+				white-space: nowrap;
+				width: 100%;                  /* IE6 需要定义宽度 */
+				overflow: hidden;
+				-o-text-overflow: ellipsis;    /* Opera */
+				text-overflow:    ellipsis;    /* IE, Safari (WebKit) */
+				display: inline-block;
 			}
 
 			.ranking-page .production-pack .list-pack .item-pack .right-pack {

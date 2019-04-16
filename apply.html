@@ -566,7 +566,7 @@
 						});
 						return false
 					}
-					if ($.trim($('#manifesto').val()).length > 30) {
+					if ($.trim($('#manifesto').val()).length > 8) {
 						mui.alert('选手姓名不能超过8个文字', '启后书法院', function () {
 							mui($('#submit')[0]).button('reset');
 						});
@@ -578,7 +578,7 @@
 						});
 						return false
 					}
-					if ($.trim($('#manifesto').val()).length > 30) {
+					if ($.trim($('#manifesto').val()).length > 15) {
 						mui.alert('作品简介不能超过30个文字', '启后书法院', function () {
 							mui($('#submit')[0]).button('reset');
 						});
