@@ -407,13 +407,13 @@
 									$('#second').html(timeObj2.second)
 								}, 1000)
 							} else {
-								mui.alert(result.msg, '启后书法院', function() {
+								mui.alert(result.msg, '启后书画院', function() {
 									console.info('你刚关闭了警告框');
 								});
 							}
 						},
 						error: function() {
-							mui.alert('获取大赛基本信息出错！', '启后书法院', function() {
+							mui.alert('获取大赛基本信息出错！', '启后书画院', function() {
 								console.info('你刚关闭了警告框');
 							});
 						}
@@ -496,7 +496,7 @@
 					fileInput.setAttribute('id', 'image-' + imageIndexIdNum);
 					fileInput.addEventListener('change', function(event) {
 						if ($(ui.imageList).find('.image-item').length > 3) {
-							mui.alert('作品最多只能上传3个！', '启后书法院', function () {});
+							mui.alert('作品最多只能上传3个！', '启后书画院', function () {});
 						} else {
 							var file = fileInput.files[0];
 							if (file) {
@@ -561,43 +561,43 @@
 				mui(document.body).on('tap', '#submit', function(e) {
 					mui(this).button('loading');
 					if ($.trim($('#name').val()) == '') {
-						mui.alert('请输入选手姓名', '启后书法院', function () {
+						mui.alert('请输入选手姓名', '启后书画院', function () {
 							mui($('#submit')[0]).button('reset');
 						});
 						return false
 					}
 					if ($.trim($('#manifesto').val()).length > 8) {
-						mui.alert('选手姓名不能超过8个文字', '启后书法院', function () {
+						mui.alert('选手姓名不能超过8个文字', '启后书画院', function () {
 							mui($('#submit')[0]).button('reset');
 						});
 						return false
 					}
 					if ($.trim($('#manifesto').val()) == '') {
-						mui.alert('请输入作品简介', '启后书法院', function () {
+						mui.alert('请输入作品简介', '启后书画院', function () {
 							mui($('#submit')[0]).button('reset');
 						});
 						return false
 					}
 					if ($.trim($('#manifesto').val()).length > 15) {
-						mui.alert('作品简介不能超过30个文字', '启后书法院', function () {
+						mui.alert('作品简介不能超过30个文字', '启后书画院', function () {
 							mui($('#submit')[0]).button('reset');
 						});
 						return false
 					}
 					if ($.trim($('#phone').val()) == '') {
-						mui.alert('请输入手机号', '启后书法院', function () {
+						mui.alert('请输入手机号', '启后书画院', function () {
 							mui($('#submit')[0]).button('reset');
 						});
 						return false
 					}
 					if (!isPoneAvailable($.trim($('#phone').val()))) {
-						mui.alert('请输入正确格式的手机号', '启后书法院', function () {
+						mui.alert('请输入正确格式的手机号', '启后书画院', function () {
 							mui($('#submit')[0]).button('reset');
 						});
 						return false
 					}
 					if (cityList.length == 0) {
-						mui.alert('请选择您所在的城市', '启后书法院', function () {
+						mui.alert('请选择您所在的城市', '启后书画院', function () {
 							mui($('#submit')[0]).button('reset');
 						});
 						return false
@@ -608,7 +608,7 @@
 						imgList.push('data:image/png;base64,' + $($('.image-item')[i]).attr('base64'))
 					}
 					if (imgList.length === 0) {
-						mui.alert('最少要上传一张您的作品哦', '启后书法院', function () {
+						mui.alert('最少要上传一张您的作品哦', '启后书画院', function () {
 							mui($('#submit')[0]).button('reset');
 						});
 						return false
@@ -634,19 +634,19 @@
 						success: function (result) {
 							mui.hideLoading(function(){});
 							if (result.state === 1) {
-								mui.alert(result.msg, '启后书法院', function () {
+								mui.alert(result.msg, '启后书画院', function () {
 									mui(self).button('reset');
 									window.location.href = 'poster.html?code='+result.data;
 								});
 							} else {
-								mui.alert(result.msg, '启后书法院', function () {
+								mui.alert(result.msg, '启后书画院', function () {
 									mui(self).button('reset');
 								});
 							}
 						},
 						error: function () {
 							mui.hideLoading(function(){});
-							mui.alert('报名失败！', '启后书法院', function () {
+							mui.alert('报名失败！', '启后书画院', function () {
 								console.info('你刚关闭了警告框');
 								mui(self).button('reset');
 							});

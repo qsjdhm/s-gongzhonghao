@@ -551,31 +551,41 @@
 
 				// 1.用户登录
 				function userLogin () {
-					var userId = window.sessionStorage.getItem('qh_user_id');
-					var openId = window.sessionStorage.getItem('qh_open_id');
-					if (userId != null && userId != undefined && userId != '' && openId != null && openId != undefined && openId != '') {
-						// 存在就不再获取了
+					if (getQueryString('code') == null) {
+						setTimeout(function () {
+							if (getCodeNum < 20) {
+								userLogin()
+								getCodeNum ++
+							} else {
+								window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1e69e98ecb44fa39&redirect_uri=http%3a%2f%2fmanbuba.imwork.net%2fwechatnumdesign%2fhome.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+							}
+						}, 500)
 					} else {
-						$.ajax({
-							url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetLoginByCode&code=" + getQueryString('code'),
-							type: "get",
-							dataType: "json",
-							success: function(result) {
-								if (result.state === 1) {
-									window.sessionStorage.setItem('qh_user_id', result.data.we_chat_user_id)
-									window.sessionStorage.setItem('qh_open_id', result.data.open_id)
-								} else {
-									mui.alert(result.msg, '启后书法院', function() {
+						var userId = window.sessionStorage.getItem('qh_user_id');
+						var openId = window.sessionStorage.getItem('qh_open_id');
+						if (userId == null || userId == undefined || userId == '' || openId == null || openId == undefined || openId == '') {
+							// 不存在再获取
+							$.ajax({
+								url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetLoginByCode&code=" + getQueryString('code'),
+								type: "get",
+								dataType: "json",
+								success: function(result) {
+									if (result.state === 1) {
+										window.sessionStorage.setItem('qh_user_id', result.data.we_chat_user_id)
+										window.sessionStorage.setItem('qh_open_id', result.data.open_id)
+									} else {
+										mui.alert(result.msg, '启后书画院', function() {
+											console.info('你刚关闭了警告框');
+										});
+									}
+								},
+								error: function() {
+									mui.alert('请求openid出错！', '启后书画院', function() {
 										console.info('你刚关闭了警告框');
 									});
 								}
-							},
-							error: function() {
-								mui.alert('请求openid出错！', '启后书法院', function() {
-									console.info('你刚关闭了警告框');
-								});
-							}
-						});
+							});
+						}
 					}
 				}
 
@@ -600,7 +610,7 @@
 							}
 						},
 						error: function() {
-							mui.alert('获取作品信息出错！', '启后书法院', function() {
+							mui.alert('获取作品信息出错！', '启后书画院', function() {
 								console.info('你刚关闭了警告框');
 							});
 						}
@@ -633,7 +643,7 @@
 							$('#giftList').append(html)
 						},
 						error: function() {
-							mui.alert('获取作者收到的礼物出错！', '启后书法院', function() {
+							mui.alert('获取作者收到的礼物出错！', '启后书画院', function() {
 								console.info('你刚关闭了警告框');
 							});
 						}
@@ -685,17 +695,17 @@
 						success: function(result) {
 							if (result.state === 1) {
 								$('#poll').html(parseInt($('#poll').html()) + 1)
-								mui.alert(result.msg, '启后书法院', function() {
+								mui.alert(result.msg, '启后书画院', function() {
 									console.info('你刚关闭了警告框');
 								});
 							} else {
-								mui.alert(result.msg, '启后书法院', function() {
+								mui.alert(result.msg, '启后书画院', function() {
 									console.info('你刚关闭了警告框');
 								});
 							}
 						},
 						error: function() {
-							mui.alert('投票出错！', '启后书法院', function() {
+							mui.alert('投票出错！', '启后书画院', function() {
 								console.info('你刚关闭了警告框');
 							});
 						}

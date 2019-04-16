@@ -372,7 +372,7 @@
 							name = result.data.author_name
 						},
 						error: function() {
-							mui.alert('获取作者战绩出错！', '启后书法院', function() {
+							mui.alert('获取作者战绩出错！', '启后书画院', function() {
 								console.info('你刚关闭了警告框');
 							});
 						}
@@ -403,13 +403,13 @@
 									$('#giftList').append(html)
 								}
 							} else {
-								mui.alert(result.msg, '启后书法院', function() {
+								mui.alert(result.msg, '启后书画院', function() {
 									console.info('你刚关闭了警告框');
 								});
 							}
 						},
 						error: function() {
-							mui.alert('获取我所拥有的礼物出错！', '启后书法院', function() {
+							mui.alert('获取我所拥有的礼物出错！', '启后书画院', function() {
 								console.info('你刚关闭了警告框');
 							});
 						}
@@ -438,7 +438,7 @@
 				$('#submit').on('touchstart', function(){
 					mui($('#submit')[0]).button('loading');
 					if (selectGiftId == '') {
-						mui.alert('请先选中您赠送的礼物！', '启后书法院', function() {
+						mui.alert('请先选中您赠送的礼物！', '启后书画院', function() {
 							console.info('你刚关闭了警告框');
 							mui($('#submit')[0]).button('reset');
 						});
@@ -458,18 +458,18 @@
 							success: function(result) {
 								mui($('#submit')[0]).button('reset');
 								if (result.state === 1) {
-									mui.alert('您赠送的礼物'+name+'已收到，小启代作者向您说一声感谢，谢谢您的支持！', '启后书法院', function() {
+									mui.alert('您赠送的礼物'+name+'已收到，小启代作者向您说一声感谢，谢谢您的支持！', '启后书画院', function() {
 										window.location.href = 'details.html?from='+getQueryString('from')+'&author_code='+getQueryString('code');
 									});
 								} else {
-									mui.alert(result.msg, '启后书法院', function() {
+									mui.alert(result.msg, '启后书画院', function() {
 										console.info('你刚关闭了警告框');
 									});
 								}
 							},
 							error: function() {
 								mui($('#submit')[0]).button('reset');
-								mui.alert('赠送礼物出错！', '启后书法院', function() {
+								mui.alert('赠送礼物出错！', '启后书画院', function() {
 									console.info('你刚关闭了警告框');
 								});
 							}

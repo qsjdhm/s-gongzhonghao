@@ -349,19 +349,19 @@
 						},
 						success: function(result) {
 							if (result.state === 1) {
-								mui.alert(result.msg, '启后书法院', function() {
+								mui.alert(result.msg, '启后书画院', function() {
 									console.info('你刚关闭了警告框');
 								});
 								$(self).find('.right-pack').html(parseInt($(self).find('.right-pack').html())+1)
 								$(self).find('.left-pack').html('<span class="have-vote">已投</span>')
 							} else {
-								mui.alert(result.msg, '启后书法院', function() {
+								mui.alert(result.msg, '启后书画院', function() {
 									console.info('你刚关闭了警告框');
 								});
 							}
 						},
 						error: function() {
-							mui.alert('投票失败！', '启后书法院', function() {
+							mui.alert('投票失败！', '启后书画院', function() {
 								console.info('你刚关闭了警告框');
 							});
 						}
@@ -484,7 +484,7 @@
 								$('#macyContainer').html('').css('height', 'auto');
 								$('.empty-pack').css('display', 'block')
 								// mui(self).button('reset');
-								mui.alert(result.msg, '启后书法院', function() {
+								mui.alert(result.msg, '启后书画院', function() {
 									console.info('你刚关闭了警告框');
 								});
 							}
@@ -493,7 +493,7 @@
 							mui($('#loadMore')[0]).button('reset');
 							$('#macyContainer').html('').css('height', 'auto');
 							$('.empty-pack').css('display', 'block')
-							mui.alert('获取参赛作品出错！', '启后书法院', function() {
+							mui.alert('获取参赛作品出错！', '启后书画院', function() {
 								console.info('你刚关闭了警告框');
 							});
 						}

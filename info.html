@@ -164,13 +164,13 @@
 								$('#name').val(result.data.we_chat_nick)
 								$('#phone').val(result.data.phone)
 							} else {
-								mui.alert(result.msg, '启后书法院', function() {
+								mui.alert(result.msg, '启后书画院', function() {
 									console.info('你刚关闭了警告框');
 								});
 							}
 						},
 						error: function() {
-							mui.alert('获取用户基本信息出错！', '启后书法院', function() {
+							mui.alert('获取用户基本信息出错！', '启后书画院', function() {
 								console.info('你刚关闭了警告框');
 							});
 						}
@@ -181,7 +181,7 @@
 					mui($('#submit')[0]).button('loading');
 					var phone = $('#phone').val()
 					if (!isPoneAvailable($.trim(phone))) {
-						mui.alert('请输入正确格式的手机号', '启后书法院', function () {
+						mui.alert('请输入正确格式的手机号', '启后书画院', function () {
 							mui($('#submit')[0]).button('reset');
 						});
 						return false
@@ -198,18 +198,18 @@
 						success: function(result) {
 							mui($('#submit')[0]).button('reset');
 							if (result.state === 1) {
-								mui.alert(result.msg, '启后书法院', function() {
+								mui.alert(result.msg, '启后书画院', function() {
 									console.info('你刚关闭了警告框');
 								});
 							} else {
-								mui.alert(result.msg, '启后书法院', function() {
+								mui.alert(result.msg, '启后书画院', function() {
 									console.info('你刚关闭了警告框');
 								});
 							}
 						},
 						error: function() {
 							mui($('#submit')[0]).button('reset');
-							mui.alert('更新个人信息出错！', '启后书法院', function() {
+							mui.alert('更新个人信息出错！', '启后书画院', function() {
 								console.info('你刚关闭了警告框');
 							});
 						}

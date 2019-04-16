@@ -346,13 +346,13 @@
 								$('#details .item-top-pack').html(result.data.works_num)
 								reGetUserInfo()
 							} else {
-								mui.alert(result.msg, '启后书法院', function() {
+								mui.alert(result.msg, '启后书画院', function() {
 									console.info('你刚关闭了警告框');
 								});
 							}
 						},
 						error: function() {
-							mui.alert('获取用户基本信息出错！', '启后书法院', function() {
+							mui.alert('获取用户基本信息出错！', '启后书画院', function() {
 								console.info('你刚关闭了警告框');
 							});
 						}
@@ -375,13 +375,13 @@
 								$('#gift .item-top-pack').html(result.data.gife_num)
 								$('#details .item-top-pack').html(result.data.works_num)
 							} else {
-								mui.alert(result.msg, '启后书法院', function() {
+								mui.alert(result.msg, '启后书画院', function() {
 									console.info('你刚关闭了警告框');
 								});
 							}
 						},
 						error: function() {
-							mui.alert('获取用户基本信息出错！', '启后书法院', function() {
+							mui.alert('获取用户基本信息出错！', '启后书画院', function() {
 								console.info('你刚关闭了警告框');
 							});
 						}
@@ -417,12 +417,12 @@
 				})
 				$('#details').on('touchstart', function(){
 					if (code === '0' || code == null || code == undefined) {
-						mui.alert('你还没有参赛报名，赶紧去报名参赛吧', '启后书法院', function() {
+						mui.alert('你还没有参赛报名，赶紧去报名参赛吧', '启后书画院', function() {
 						});
 						return false
 					}
 					if ($('#details .item-top-pack').html() == '0') {
-						mui.alert('你还没有参赛参赛作品，赶紧去报名参赛吧', '启后书法院', function() {
+						mui.alert('你还没有参赛参赛作品，赶紧去报名参赛吧', '启后书画院', function() {
 						});
 						return false
 					}
@@ -434,7 +434,7 @@
 				})
 				$('#poster').on('touchstart', function(){
 					if (code === '0' || code == null || code == undefined) {
-						mui.alert('你还没有参赛报名，赶紧去报名参赛吧', '启后书法院', function() {
+						mui.alert('你还没有参赛报名，赶紧去报名参赛吧', '启后书画院', function() {
 						});
 						return false
 					}

@@ -537,13 +537,13 @@
 									$('#second').html(timeObj2.second)
 								}, 1000)
 							} else {
-								mui.alert(result.msg, '启后书法院', function() {
+								mui.alert(result.msg, '启后书画院', function() {
 									console.info('你刚关闭了警告框');
 								});
 							}
 						},
 						error: function() {
-							mui.alert('获取大赛基本信息出错！', '启后书法院', function() {
+							mui.alert('获取大赛基本信息出错！', '启后书画院', function() {
 								console.info('你刚关闭了警告框');
 							});
 						}
@@ -597,14 +597,14 @@
 								}
 							} else {
 								// mui(self).button('reset');
-								mui.alert(result.msg, '启后书法院', function() {
+								mui.alert(result.msg, '启后书画院', function() {
 									console.info('你刚关闭了警告框');
 								});
 							}
 						},
 						error: function() {
 							mui($('#loadMore')[0]).button('reset');
-							mui.alert('获取参赛作品出错！', '启后书法院', function() {
+							mui.alert('获取参赛作品出错！', '启后书画院', function() {
 								console.info('你刚关闭了警告框');
 							});
 						}

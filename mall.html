@@ -240,13 +240,13 @@
 									$("#giftList").append(html)
 								}
 							} else {
-								mui.alert(result.msg, '启后书法院', function() {
+								mui.alert(result.msg, '启后书画院', function() {
 									console.info('你刚关闭了警告框');
 								});
 							}
 						},
 						error: function() {
-							mui.alert('获取可兑换礼物出错！', '启后书法院', function() {
+							mui.alert('获取可兑换礼物出错！', '启后书画院', function() {
 								console.info('你刚关闭了警告框');
 							});
 						}
@@ -262,7 +262,7 @@
 				$('#submit').on('touchstart', function(){
 					mui($('#submit')[0]).button('loading');
 					if (selectGiftId == '') {
-						mui.alert('请先选中您要兑换的礼物！', '启后书法院', function() {
+						mui.alert('请先选中您要兑换的礼物！', '启后书画院', function() {
 							console.info('你刚关闭了警告框');
 							mui($('#submit')[0]).button('reset');
 						});
@@ -281,18 +281,18 @@
 							success: function(result) {
 								mui($('#submit')[0]).button('reset');
 								if (result.state === 1) {
-									mui.alert(result.msg, '启后书法院', function() {
+									mui.alert(result.msg, '启后书画院', function() {
 										console.info('你刚关闭了警告框');
 									});
 								} else {
-									mui.alert(result.msg, '启后书法院', function() {
+									mui.alert(result.msg, '启后书画院', function() {
 										console.info('你刚关闭了警告框');
 									});
 								}
 							},
 							error: function() {
 								mui($('#submit')[0]).button('reset');
-								mui.alert('积分兑换礼物出错！', '启后书法院', function() {
+								mui.alert('积分兑换礼物出错！', '启后书画院', function() {
 									console.info('你刚关闭了警告框');
 								});
 							}
