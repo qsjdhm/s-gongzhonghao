@@ -539,6 +539,8 @@
 			$(function () {
 				var from = 'home';
 				var authorCode = '';
+				var name = '';
+				var getCodeNum = 0;
 				from = getQueryString('from');
 				authorCode = getQueryString('author_code');
 
@@ -599,6 +601,7 @@
 							$('title').html(result.data.author_name+'的作品')
 							$('#portrait').attr('src', result.data.author_head_img)
 							$('#name').html(result.data.author_name)
+							name = result.data.author_name;
 							$('#poll').html(result.data.vote_num)
 							if (result.data.author_imgs != null) {
 								var html = '';
@@ -713,7 +716,8 @@
 				})
 
 				$('.gift-pack').tap(function(){
-					window.location.href = 'give.html?code='+authorCode+'&from='+getQueryString('from');
+					// window.location.href = 'give.html?code='+authorCode+'&from='+getQueryString('from');
+					window.location.href = 'buy.html?code='+authorCode+'&name='+encodeURI(encodeURI(name))+'&from='+from;
 				})
 
 

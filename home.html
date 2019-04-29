@@ -381,9 +381,9 @@
 
 	</head>
 	<body>
-		<div class="music-pic">
+		<!--<div class="music-pic">
 			<audio id="audio" src="http://47.92.216.253/wechatnumdesign/music/bg.mp3" preload="auto" loop="loop" ></audio>
-		</div>
+		</div>-->
 
 		<marquee bgcolor=#000 behavior="scroll" loop="infinite" direction="left" ><P align=left>公告：一旦发现刷票行为，一律取消参赛资格！</P></marquee>
 
@@ -532,27 +532,27 @@
 				}
 				document.addEventListener('DOMContentLoaded', musicInWeixinHandler);
 			}
-			function musicPlay(isPlay) {
-				var audio = document.getElementById('audio');
-				if (isPlay && audio.paused) {
-					audio.play();
-				}
-				if (!isPlay && !audio.paused) {
-					audio.pause();
-				}
-			};
-			autoPlayMusic();
+			// function musicPlay(isPlay) {
+			// 	var audio = document.getElementById('audio');
+			// 	if (isPlay && audio.paused) {
+			// 		audio.play();
+			// 	}
+			// 	if (!isPlay && !audio.paused) {
+			// 		audio.pause();
+			// 	}
+			// };
+			// autoPlayMusic();
 
 			// 关闭音乐
-			$('.music-pic').click(function () {
-				if($('.music-pic').hasClass('close')){
-					document.getElementById("audio").muted=false;
-					$('.music-pic').removeClass('close');
-				}else {
-					$('.music-pic').addClass('close');
-					document.getElementById("audio").muted=true;
-				}
-			});
+			// $('.music-pic').click(function () {
+			// 	if($('.music-pic').hasClass('close')){
+			// 		document.getElementById("audio").muted=false;
+			// 		$('.music-pic').removeClass('close');
+			// 	}else {
+			// 		$('.music-pic').addClass('close');
+			// 		document.getElementById("audio").muted=true;
+			// 	}
+			// });
 
 			$(function () {
 
@@ -600,23 +600,47 @@
 					window.location.href = 'introduce.html';
 				})
 				$('#applyBtn').tap(function(){
-					window.location.href = 'apply.html';
+					var userId = window.sessionStorage.getItem('qh_user_id');
+					var openId = window.sessionStorage.getItem('qh_open_id');
+					if (userId != null && userId != undefined && userId != '' && openId != null && openId != undefined && openId != '') {
+						window.location.href = 'apply.html';
+					}
 				})
 				$('#ranking').tap(function(){
-					window.location.href = 'ranking.html';
+					var userId = window.sessionStorage.getItem('qh_user_id');
+					var openId = window.sessionStorage.getItem('qh_open_id');
+					if (userId != null && userId != undefined && userId != '' && openId != null && openId != undefined && openId != '') {
+						window.location.href = 'ranking.html';
+					}
 				})
 				$('#search').tap(function(){
-					window.location.href = 'find.html';
+					var userId = window.sessionStorage.getItem('qh_user_id');
+					var openId = window.sessionStorage.getItem('qh_open_id');
+					if (userId != null && userId != undefined && userId != '' && openId != null && openId != undefined && openId != '') {
+						window.location.href = 'find.html';
+					}
 				})
 				$('#apply').tap(function(){
-					window.location.href = 'apply.html';
+					var userId = window.sessionStorage.getItem('qh_user_id');
+					var openId = window.sessionStorage.getItem('qh_open_id');
+					if (userId != null && userId != undefined && userId != '' && openId != null && openId != undefined && openId != '') {
+						window.location.href = 'apply.html';
+					}
 				})
 				$('#personal').tap(function(){
-					window.location.href = 'personal.html';
+					var userId = window.sessionStorage.getItem('qh_user_id');
+					var openId = window.sessionStorage.getItem('qh_open_id');
+					if (userId != null && userId != undefined && userId != '' && openId != null && openId != undefined && openId != '') {
+						window.location.href = 'personal.html';
+					}
 				})
 				$('.production img').live('tap', function(){
-					var code = $(this).attr('code')
-					window.location.href = 'details.html?from=home&author_code='+code;
+					var userId = window.sessionStorage.getItem('qh_user_id');
+					var openId = window.sessionStorage.getItem('qh_open_id');
+					if (userId != null && userId != undefined && userId != '' && openId != null && openId != undefined && openId != '') {
+						var code = $(this).attr('code')
+						window.location.href = 'details.html?from=home&author_code='+code;
+					}
 				})
 
 				$('.vote-pack').live('touchstart', function(){
