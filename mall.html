@@ -253,13 +253,13 @@
 					});
 				}
 
-				$('.mui-table-view-cell').live('touchstart', function(){
+				$('.mui-table-view-cell').live('click', function(){
 					$('.mui-table-view-cell').css('border', '0px solid #f45d4a!important')
 					$(this).css('border', '1px solid #ffc900!important')
 					selectGiftId = $(this).attr("id")
 				})
 
-				$('#submit').on('touchstart', function(){
+				$('#submit').on('click', function(){
 					mui($('#submit')[0]).button('loading');
 					if (selectGiftId == '') {
 						mui.alert('请先选中您要兑换的礼物！', '启后书画院', function() {

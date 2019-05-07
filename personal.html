@@ -415,7 +415,7 @@
 				$('#gift').tap(function(){
 					window.location.href = 'gift.html';
 				})
-				$('#details').on('touchstart', function(){
+				$('#details').on('click', function(){
 					if (code === '0' || code == null || code == undefined) {
 						mui.alert('你还没有参赛报名，赶紧去报名参赛吧', '启后书画院', function() {
 						});
@@ -432,7 +432,7 @@
 				$('#recharge').tap(function(){
 					window.location.href = 'recharge.html';
 				})
-				$('#poster').on('touchstart', function(){
+				$('#poster').on('click', function(){
 					if (code === '0' || code == null || code == undefined) {
 						mui.alert('你还没有参赛报名，赶紧去报名参赛吧', '启后书画院', function() {
 						});

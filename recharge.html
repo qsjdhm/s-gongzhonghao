@@ -179,13 +179,13 @@
 		});
 
 
-		$('.mui-table-view-cell').live('touchstart', function(){
+		$('.mui-table-view-cell').live('click', function(){
 			$('.mui-table-view-cell').css('border', '0px solid #ffc900!important')
 			$(this).css('border', '1px solid #ffc900!important')
 			selectRechargeId = $(this).attr("id")
 		})
 
-		$('#submit').live('touchstart', function(){
+		$('#submit').live('click', function(){
 			if (selectRechargeId == '') {
 				mui.alert('请先选择您要充值的金额！', '启后书画院', function() {
 					console.info('你刚关闭了警告框');

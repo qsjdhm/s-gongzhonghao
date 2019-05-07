@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="">
 	<head>
-		<title>赠送礼物</title>
+		<title>赞赏</title>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="description" content="" />
@@ -236,7 +236,7 @@
 		<div id="give_page" class="give-page">
 			<header id="header" class="mui-bar mui-bar-nav">
 				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-				<h1 class="mui-title">赠送礼物</h1>
+				<h1 class="mui-title">赞赏</h1>
 			</header>
 			<div class="page-pack">
 				<div class="all-pack">
@@ -417,7 +417,7 @@
 				}
 
 
-				$('.gift-cell-pack').live('touchstart', function(){
+				$('.gift-cell-pack').live('click', function(){
 					$('.gift-cell-pack').css('border', '0px solid #f45d4a!important')
 					$(this).css('border', '1px solid #ffc900!important')
 					selectGiftId = $(this).attr("id")
@@ -435,7 +435,7 @@
 					window.location.href = 'buy.html?code='+getQueryString('code')+'&name='+encodeURI(encodeURI(name))+'&from='+getQueryString('from');
 				})
 
-				$('#submit').on('touchstart', function(){
+				$('#submit').on('click', function(){
 					mui($('#submit')[0]).button('loading');
 					if (selectGiftId == '') {
 						mui.alert('请先选中您赠送的礼物！', '启后书画院', function() {
@@ -469,7 +469,7 @@
 							},
 							error: function() {
 								mui($('#submit')[0]).button('reset');
-								mui.alert('赠送礼物出错！', '启后书画院', function() {
+								mui.alert('赞赏出错！', '启后书画院', function() {
 									console.info('你刚关闭了警告框');
 								});
 							}

@@ -177,7 +177,7 @@
 					});
 				}
 
-				$('#submit').on('touchstart', function(){
+				$('#submit').on('click', function(){
 					mui($('#submit')[0]).button('loading');
 					var phone = $('#phone').val()
 					if (!isPoneAvailable($.trim(phone))) {

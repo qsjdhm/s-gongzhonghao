@@ -518,9 +518,9 @@
 				// 自动播放音乐效果，解决浏览器或者APP自动播放问题
 				function musicInBrowserHandler() {
 					musicPlay(true);
-					document.body.removeEventListener('touchstart', musicInBrowserHandler);
+					document.body.removeEventListener('click', musicInBrowserHandler);
 				}
-				document.body.addEventListener('touchstart', musicInBrowserHandler);
+				document.body.addEventListener('click', musicInBrowserHandler);
 
 				// 自动播放音乐效果，解决微信自动播放问题
 				function musicInWeixinHandler() {
@@ -597,7 +597,11 @@
 
 
 				$('#introduceBtn').tap(function(){
-					window.location.href = 'introduce.html';
+					var userId = window.sessionStorage.getItem('qh_user_id');
+					var openId = window.sessionStorage.getItem('qh_open_id');
+					if (userId != null && userId != undefined && userId != '' && openId != null && openId != undefined && openId != '') {
+						window.location.href = 'introduce.html';
+					}
 				})
 				$('#applyBtn').tap(function(){
 					var userId = window.sessionStorage.getItem('qh_user_id');
@@ -634,7 +638,7 @@
 						window.location.href = 'personal.html';
 					}
 				})
-				$('.production img').live('tap', function(){
+				$('.production img').live('click', function(){
 					var userId = window.sessionStorage.getItem('qh_user_id');
 					var openId = window.sessionStorage.getItem('qh_open_id');
 					if (userId != null && userId != undefined && userId != '' && openId != null && openId != undefined && openId != '') {
@@ -643,7 +647,7 @@
 					}
 				})
 
-				$('.vote-pack').live('touchstart', function(){
+				$('.vote-pack').live('click', function(){
 					var self = this;
 					var code = $(this).attr('id')
 					$.ajax({
@@ -675,7 +679,7 @@
 						}
 					});
 				})
-				$('#loadMore').on('touchstart', function(){
+				$('#loadMore').on('click', function(){
 					mui($('#loadMore')[0]).button('loading');
 					page++;
 					// 获取本次大赛的作品列表
@@ -694,41 +698,30 @@
 
 				// 1.用户登录
 				function userLogin () {
-					if (getQueryString('code') == null) {
-						setTimeout(function () {
-							if (getCodeNum < 20) {
-								userLogin()
-								getCodeNum ++
-							} else {
-								window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1e69e98ecb44fa39&redirect_uri=http%3a%2f%2fmanbuba.imwork.net%2fwechatnumdesign%2fhome.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
-							}
-						}, 500)
-					} else {
-						var userId = window.sessionStorage.getItem('qh_user_id');
-						var openId = window.sessionStorage.getItem('qh_open_id');
-						if (userId == null || userId == undefined || userId == '' || openId == null || openId == undefined || openId == '') {
-							// 不存在再获取
-							$.ajax({
-								url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetLoginByCode&code=" + getQueryString('code'),
-								type: "get",
-								dataType: "json",
-								success: function(result) {
-									if (result.state === 1) {
-										window.sessionStorage.setItem('qh_user_id', result.data.we_chat_user_id)
-										window.sessionStorage.setItem('qh_open_id', result.data.open_id)
-									} else {
-										mui.alert(result.msg, '启后书画院', function() {
-											console.info('你刚关闭了警告框');
-										});
-									}
-								},
-								error: function() {
-									mui.alert('请求openid出错！', '启后书画院', function() {
+					var userId = window.sessionStorage.getItem('qh_user_id');
+					var openId = window.sessionStorage.getItem('qh_open_id');
+					if (userId == null || userId == undefined || userId == '' || openId == null || openId == undefined || openId == '') {
+						// 不存在再获取
+						$.ajax({
+							url: "http://47.92.216.253/tools/wechatpn.ashx?action=GetLoginByCode&code=" + getQueryString('code'),
+							type: "get",
+							dataType: "json",
+							success: function(result) {
+								if (result.state === 1) {
+									window.sessionStorage.setItem('qh_user_id', result.data.we_chat_user_id)
+									window.sessionStorage.setItem('qh_open_id', result.data.open_id)
+								} else {
+									mui.alert(result.msg, '启后书画院', function() {
 										console.info('你刚关闭了警告框');
 									});
 								}
-							});
-						}
+							},
+							error: function() {
+								mui.alert('请求openid出错！', '启后书画院', function() {
+									console.info('你刚关闭了警告框');
+								});
+							}
+						});
 					}
 				}
 

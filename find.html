@@ -318,7 +318,7 @@
 				// 先获取全部作品
 				getMegagameProductionList('')
 
-				$('#searchBtn').on('touchstart', function(){
+				$('#searchBtn').on('click', function(){
 					$('#macyContainer').empty()
 					page = 1;
 					var value = $('#searchInput').val();
@@ -335,7 +335,7 @@
 						e.preventDefault();
 					}
 				},false);
-				$('.vote-pack').live('touchstart', function(){
+				$('.vote-pack').live('click', function(){
 					var self = this;
 					var code = $(this).attr('id')
 					$.ajax({
@@ -367,7 +367,7 @@
 						}
 					});
 				})
-				$('#loadMore').on('touchstart', function(){
+				$('#loadMore').on('click', function(){
 					mui($('#loadMore')[0]).button('loading');
 					page++;
 					var value = $('#searchInput').val();
